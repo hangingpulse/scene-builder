@@ -1,7 +1,37 @@
-import React from "react";
+import { useReducer } from "react";
+import dummyScene from "../data/dummyScene";
 
 function useSceneContext() {
-    return;
+    const initialState = [...dummyScene];
+
+    const reducer = (sceneState, action) => {
+        switch (action.type) {
+            case "LOAD SCENE":
+                return;
+            case "CREATE NEW SCENE":
+                return;
+            case "DELETE SCENE":
+                return;
+            case "ADD BUBBLE":
+                return;
+            case "DELETE BUBBLE":
+                return;
+            case "EDIT BUBBLE":
+                console.log(action.payload);
+                sceneState[action.payload.index] = action.payload.bubble;
+                return [...sceneState];
+            case "ADD CHARACTER":
+                return;
+            case "DELETE CHARACTER":
+                return;
+            default:
+                return sceneState;
+        }
+    };
+
+    const [sceneState, dispatch] = useReducer(reducer, initialState);
+
+    return [sceneState, dispatch];
 }
 
 export default useSceneContext;

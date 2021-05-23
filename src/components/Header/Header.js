@@ -1,9 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+import Title from "./Header.style";
 
 function Header() {
     return (
         <div>
-            <h1 className="title">Scene Builder</h1>
+            <Title>Scene Builder</Title>
         </div>
     );
 }

@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { SceneContext } from "../../context/SceneContextProvider";
+import StyledSpeechbubble from "../Animation/Speechbubble.style";
+import SpeechbubbleEditor from "./SpeechbubbleEditor";
 
 function SceneEditor() {
-    return <div></div>;
+    const { sceneState } = useContext(SceneContext);
+
+    return (
+        <div className="SceneEditor">
+            {sceneState.map((dialogue, index) => (
+                <SpeechbubbleEditor
+                    key={index}
+                    indexBubble={index}
+                    dialogue={dialogue}
+                />
+            ))}
+        </div>
+    );
 }
 
 export default SceneEditor;

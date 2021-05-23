@@ -1,11 +1,8 @@
 import React from "react";
+import { FooterContainer } from "./Footer.style";
 
 function Footer() {
-    return <div></div>;
+    return <FooterContainer>Hello</FooterContainer>;
 }
 
 export default Footer;
-
-// TODO:
-// Impressum/ Copyright / Contact Links. Maybe Share buttons for Social Media
-// Not important
