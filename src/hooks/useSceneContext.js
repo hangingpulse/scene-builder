@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import dummyScene from "../data/dummyScene";
 
 function useSceneContext() {
-    const initialState = [...dummyScene];
+    const initialState = { ...dummyScene };
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
@@ -17,9 +17,9 @@ function useSceneContext() {
             case "DELETE BUBBLE":
                 return;
             case "EDIT BUBBLE":
-                console.log(action.payload);
-                sceneState[action.payload.index] = action.payload.bubble;
-                return [...sceneState];
+                sceneState.dialogue[action.payload.index] =
+                    action.payload.bubble;
+                return { ...sceneState };
             case "ADD CHARACTER":
                 return;
             case "DELETE CHARACTER":

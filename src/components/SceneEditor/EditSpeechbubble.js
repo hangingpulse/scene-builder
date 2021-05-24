@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../context/SceneContextProvider";
-import StyledSpeechbubble from "../Animation/Speechbubble.style";
+import StyledSpeechbubble from "../Speechbubble/Speechbubble.style";
 
 const StyledEditSpeechbubble = styled(StyledSpeechbubble)`
     position: relative;
@@ -24,7 +24,12 @@ const DialogueInput = styled.textarea`
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 
-function EditSpeechbubble({ dialogue, indexBubble, toggleEditMode }) {
+function EditSpeechbubble({
+    dialogue,
+    character,
+    indexBubble,
+    toggleEditMode,
+}) {
     const [editedText, setEditedText] = useState(dialogue.text);
     const { dispatch } = useContext(SceneContext);
 
@@ -39,7 +44,10 @@ function EditSpeechbubble({ dialogue, indexBubble, toggleEditMode }) {
     };
 
     return (
-        <StyledEditSpeechbubble leftBubble={dialogue.leftBubble}>
+        <StyledEditSpeechbubble
+            leftBubble={dialogue.leftBubble}
+            character={character}
+        >
             <CloseEdit onClick={saveChange}>X</CloseEdit>
             <DialogueInput
                 autoFocus

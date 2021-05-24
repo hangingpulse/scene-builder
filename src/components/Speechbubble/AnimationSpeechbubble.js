@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import StyledSpeechbubble from "./Speechbubble.style";
+import { SceneContext } from "../../context/SceneContextProvider";
 
 function AnimationSpeechbubble({ controls, totalDelay, duration, dialogue }) {
     // Defining the SPeechbubble as a motion component happens in the style file
+    const { sceneState } = useContext(SceneContext);
+
+    const getCharacter = () => {
+        return sceneState.characters.find(
+            (character) => character.name === dialogue.character
+        );
+    };
 
     return (
         <StyledSpeechbubble
@@ -14,6 +22,7 @@ function AnimationSpeechbubble({ controls, totalDelay, duration, dialogue }) {
                 duration: duration,
             }}
             leftBubble={dialogue.leftBubble}
+            character={getCharacter()}
         >
             {" "}
             {dialogue.text}
