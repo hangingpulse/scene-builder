@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../context/SceneContextProvider";
-import StyledSpeechbubble from "../Speechbubble/Speechbubble.style";
+import StyledSpeechbubble from "./Speechbubble.style";
 
 const StyledEditSpeechbubble = styled(StyledSpeechbubble)`
     position: relative;

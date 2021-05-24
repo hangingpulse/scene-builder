@@ -2,11 +2,15 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../context/SceneContextProvider";
 import useSpeechbubbleAnimation from "../../hooks/useSpeechbubbleAnimation";
-import Character from "../Character/Character";
+import Character from "../CharacterComponents/Character";
 
 const Characters = styled.div`
     display: flex;
     justify-content: space-around;
+`;
+
+const Dialogue = styled.div`
+    height: 5rem;
 `;
 
 function Animation() {
@@ -16,12 +20,12 @@ function Animation() {
 
     return (
         <div className="Animation">
+            <Dialogue>{buildSpeechbubbles(sceneState.dialogue)}</Dialogue>
             <Characters>
                 {sceneState.characters.map((character, index) => (
                     <Character key={index} character={character} />
                 ))}
             </Characters>
-            {buildSpeechbubbles(sceneState.dialogue)}
         </div>
     );
 }

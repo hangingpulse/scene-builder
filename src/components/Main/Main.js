@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SceneContextProvider } from "../../context/SceneContextProvider";
-import Animation from "../Animation/Animation";
-import SceneEditor from "../SceneEditor/SceneEditor";
+import Animation from "../Animation";
+import SceneEditor from "../SceneEditor";
 import TextEditor from "../TextEditor/TextEditor";
 import { MainContainer, TabBar, TabItem } from "./Main.style";
 

@@ -4,13 +4,13 @@ const dummyScene = {
     characters: [
         {
             name: "Joseph",
-            color: "#e9b0df",
-            image: "../../pics/characters/peep-51.png",
+            colorIndex: 1,
+            imageIndex: 1,
         },
         {
             name: "Henrietta",
-            color: "#adeecf",
-            image: "../../pics/characters/peep-13.png",
+            colorIndex: 2,
+            imageIndex: 2,
         },
     ],
     dialogue: [
