@@ -1,6 +1,6 @@
 import React from "react";
 import { useAnimation } from "framer-motion";
-import AnimationSpeechbubble from "../components/Animation/AnimationSpeechbubble";
+import AnimationSpeechbubble from "../components/Speechbubble/AnimationSpeechbubble";
 
 function useSpeechbubbleAnimation() {
     // Animation for the speechbubbles, using the useAnimation hook
@@ -19,9 +19,9 @@ function useSpeechbubbleAnimation() {
         transitionEnd: { display: "none" },
     }));
 
-    const buildSpeechbubbles = (sceneState) => {
+    const buildSpeechbubbles = (dialogue) => {
         let totalDelay = 0;
-        return sceneState.map((dialogue, index) => {
+        return dialogue.map((dialogue, index) => {
             const duration = dialogue.length;
             totalDelay += dialogue.delay + duration;
 

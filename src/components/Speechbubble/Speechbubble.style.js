@@ -10,7 +10,7 @@ const StyledSpeechbubble = styled(motion.div)`
     font-size: 1rem;
     font-family: ${(props) => props.theme.fonts.sansSerif};
     border: 1px solid black;
-    background-color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.character.color};
 `;
 
 export default StyledSpeechbubble;

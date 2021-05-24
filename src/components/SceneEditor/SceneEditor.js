@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { SceneContext } from "../../context/SceneContextProvider";
-import StyledSpeechbubble from "../Animation/Speechbubble.style";
 import SpeechbubbleEditor from "./SpeechbubbleEditor";
 
 function SceneEditor() {
@@ -8,11 +7,15 @@ function SceneEditor() {
 
     return (
         <div className="SceneEditor">
-            {sceneState.map((dialogue, index) => (
+            <div className="Characters"></div>
+            {sceneState.dialogue.map((dialogue, index) => (
                 <SpeechbubbleEditor
                     key={index}
                     indexBubble={index}
                     dialogue={dialogue}
+                    character={sceneState.characters.find(
+                        (character) => character.name === dialogue.character
+                    )}
                 />
             ))}
         </div>
