@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
+import dummyText from "../../data/dummyText";
+
+const StyledTextArea = styled.textarea`
+    width: 100%;
+    height: 75vh;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    font-family: ${(props) => props.theme.fonts.sansSerif};
+`;
 
 function TextEditor() {
-    return <div></div>;
+    const [text, setText] = useState(dummyText);
+
+    const dialogueRegex =
+        /\n(?<name>[^a-z\n]+)\n(?<parentheticals>\([^\n]+\)\n)?(?<dialogue>[^\n]+)\n/g; //Dialogue Object that finds the names
+
+    const saveText = () => {
+        const regexTest = text.matchAll(dialogueRegex);
+        console.log([...regexTest]);
+    };
+
+    return (
+        <div>
+            <StyledTextArea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+            ></StyledTextArea>
+            <button className="SaveButton" onClick={saveText}>
+                Save
+            </button>
+        </div>
+    );
 }
 
 export default TextEditor;

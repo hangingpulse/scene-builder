@@ -8,7 +8,7 @@ function EditorSpeechbubble() {
     // Select the Character for each Speechbubble by matching names
     const findCharacter = (characterName) => {
         return sceneState.characters.find(
-            (character) => character.name === characterName
+            (character) => character.id === characterName
         );
     };
 

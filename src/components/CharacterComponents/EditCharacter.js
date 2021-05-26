@@ -1,82 +1,50 @@
-import React, { useState, useContext } from "react";
-import { SceneContext } from "../../context/SceneContextProvider";
-import styled from "styled-components";
-import { StyledCharacter, CharacterImage } from "./Character.style";
+import React from "react";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+
+import ColorSelection from "../SceneEditor/ColorSelection";
+import { CharacterImage } from "./Character.style";
+import {
+    StyledEditCharacter,
+    CharacterImageSelector,
+    CharacterNameInput,
+} from "./EditCharacter.style";
 import { characterImages, characterColors } from "../../data/characterdata";
 
-const StyledEditCharacter = styled(StyledCharacter)`
-    position: relative;
-    width: 20rem;
-    left: 20%;
-`;
-
-const CharacterImageSelector = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const CharacterNameInput = styled.input`
-    width: 8rem;
-    font-family: ${(props) => props.theme.fonts.sansSerif};
-`;
-
-const CloseEdit = styled.div`
-    font-size: 1.5rem;
-    text-align: right;
-    cursor: pointer;
-`;
-
-function EditCharacter({ character, toggleEdit }) {
-    const [name, setName] = useState(character.name);
-
-    const [imageIndex, setImageIndex] = useState(character.imageIndex);
-    const [color, setColor] = useState(characterColors[character.colorIndex]);
-
-    const changeImage = (action) => {
-        switch (action) {
-            case "next":
-                setImageIndex((prevState) =>
-                    prevState <= characterImages.length - 1 ? prevState + 1 : 0
-                );
-                console.log((imageIndex + 1) % 4);
-                break;
-            case "previous":
-                setImageIndex((prevState) =>
-                    prevState ? prevState - 1 : characterImages.length - 1
-                );
-                break;
-            default:
-                break;
-        }
-    };
-
+function EditCharacter({ characterState, editCharacterState }) {
     return (
-        <StyledEditCharacter character={character} color={color}>
-            <CloseEdit onClick={() => toggleEdit((prevState) => !prevState)}>
-                X
-            </CloseEdit>
+        <StyledEditCharacter
+            character={characterState}
+            color={characterColors[characterState.colorIndex]}
+        >
+            <ColorSelection
+                editCharacterState={editCharacterState}
+                selectedColor={characterState.colorIndex}
+            />
             <CharacterImageSelector>
-                <button
-                    className="NextImage"
-                    onClick={() => changeImage("previous")}
-                >
-                    Previous
-                </button>
-                <CharacterImage
-                    src={characterImages[imageIndex]}
-                    alt={character.name}
+                <FaAngleLeft
+                    size={25}
+                    onClick={() =>
+                        editCharacterState({ type: "PREVIOUS IMAGE" })
+                    }
                 />
-                <button
-                    className="NextImage"
-                    onClick={() => changeImage("next")}
-                >
-                    Next
-                </button>
+                <CharacterImage
+                    src={characterImages[characterState.imageIndex]}
+                    alt={characterState.name}
+                />
+                <FaAngleRight
+                    size={25}
+                    onClick={() => editCharacterState({ type: "NEXT IMAGE" })}
+                />
             </CharacterImageSelector>
             <CharacterNameInput
                 autoFocus
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={characterState.name}
+                onChange={(e) =>
+                    editCharacterState({
+                        type: "CHANGE NAME",
+                        payload: e.target.value,
+                    })
+                }
             />
         </StyledEditCharacter>
     );

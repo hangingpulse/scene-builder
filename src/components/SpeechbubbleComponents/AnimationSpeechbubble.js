@@ -8,7 +8,7 @@ function AnimationSpeechbubble({ controls, totalDelay, duration, dialogue }) {
 
     const getCharacter = () => {
         return sceneState.characters.find(
-            (character) => character.name === dialogue.character
+            (character) => character.id === dialogue.character
         );
     };
 

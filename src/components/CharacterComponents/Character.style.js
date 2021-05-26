@@ -20,8 +20,6 @@ const StyledCharacter = styled.div`
     font-family: ${(props) => props.theme.fonts.sansSerif};
 
     &:hover {
-        transform: scale(1.05);
-        transition: transform 0.1s;
         cursor: pointer;
     }
 `;

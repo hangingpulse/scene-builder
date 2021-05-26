@@ -20,6 +20,10 @@ function useSceneContext() {
                 sceneState.dialogue[action.payload.index] =
                     action.payload.bubble;
                 return { ...sceneState };
+            case "EDIT CHARACTER":
+                sceneState.characters[action.payload.index] =
+                    action.payload.newCharacterState;
+                return { ...sceneState };
             case "ADD CHARACTER":
                 return;
             case "DELETE CHARACTER":
