@@ -1,30 +1,35 @@
-import React, { useState } from "react";
-import StyledSpeechbubble from "../Speechbubble/Speechbubble.style";
-import EditSpeechbubble from "./EditSpeechbubble";
+import React, { useContext } from "react";
+import { SceneContext } from "../../context/SceneContextProvider";
+import SpeechbubbleEditorItem from "./SpeechbubbleEditorItem";
 
-function EditorSpeechbubble({ dialogue, character, indexBubble }) {
-    const [editMode, toggleEditMode] = useState(false);
+function EditorSpeechbubble() {
+    const { sceneState } = useContext(SceneContext);
+
+    // Select the Character for each Speechbubble by matching names
+    const findCharacter = (characterName) => {
+        return sceneState.characters.find(
+            (character) => character.id === characterName
+        );
+    };
 
     return (
-        <div className="EditorSpeechbubble">
-            {!editMode ? (
-                <StyledSpeechbubble
-                    leftBubble={dialogue.leftBubble}
-                    onClick={() => toggleEditMode((prevState) => !prevState)}
-                    character={character}
-                >
-                    {dialogue.text}
-                </StyledSpeechbubble>
-            ) : (
-                <EditSpeechbubble
+        <div className="SpeechbubbleEditor">
+            {sceneState.dialogue.map((dialogue, index) => (
+                <SpeechbubbleEditorItem
+                    key={index}
                     dialogue={dialogue}
-                    character={character}
-                    toggleEditMode={toggleEditMode}
-                    indexBubble={indexBubble}
+                    character={findCharacter(dialogue.character)}
+                    indexBubble={index}
                 />
-            )}
+            ))}
         </div>
     );
 }
 
 export default EditorSpeechbubble;
+
+/*
+PURPOSE: This component renders the list of Speechbubbles together with their EditMode.
+
+
+*/

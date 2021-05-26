@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { characterColors } from "../../data/characterdata";
 
 const StyledSpeechbubble = styled(motion.div)`
     width: 15rem;
@@ -9,8 +10,15 @@ const StyledSpeechbubble = styled(motion.div)`
     margin-left: ${(props) => (props.leftBubble ? "1em" : "auto")};
     font-size: 1rem;
     font-family: ${(props) => props.theme.fonts.sansSerif};
-    border: 1px solid black;
-    background-color: ${(props) => props.character.color};
+    border: 2px solid ${(props) => characterColors[props.character.colorIndex]};
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme.colors.primaryLight};
+
+    &:hover {
+        transform: scale(1.05);
+        transition: transform 0.1s;
+        cursor: pointer;
+    }
 `;
 
 export default StyledSpeechbubble;

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../context/SceneContextProvider";
-import StyledSpeechbubble from "../Speechbubble/Speechbubble.style";
+import StyledSpeechbubble from "./Speechbubble.style";
 
 const StyledEditSpeechbubble = styled(StyledSpeechbubble)`
     position: relative;
@@ -12,15 +12,19 @@ const StyledEditSpeechbubble = styled(StyledSpeechbubble)`
 `;
 
 const CloseEdit = styled.div`
-    font-size: 1.5rem;
+    position: absolute;
+    right: 0.2rem;
+    top: 0;
+    font-size: 1.2rem;
     text-align: right;
     cursor: pointer;
 `;
 
 const DialogueInput = styled.textarea`
-    margin: 0.5rem;
+    margin: 0.1rem;
     padding: 0.3rem;
     width: 15rem;
+    font-size: 1rem;
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 
