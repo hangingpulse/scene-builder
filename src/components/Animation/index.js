@@ -10,7 +10,7 @@ const Characters = styled.div`
 `;
 
 const Dialogue = styled.div`
-    height: 5rem;
+    height: 10rem;
 `;
 
 function Animation() {

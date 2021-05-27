@@ -8,8 +8,13 @@ function useSceneContext() {
         switch (action.type) {
             case "LOAD SCENE":
                 return;
-            case "CREATE NEW SCENE":
-                return;
+            case "EDIT SCENE":
+                console.log(action.payload);
+                return {
+                    ...sceneState,
+                    characters: action.payload.characters,
+                    dialogue: action.payload.dialogue,
+                };
             case "DELETE SCENE":
                 return;
             case "ADD BUBBLE":

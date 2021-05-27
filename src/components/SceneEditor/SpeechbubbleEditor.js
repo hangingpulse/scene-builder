@@ -6,12 +6,11 @@ function EditorSpeechbubble() {
     const { sceneState } = useContext(SceneContext);
 
     // Select the Character for each Speechbubble by matching names
-    const findCharacter = (characterName) => {
+    const findCharacter = (characterId) => {
         return sceneState.characters.find(
-            (character) => character.id === characterName
+            (character) => character.id === characterId
         );
     };
-
     return (
         <div className="SpeechbubbleEditor">
             {sceneState.dialogue.map((dialogue, index) => (

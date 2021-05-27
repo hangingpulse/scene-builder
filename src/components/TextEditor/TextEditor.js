@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import dummyText from "../../data/dummyText";
+import useTextParser from "../../hooks/useTextParser";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
@@ -13,12 +14,10 @@ const StyledTextArea = styled.textarea`
 function TextEditor() {
     const [text, setText] = useState(dummyText);
 
-    const dialogueRegex =
-        /\n(?<name>[^a-z\n]+)\n(?<parentheticals>\([^\n]+\)\n)?(?<dialogue>[^\n]+)\n/g; //Dialogue Object that finds the names
+    const saveScene = useTextParser();
 
-    const saveText = () => {
-        const regexTest = text.matchAll(dialogueRegex);
-        console.log([...regexTest]);
+    const handleClick = () => {
+        saveScene(text);
     };
 
     return (
@@ -27,7 +26,7 @@ function TextEditor() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             ></StyledTextArea>
-            <button className="SaveButton" onClick={saveText}>
+            <button className="SaveButton" onClick={handleClick}>
                 Save
             </button>
         </div>

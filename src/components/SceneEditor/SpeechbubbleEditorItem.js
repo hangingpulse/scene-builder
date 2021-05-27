@@ -7,7 +7,7 @@ function SpeechbubbleEditorItem({ dialogue, character, indexBubble }) {
 
     return (
         <div className="EditOrViewSpeechbubble">
-            {!edit ? (
+            {!edit && character ? (
                 <StyledSpeechbubble
                     leftBubble={dialogue.leftBubble}
                     onClick={() => toggleEdit((prevState) => !prevState)}
