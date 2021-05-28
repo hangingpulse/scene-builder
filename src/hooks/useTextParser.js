@@ -4,11 +4,6 @@ import { SceneContext } from "../context/SceneContextProvider";
 function useTextParser() {
     const { sceneState, dispatch } = useContext(SceneContext);
 
-    // if there are already characters in our Global Scene Object, put their names in this array.
-    const currentCharacters = sceneState.characters.length
-        ? sceneState.characters.map((character) => character.name.toUpperCase())
-        : [];
-
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
@@ -21,8 +16,7 @@ function useTextParser() {
         return actiontextObjects;
     };
 
-    const createCharacterObject = (charactername) => {
-        const characterId = currentCharacters.length + 1;
+    const createCharacterObject = (charactername, characterId) => {
         return {
             name: charactername,
             id: characterId,
@@ -32,15 +26,10 @@ function useTextParser() {
         };
     };
 
-    const createDialogueObject = (dialogue) => {
-        const dialogueLines = dialogue.split(/\n/);
-
-        // take the character name out of the dialogue array
-        const characterName = dialogueLines.shift();
-
+    const createDialogueObject = (dialogueLines, characterId) => {
         // get the current Character ID by checking the position in the currentCharacter Array
         // This should work because that's also how the character objects are created
-        const characterId = currentCharacters.indexOf(characterName) + 1;
+
         const dialogueObjects = dialogueLines.map((dialogueLine, index) => {
             // Check if Dialogue Line is a parenthetical
             if (/\(.*\)/.test(dialogueLine)) {
@@ -71,7 +60,7 @@ function useTextParser() {
 
     const findSceneObjects = (text) => {
         const sceneObjects = [];
-        const characterObjects = [];
+        const characterObjects = [...sceneState.characters];
         let headerObject = "";
         const sceneArray = text.split(/\n\n/);
 
@@ -80,14 +69,31 @@ function useTextParser() {
                 headerObject = sceneObject;
             } else if (/([^a-z\n]+)\n.*/.test(sceneObject)) {
                 const dialogueObjectArray = sceneObject.split(/\n/);
-                if (!currentCharacters.includes(dialogueObjectArray[0])) {
+
+                // take the character name out of the dialogue array
+                const characterName = dialogueObjectArray.shift();
+
+                // check if there is already a character with this name. If no, create a new character object
+                if (
+                    !characterObjects
+                        .map((character) => character.name)
+                        .includes(characterName)
+                ) {
+                    console.log(characterObjects);
                     const newCharacterObject = createCharacterObject(
-                        dialogueObjectArray[0]
+                        characterName,
+                        characterObjects.length + 1
                     );
                     characterObjects.push(newCharacterObject);
-                    currentCharacters.push(newCharacterObject.name);
                 }
-                const newDialogueObject = createDialogueObject(sceneObject);
+
+                const { id } = characterObjects.find(
+                    (character) => character.name === characterName
+                );
+                const newDialogueObject = createDialogueObject(
+                    dialogueObjectArray,
+                    id
+                );
                 sceneObjects.push(...newDialogueObject);
             } else if (/.*/.test(sceneObject)) {
                 const newActiontextObject = createActiontextObject(sceneObject);
@@ -97,7 +103,6 @@ function useTextParser() {
             }
         });
 
-        console.log(characterObjects, sceneObjects);
         return [characterObjects, sceneObjects, headerObject];
     };
 

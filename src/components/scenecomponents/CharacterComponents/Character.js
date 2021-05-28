@@ -4,7 +4,7 @@ import {
     CharacterImage,
     CharacterName,
 } from "./Character.style";
-import { characterColors, characterImages } from "../../data/characterdata";
+import { characterColors, characterImages } from "../../../data/characterdata";
 
 function Character({ character }) {
     return (

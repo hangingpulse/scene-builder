@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import useSpeechbubbleAnimation from "../../../hooks/useSpeechbubbleAnimation";
-import Character from "../CharacterComponents/Character";
+import Character from "../../scenecomponents/CharacterComponents/Character";
 
 const Characters = styled.div`
     display: flex;
@@ -15,12 +15,14 @@ const Dialogue = styled.div`
 
 function Animation() {
     const { sceneState } = useContext(SceneContext);
-    console.log(sceneState);
+    const onlyDialogue = sceneState.dialogue.filter(
+        (dialogue) => dialogue.type === "DIALOGUE"
+    );
     const buildSpeechbubbles = useSpeechbubbleAnimation();
 
     return (
         <div className="Animation">
-            <Dialogue>{buildSpeechbubbles(sceneState.dialogue)}</Dialogue>
+            <Dialogue>{buildSpeechbubbles(onlyDialogue)}</Dialogue>
             <Characters>
                 {sceneState.characters.map((character, index) => (
                     <Character key={index} character={character} />

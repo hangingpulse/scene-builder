@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SceneContext } from "../../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContextProvider";
 import Actiontext from "../../scenecomponents/ActiontextComponents/Actiontext";
 import Parenthetical from "../../scenecomponents/ParentheticalComponents/Parenthetical";
 import SpeechbubbleEditorItem from "./SpeechbubbleEditorItem";
@@ -16,13 +16,11 @@ function EditorSpeechbubble() {
     };
 
     const renderDialogue = () => {
-        sceneState.dialogue.map((dialogue, index) => {
-            console.log(dialogue);
+        const sceneArray = sceneState.dialogue.map((dialogue, index) => {
             if (dialogue.type === "ACTIONTEXT") {
                 return <Actiontext key={index} actiontext={dialogue} />;
             }
             if (dialogue.type === "PARENTHETICAL") {
-                console.log(dialogue);
                 return (
                     <Parenthetical
                         key={index}
@@ -32,7 +30,6 @@ function EditorSpeechbubble() {
                 );
             }
             if (dialogue.type === "DIALOGUE") {
-                console.log(dialogue);
                 return (
                     <SpeechbubbleEditorItem
                         key={index}
@@ -44,8 +41,9 @@ function EditorSpeechbubble() {
             }
             return "";
         });
-    };
 
+        return sceneArray;
+    };
     return <div className="SpeechbubbleEditor">{renderDialogue()}</div>;
 }
 

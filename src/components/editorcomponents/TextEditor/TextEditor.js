@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SceneContext } from "../../../context/SceneContextProvider";
 import styled from "styled-components";
 import dummyText from "../../../data/dummyText";
 import useTextParser from "../../../hooks/useTextParser";
@@ -13,10 +14,12 @@ const StyledTextArea = styled.textarea`
 
 function TextEditor() {
     const [text, setText] = useState(dummyText);
+    const { sceneState } = useContext(SceneContext);
 
     const saveScene = useTextParser();
 
     const handleClick = () => {
+        console.log(sceneState);
         saveScene(text);
     };
 
