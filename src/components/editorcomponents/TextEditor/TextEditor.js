@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import styled from "styled-components";
 import dummyText from "../../../data/dummyText";
-import useTextParser from "../../../hooks/useTextParser";
+import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
+import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
@@ -13,13 +14,17 @@ const StyledTextArea = styled.textarea`
 `;
 
 function TextEditor() {
-    const [text, setText] = useState(dummyText);
     const { sceneState } = useContext(SceneContext);
+    const [text, setText] = useState(dummyText);
 
-    const saveScene = useTextParser();
+    useEffect(() => {
+        const sceneText = changeObjectToTextParser(sceneState);
+        setText(sceneText);
+    }, [sceneState]);
+
+    const saveScene = useTextToObjectParser();
 
     const handleClick = () => {
-        console.log(sceneState);
         saveScene(text);
     };
 

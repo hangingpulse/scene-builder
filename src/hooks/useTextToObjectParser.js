@@ -4,6 +4,7 @@ import { SceneContext } from "../context/SceneContextProvider";
 function useTextParser() {
     const { sceneState, dispatch } = useContext(SceneContext);
 
+    console.log(sceneState);
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
