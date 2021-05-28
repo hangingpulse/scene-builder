@@ -28,8 +28,8 @@ function CharacterEditor() {
             )}
 
             {sceneState.characters.map((character, index) => (
-                <div onClick={() => openEdit(character, index)}>
-                    <Character key={index} character={character} />
+                <div key={index} onClick={() => openEdit(character, index)}>
+                    <Character character={character} />
                 </div>
             ))}
         </CharacterContainer>

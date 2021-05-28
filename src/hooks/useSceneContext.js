@@ -9,12 +9,16 @@ function useSceneContext() {
             case "LOAD SCENE":
                 return;
             case "EDIT SCENE":
-                console.log(action.payload);
-                return {
+                const newState = {
                     ...sceneState,
                     characters: action.payload.characters,
                     dialogue: action.payload.dialogue,
+                    header: action.payload.header,
                 };
+
+                console.log(newState);
+
+                return newState;
             case "DELETE SCENE":
                 return;
             case "ADD BUBBLE":

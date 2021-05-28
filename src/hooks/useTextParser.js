@@ -1,93 +1,116 @@
 import { useContext } from "react";
 import { SceneContext } from "../context/SceneContextProvider";
 
-const sceneRegex =
-    /\n(?<name>[^a-z\n]+)\n(?<dialogue>(?:(?:\([^\n]+\)\n)?[^\n]+\n)+)/g; //Dialogue Object that finds the names
-
-const dialogueRegex = /([^\n]+)\n/g; // Dialogue parts in the dialogue object.
-
-const parentheticalRegex = /\([^\n]+\)\n/;
-
 function useTextParser() {
-    const { dispatch } = useContext(SceneContext);
+    const { sceneState, dispatch } = useContext(SceneContext);
 
-    // This function gets all the characters
-    // This function extracts all the speaking characters in the scene
-    function findSceneObjects(text) {
-        // This array contains all dialogue objects found with the Regular Expressions
-        const sceneObjectsArray = [...text.matchAll(sceneRegex)];
+    // if there are already characters in our Global Scene Object, put their names in this array.
+    const currentCharacters = sceneState.characters.length
+        ? sceneState.characters.map((character) => character.name.toUpperCase())
+        : [];
 
-        const findCharacterObjects = () => {
-            const characterArray = [];
-            sceneObjectsArray.forEach((sceneObject) => {
-                if (!characterArray.includes(sceneObject.groups.name)) {
-                    characterArray.push(sceneObject.groups.name);
-                }
-            });
+    const createActiontextObject = (actiontext) => {
+        const actiontextLines = actiontext.split(/\n/);
+        const actiontextObjects = actiontextLines.map((actiontextLine) => ({
+            type: "ACTIONTEXT",
+            text: actiontextLine,
+            duration: 2 + actiontextLine.length * 0.05,
+            delay: 0,
+            display: true,
+        }));
+        return actiontextObjects;
+    };
 
-            // This function creates new character objects for our scene object
-            // TO DO: Build in a check if the character already exists in the sceneState
-            const sceneObjectCharacters = characterArray.map(
-                (character, index) => {
-                    return {
-                        name: character,
-                        id: index + 1,
-                        position: index,
-                        imageIndex: index + 1,
-                        colorIndex: index + 1,
-                    };
-                }
-            );
-            return sceneObjectCharacters;
+    const createCharacterObject = (charactername) => {
+        const characterId = currentCharacters.length + 1;
+        return {
+            name: charactername,
+            id: characterId,
+            position: characterId - 1,
+            colorIndex: characterId,
+            imageIndex: characterId,
         };
-        // perform a Regex search for each DialogueObject to get the speechbubbles
+    };
 
-        const findDialogueObjects = (characters) => {
-            const dialogueArray = [];
-            sceneObjectsArray.forEach((sceneObject) => {
-                // creates an Array with all the Dialogue Lines in one Dialogue Object
-                const dialogueCharacter = characters.find(
-                    (character) => sceneObject.groups.name === character.name
-                );
+    const createDialogueObject = (dialogue) => {
+        const dialogueLines = dialogue.split(/\n/);
 
-                const dialogueLines = [
-                    ...sceneObject.groups.dialogue.matchAll(dialogueRegex),
-                ];
+        // take the character name out of the dialogue array
+        const characterName = dialogueLines.shift();
 
-                // filters only the spoken lines and not the parentheticals
-                const rawDialogueText = dialogueLines.filter(
-                    (dialogueLine) => !parentheticalRegex.test(dialogueLine)
-                );
+        // get the current Character ID by checking the position in the currentCharacter Array
+        // This should work because that's also how the character objects are created
+        const characterId = currentCharacters.indexOf(characterName) + 1;
+        const dialogueObjects = dialogueLines.map((dialogueLine, index) => {
+            // Check if Dialogue Line is a parenthetical
+            if (/\(.*\)/.test(dialogueLine)) {
+                return {
+                    type: "PARENTHETICAL",
+                    text: dialogueLine,
+                    character: characterId,
+                    duration: 2 + dialogueLine.length * 0.05,
+                    delay: 0,
+                    display: false,
+                };
+            }
+            // Check if dialogue line is dialogue
+            if (/.*/.test(dialogueLine)) {
+                return {
+                    type: "DIALOGUE",
+                    text: dialogueLine,
+                    character: characterId,
+                    duration: 2 + dialogueLine.length * 0.05,
+                    delay: 0,
+                    display: true,
+                };
+            }
+            return "";
+        });
+        return dialogueObjects;
+    };
 
-                // creates a SpeechBubbleObject for every new line of dialogue
-                const speechbubbleObjects = rawDialogueText.map((dialogue) => {
-                    return {
-                        character: dialogueCharacter.id,
-                        text: dialogue[1],
-                        length: 2 + dialogue[1].length * 0.05,
-                        delay: 0,
-                    };
-                });
+    const findSceneObjects = (text) => {
+        const sceneObjects = [];
+        const characterObjects = [];
+        let headerObject = "";
+        const sceneArray = text.split(/\n\n/);
 
-                dialogueArray.push(...speechbubbleObjects);
-            });
-            return dialogueArray;
-        };
+        sceneArray.forEach((sceneObject) => {
+            if (/^[^a-z]+$/.test(sceneObject)) {
+                headerObject = sceneObject;
+            } else if (/([^a-z\n]+)\n.*/.test(sceneObject)) {
+                const dialogueObjectArray = sceneObject.split(/\n/);
+                if (!currentCharacters.includes(dialogueObjectArray[0])) {
+                    const newCharacterObject = createCharacterObject(
+                        dialogueObjectArray[0]
+                    );
+                    characterObjects.push(newCharacterObject);
+                    currentCharacters.push(newCharacterObject.name);
+                }
+                const newDialogueObject = createDialogueObject(sceneObject);
+                sceneObjects.push(...newDialogueObject);
+            } else if (/.*/.test(sceneObject)) {
+                const newActiontextObject = createActiontextObject(sceneObject);
+                sceneObjects.push(...newActiontextObject);
+            } else {
+                return;
+            }
+        });
 
-        const characterObjects = findCharacterObjects();
-        const dialogueObjects = findDialogueObjects(characterObjects);
+        console.log(characterObjects, sceneObjects);
+        return [characterObjects, sceneObjects, headerObject];
+    };
 
-        console.log(dialogueObjects);
-        return [characterObjects, dialogueObjects];
-    }
-
+    // This sends all the characters, the dialogue objects and the header info to the global scene object
     const saveScene = (text) => {
-        const [characterObjects, dialogueObjects] = findSceneObjects(text);
+        const [characterObjects, sceneObjects, headerObject] =
+            findSceneObjects(text);
         dispatch({
             type: "EDIT SCENE",
             payload: {
+                header: headerObject,
                 characters: characterObjects,
-                dialogue: dialogueObjects,
+                dialogue: sceneObjects,
             },
         });
     };

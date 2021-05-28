@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { SceneContext } from "../../context/SceneContextProvider";
-import useSpeechbubbleAnimation from "../../hooks/useSpeechbubbleAnimation";
+import { SceneContext } from "../../../context/SceneContextProvider";
+import useSpeechbubbleAnimation from "../../../hooks/useSpeechbubbleAnimation";
 import Character from "../CharacterComponents/Character";
 
 const Characters = styled.div`
@@ -15,7 +15,7 @@ const Dialogue = styled.div`
 
 function Animation() {
     const { sceneState } = useContext(SceneContext);
-
+    console.log(sceneState);
     const buildSpeechbubbles = useSpeechbubbleAnimation();
 
     return (

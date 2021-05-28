@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import dummyText from "../../data/dummyText";
-import useTextParser from "../../hooks/useTextParser";
+import dummyText from "../../../data/dummyText";
+import useTextParser from "../../../hooks/useTextParser";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
