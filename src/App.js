@@ -5,6 +5,7 @@ import Main from "./components/pagecomponents/Main/Main";
 import Footer from "./components/pagecomponents/Footer/Footer";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
+import { SceneContextProvider } from "./context/SceneContextProvider";
 
 const AppBody = styled.div`
     display: flex;
@@ -17,7 +18,9 @@ function App() {
             <GlobalStyle />
             <AppBody>
                 <Header />
-                <Main />
+                <SceneContextProvider>
+                    <Main />
+                </SceneContextProvider>
                 <Footer />
             </AppBody>
         </Theme>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { SceneContextProvider } from "../../../context/SceneContextProvider";
+import React, { useState, useEffect, useContext } from "react";
+import { SceneContext } from "../../../context/SceneContextProvider";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import Animation from "../../editorcomponents/Animation";
 import SceneEditor from "../../editorcomponents/SceneEditor";
 import TextEditor from "../../editorcomponents/TextEditor/TextEditor";
@@ -7,6 +8,14 @@ import { MainContainer, TabBar, TabItem } from "./Main.style";
 
 function Main() {
     const [selectedTab, setSelectedTab] = useState("SceneEditor");
+
+    const { sceneState } = useContext(SceneContext);
+    const [saveSceneToLocalStorage, getSceneFromLocalStorage] =
+        useLocalStorage();
+
+    useEffect(() => {
+        saveSceneToLocalStorage(sceneState);
+    }, [sceneState, saveSceneToLocalStorage]);
 
     const handleTab = (e) => {
         setSelectedTab(e.target.innerText);
@@ -47,7 +56,7 @@ function Main() {
                     Animation
                 </TabItem>
             </TabBar>
-            <SceneContextProvider>{showTab()}</SceneContextProvider>
+            {showTab()}
         </MainContainer>
     );
 }

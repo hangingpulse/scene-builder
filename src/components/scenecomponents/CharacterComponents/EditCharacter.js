@@ -42,7 +42,7 @@ function EditCharacter({ characterState, editCharacterState }) {
                 onChange={(e) =>
                     editCharacterState({
                         type: "CHANGE NAME",
-                        payload: e.target.value,
+                        payload: e.target.value.toUpperCase(),
                     })
                 }
             />

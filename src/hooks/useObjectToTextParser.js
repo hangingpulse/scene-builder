@@ -1,11 +1,7 @@
-import { useContext } from "react";
-import { SceneContext } from "../context/SceneContextProvider";
-
 function changeObjectToTextParser(sceneState) {
     const header = sceneState.header;
     const characters = sceneState.characters;
     const textArray = [header];
-    console.log(sceneState);
     let currentCharacter = "";
     let currentDialogue = [];
 
@@ -29,14 +25,13 @@ function changeObjectToTextParser(sceneState) {
                     textArray.push(currentDialogue.join("\n"));
                     currentDialogue = [];
                 }
-                currentDialogue.push(dialogueCharacter.name);
+                currentDialogue.push(dialogueCharacter.name.toUpperCase());
                 currentDialogue.push(dialogue.text);
                 currentCharacter = dialogueCharacter.name;
             }
         }
     });
-    console.log(textArray);
-
+    textArray.push(currentDialogue.join("\n"));
     const sceneString = textArray.join("\n\n");
     return sceneString;
 }

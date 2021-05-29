@@ -1,13 +1,22 @@
 import { useReducer } from "react";
+import useLocalStorage from "./useLocalStorage";
 import dummyScene from "../data/dummyScene";
 
 function useSceneContext() {
-    const initialState = { ...dummyScene };
+    const [saveSceneToLocalStorage, getSceneFromLocalStorage] =
+        useLocalStorage();
+    const savedSceneState = getSceneFromLocalStorage();
+    console.log(getSceneFromLocalStorage);
+    const initialState = savedSceneState
+        ? { ...savedSceneState }
+        : { ...dummyScene };
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
             case "LOAD SCENE":
-                return;
+                return {
+                    ...action.payload,
+                };
             case "EDIT SCENE":
                 const newState = {
                     ...sceneState,

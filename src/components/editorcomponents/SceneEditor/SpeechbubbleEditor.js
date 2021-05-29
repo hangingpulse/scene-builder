@@ -7,7 +7,6 @@ import SpeechbubbleEditorItem from "./SpeechbubbleEditorItem";
 function EditorSpeechbubble() {
     const { sceneState } = useContext(SceneContext);
 
-    console.log(sceneState);
     // Select the Character for each Speechbubble by matching names
     const findCharacter = (characterId) => {
         return sceneState.characters.find(

@@ -4,7 +4,6 @@ import { SceneContext } from "../context/SceneContextProvider";
 function useTextParser() {
     const { sceneState, dispatch } = useContext(SceneContext);
 
-    console.log(sceneState);
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
@@ -66,41 +65,48 @@ function useTextParser() {
         const sceneArray = text.split(/\n\n/);
 
         sceneArray.forEach((sceneObject) => {
-            if (/^[^a-z]+$/.test(sceneObject)) {
-                headerObject = sceneObject;
-            } else if (/([^a-z\n]+)\n.*/.test(sceneObject)) {
-                const dialogueObjectArray = sceneObject.split(/\n/);
+            // don't render empty scene objects:
+            if (sceneObject.length) {
+                console.log(sceneObject.length);
+                // test if it is a header Object: only containing Capital letters
+                if (/^[^a-z]+$/.test(sceneObject) && headerObject === "") {
+                    headerObject = sceneObject;
 
-                // take the character name out of the dialogue array
-                const characterName = dialogueObjectArray.shift();
+                    // test if it is a dialogue object: starts with only capital letters, then a line break, than the dialogue.
+                } else if (/^([^a-z\n]+)\n.*/.test(sceneObject)) {
+                    const dialogueObjectArray = sceneObject.split(/\n/);
 
-                // check if there is already a character with this name. If no, create a new character object
-                if (
-                    !characterObjects
-                        .map((character) => character.name)
-                        .includes(characterName)
-                ) {
-                    console.log(characterObjects);
-                    const newCharacterObject = createCharacterObject(
-                        characterName,
-                        characterObjects.length + 1
+                    // take the character name out of the dialogue array
+                    const characterName = dialogueObjectArray.shift();
+
+                    // check if there is already a character with this name. If no, create a new character object
+                    if (
+                        !characterObjects
+                            .map((character) => character.name)
+                            .includes(characterName)
+                    ) {
+                        const newCharacterObject = createCharacterObject(
+                            characterName,
+                            characterObjects.length + 1
+                        );
+                        characterObjects.push(newCharacterObject);
+                    }
+
+                    const { id } = characterObjects.find(
+                        (character) => character.name === characterName
                     );
-                    characterObjects.push(newCharacterObject);
+                    const newDialogueObject = createDialogueObject(
+                        dialogueObjectArray,
+                        id
+                    );
+                    sceneObjects.push(...newDialogueObject);
+                } else if (/.*/.test(sceneObject)) {
+                    const newActiontextObject =
+                        createActiontextObject(sceneObject);
+                    sceneObjects.push(...newActiontextObject);
+                } else {
+                    return;
                 }
-
-                const { id } = characterObjects.find(
-                    (character) => character.name === characterName
-                );
-                const newDialogueObject = createDialogueObject(
-                    dialogueObjectArray,
-                    id
-                );
-                sceneObjects.push(...newDialogueObject);
-            } else if (/.*/.test(sceneObject)) {
-                const newActiontextObject = createActiontextObject(sceneObject);
-                sceneObjects.push(...newActiontextObject);
-            } else {
-                return;
             }
         });
 
