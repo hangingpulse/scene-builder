@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import Actiontext from "../../scenecomponents/ActiontextComponents/Actiontext";
+import DelayItem from "../../scenecomponents/DelayItem/DelayItem";
 import Parenthetical from "../../scenecomponents/ParentheticalComponents/Parenthetical";
 import SpeechbubbleEditorItem from "./SpeechbubbleEditorItem";
 
@@ -17,25 +18,36 @@ function EditorSpeechbubble() {
     const renderDialogue = () => {
         const sceneArray = sceneState.dialogue.map((dialogue, index) => {
             if (dialogue.type === "ACTIONTEXT") {
-                return <Actiontext key={index} actiontext={dialogue} />;
+                return (
+                    <>
+                        <Actiontext key={index} actiontext={dialogue} />
+                        <DelayItem />
+                    </>
+                );
             }
             if (dialogue.type === "PARENTHETICAL") {
                 return (
-                    <Parenthetical
-                        key={index}
-                        character={findCharacter(dialogue.character)}
-                        parenthetical={dialogue}
-                    />
+                    <>
+                        <Parenthetical
+                            key={index}
+                            character={findCharacter(dialogue.character)}
+                            parenthetical={dialogue}
+                        />
+                        <DelayItem />
+                    </>
                 );
             }
             if (dialogue.type === "DIALOGUE") {
                 return (
-                    <SpeechbubbleEditorItem
-                        key={index}
-                        dialogue={dialogue}
-                        character={findCharacter(dialogue.character)}
-                        indexBubble={index}
-                    />
+                    <>
+                        <SpeechbubbleEditorItem
+                            key={index}
+                            dialogue={dialogue}
+                            character={findCharacter(dialogue.character)}
+                            indexBubble={index}
+                        />
+                        <DelayItem />
+                    </>
                 );
             }
             return "";
