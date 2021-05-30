@@ -1,15 +1,9 @@
 import { useReducer } from "react";
-import useLocalStorage from "./useLocalStorage";
 import dummyScene from "../data/dummyScene";
+import { useEffect } from "react/cjs/react.development";
 
 function useSceneContext() {
-    const [saveSceneToLocalStorage, getSceneFromLocalStorage] =
-        useLocalStorage();
-    const savedSceneState = getSceneFromLocalStorage();
-    console.log(getSceneFromLocalStorage);
-    const initialState = savedSceneState
-        ? { ...savedSceneState }
-        : { ...dummyScene };
+    const initialState = {};
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
@@ -51,7 +45,16 @@ function useSceneContext() {
         }
     };
 
-    const [sceneState, dispatch] = useReducer(reducer, initialState);
+    const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
+        // get the initialState from the localStorage
+        const localScene = localStorage.getItem("scene");
+        return localScene ? JSON.parse(localScene) : { ...dummyScene };
+    });
+
+    // save the sceneState to local storage whenever it changes
+    useEffect(() => {
+        localStorage.setItem("scene", JSON.stringify(sceneState));
+    }, [sceneState]);
 
     return [sceneState, dispatch];
 }

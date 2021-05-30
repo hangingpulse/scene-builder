@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
-import useLocalStorage from "../../../hooks/useLocalStorage";
 import Animation from "../../editorcomponents/Animation";
 import SceneEditor from "../../editorcomponents/SceneEditor";
 import TextEditor from "../../editorcomponents/TextEditor/TextEditor";
@@ -10,12 +9,7 @@ function Main() {
     const [selectedTab, setSelectedTab] = useState("SceneEditor");
 
     const { sceneState } = useContext(SceneContext);
-    const [saveSceneToLocalStorage, getSceneFromLocalStorage] =
-        useLocalStorage();
-
-    useEffect(() => {
-        saveSceneToLocalStorage(sceneState);
-    }, [sceneState, saveSceneToLocalStorage]);
+    console.log(sceneState);
 
     const handleTab = (e) => {
         setSelectedTab(e.target.innerText);
