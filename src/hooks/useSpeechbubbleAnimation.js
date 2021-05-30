@@ -1,6 +1,6 @@
 import React from "react";
 import { useAnimation } from "framer-motion";
-import AnimationSpeechbubble from "../components/SpeechbubbleComponents/AnimationSpeechbubble";
+import AnimationSpeechbubble from "../components/scenecomponents/SpeechbubbleComponents/AnimationSpeechbubble";
 
 function useSpeechbubbleAnimation() {
     // Animation for the speechbubbles, using the useAnimation hook

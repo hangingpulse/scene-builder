@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { SceneContext } from "../../../context/SceneContextProvider";
 import styled from "styled-components";
-import dummyText from "../../data/dummyText";
+import dummyText from "../../../data/dummyText";
+import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
+import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
@@ -11,14 +14,18 @@ const StyledTextArea = styled.textarea`
 `;
 
 function TextEditor() {
+    const { sceneState } = useContext(SceneContext);
     const [text, setText] = useState(dummyText);
 
-    const dialogueRegex =
-        /\n(?<name>[^a-z\n]+)\n(?<parentheticals>\([^\n]+\)\n)?(?<dialogue>[^\n]+)\n/g; //Dialogue Object that finds the names
+    useEffect(() => {
+        const sceneText = changeObjectToTextParser(sceneState);
+        setText(sceneText);
+    }, [sceneState]);
 
-    const saveText = () => {
-        const regexTest = text.matchAll(dialogueRegex);
-        console.log([...regexTest]);
+    const saveScene = useTextToObjectParser();
+
+    const handleClick = () => {
+        saveScene(text);
     };
 
     return (
@@ -27,7 +34,7 @@ function TextEditor() {
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             ></StyledTextArea>
-            <button className="SaveButton" onClick={saveText}>
+            <button className="SaveButton" onClick={handleClick}>
                 Save
             </button>
         </div>

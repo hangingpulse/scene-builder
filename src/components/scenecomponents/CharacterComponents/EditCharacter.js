@@ -1,14 +1,14 @@
 import React from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-import ColorSelection from "../SceneEditor/ColorSelection";
+import ColorSelection from "../../editorcomponents/SceneEditor/ColorSelection";
 import { CharacterImage } from "./Character.style";
 import {
     StyledEditCharacter,
     CharacterImageSelector,
     CharacterNameInput,
 } from "./EditCharacter.style";
-import { characterImages, characterColors } from "../../data/characterdata";
+import { characterImages, characterColors } from "../../../data/characterdata";
 
 function EditCharacter({ characterState, editCharacterState }) {
     return (
@@ -42,7 +42,7 @@ function EditCharacter({ characterState, editCharacterState }) {
                 onChange={(e) =>
                     editCharacterState({
                         type: "CHANGE NAME",
-                        payload: e.target.value,
+                        payload: e.target.value.toUpperCase(),
                     })
                 }
             />

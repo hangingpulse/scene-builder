@@ -1,12 +1,15 @@
-import React, { useState } from "react";
-import { SceneContextProvider } from "../../context/SceneContextProvider";
-import Animation from "../Animation";
-import SceneEditor from "../SceneEditor";
-import TextEditor from "../TextEditor/TextEditor";
+import React, { useState, useContext } from "react";
+import { SceneContext } from "../../../context/SceneContextProvider";
+import Animation from "../../editorcomponents/Animation";
+import SceneEditor from "../../editorcomponents/SceneEditor";
+import TextEditor from "../../editorcomponents/TextEditor/TextEditor";
 import { MainContainer, TabBar, TabItem } from "./Main.style";
 
 function Main() {
     const [selectedTab, setSelectedTab] = useState("SceneEditor");
+
+    const { sceneState } = useContext(SceneContext);
+    console.log(sceneState);
 
     const handleTab = (e) => {
         setSelectedTab(e.target.innerText);
@@ -47,7 +50,7 @@ function Main() {
                     Animation
                 </TabItem>
             </TabBar>
-            <SceneContextProvider>{showTab()}</SceneContextProvider>
+            {showTab()}
         </MainContainer>
     );
 }

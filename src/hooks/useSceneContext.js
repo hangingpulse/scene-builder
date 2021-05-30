@@ -1,15 +1,27 @@
 import { useReducer } from "react";
 import dummyScene from "../data/dummyScene";
+import { useEffect } from "react/cjs/react.development";
 
 function useSceneContext() {
-    const initialState = { ...dummyScene };
+    const initialState = {};
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
             case "LOAD SCENE":
-                return;
-            case "CREATE NEW SCENE":
-                return;
+                return {
+                    ...action.payload,
+                };
+            case "EDIT SCENE":
+                const newState = {
+                    ...sceneState,
+                    characters: action.payload.characters,
+                    dialogue: action.payload.dialogue,
+                    header: action.payload.header,
+                };
+
+                console.log(newState);
+
+                return newState;
             case "DELETE SCENE":
                 return;
             case "ADD BUBBLE":
@@ -33,7 +45,16 @@ function useSceneContext() {
         }
     };
 
-    const [sceneState, dispatch] = useReducer(reducer, initialState);
+    const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
+        // get the initialState from the localStorage
+        const localScene = localStorage.getItem("scene");
+        return localScene ? JSON.parse(localScene) : { ...dummyScene };
+    });
+
+    // save the sceneState to local storage whenever it changes
+    useEffect(() => {
+        localStorage.setItem("scene", JSON.stringify(sceneState));
+    }, [sceneState]);
 
     return [sceneState, dispatch];
 }
