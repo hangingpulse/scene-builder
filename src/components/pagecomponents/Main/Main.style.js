@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const MainContainer = styled.div`
+    display: flex;
+    flex-direction: ${(props) => props.flex};
     width: 100%;
     min-height: 80vh;
     background-color: ${(props) => props.theme.colors.background};
@@ -15,6 +17,8 @@ const EditorContainer = styled.div`
 
 const AnimationContainer = styled.div`
     border: 1px solid black;
+    width: 50%;
+    height: 100vh;
 `;
 
 const TabBar = styled.div`
