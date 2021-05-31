@@ -7,17 +7,17 @@ const StyledParenthetical = styled(motion.div)`
     width: 10rem;
     padding: 0.3em;
     margin: 0.3em;
-    margin-left: ${(props) => `calc(${props.character.position * 40}% + 1em)`};
-    font-size: 1rem;
+    font-size: ${(props) => props.theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
     border: 2px solid ${(props) => characterColors[props.character.colorIndex]};
     border-radius: 0.5rem;
     background-color: ${(props) => props.theme.colors.primaryLight};
 `;
 
-function Parenthetical({ parenthetical }) {
+function Parenthetical({ parenthetical, character }) {
+    console.log(parenthetical);
     return (
-        <StyledParenthetical character={parenthetical.character}>
+        <StyledParenthetical character={character}>
             {parenthetical.text}
         </StyledParenthetical>
     );

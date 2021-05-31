@@ -27,7 +27,8 @@ const EditorContainer = styled.div`
     overflow: scroll;
 `;
 
-const AnimationContainer = styled.div`
+const AnimationContentContainer = styled.div`
+    width: 100%;
     border: 1px solid black;
 `;
 
@@ -36,5 +37,5 @@ export {
     MainContainer,
     EditorContentContainer,
     EditorContainer,
-    AnimationContainer,
+    AnimationContentContainer,
 };

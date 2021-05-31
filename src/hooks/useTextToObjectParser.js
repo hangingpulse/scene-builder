@@ -9,7 +9,7 @@ function useTextParser() {
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
             type: "ACTIONTEXT",
             text: actiontextLine,
-            duration: 2 + actiontextLine.length * 0.05,
+            length: 2 + actiontextLine.length * 0.05,
             delay: 0,
             display: true,
         }));
@@ -37,7 +37,7 @@ function useTextParser() {
                     type: "PARENTHETICAL",
                     text: dialogueLine,
                     character: characterId,
-                    duration: 2 + dialogueLine.length * 0.05,
+                    length: 2 + dialogueLine.length * 0.05,
                     delay: 0,
                     display: false,
                 };
@@ -48,7 +48,8 @@ function useTextParser() {
                     type: "DIALOGUE",
                     text: dialogueLine,
                     character: characterId,
-                    duration: 2 + dialogueLine.length * 0.05,
+                    length:
+                        Math.round((2 + dialogueLine.length * 0.05) * 10) / 10,
                     delay: 0,
                     display: true,
                 };

@@ -5,7 +5,6 @@ import { SceneContext } from "../../../context/SceneContextProvider";
 function AnimationSpeechbubble({ controls, totalDelay, duration, dialogue }) {
     // Defining the SPeechbubble as a motion component happens in the style file
     const { sceneState } = useContext(SceneContext);
-    console.log(sceneState);
     const getCharacter = () => {
         return sceneState.characters.find(
             (character) => character.id === dialogue.character

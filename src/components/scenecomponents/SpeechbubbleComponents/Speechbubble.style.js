@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { characterColors } from "../../../data/characterdata";
 
 const StyledSpeechbubble = styled(motion.div)`
-    width: 12rem;
+    width: 20rem;
     padding: 0.3em;
     margin: 0.3em;
 
