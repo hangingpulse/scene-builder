@@ -1,56 +1,20 @@
-import React, { useState, useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
-import Animation from "../../editorcomponents/Animation";
-import SceneEditor from "../../editorcomponents/SceneEditor";
-import TextEditor from "../../editorcomponents/TextEditor/TextEditor";
-import { MainContainer, TabBar, TabItem } from "./Main.style";
+import React, { useState } from "react";
+import { MainContainer } from "./Main.style";
+import EditorContent from "./EditorContent";
+import AnimationContent from "./AnimationContent";
 
 function Main() {
-    const [selectedTab, setSelectedTab] = useState("SceneEditor");
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    const { sceneState } = useContext(SceneContext);
-    console.log(sceneState);
-
-    const handleTab = (e) => {
-        setSelectedTab(e.target.innerText);
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth);
     };
-
-    const showTab = () => {
-        switch (selectedTab) {
-            case "TextEditor":
-                return <TextEditor />;
-            case "SceneEditor":
-                return <SceneEditor />;
-            case "Animation":
-                return <Animation />;
-            default:
-                return;
-        }
-    };
+    window.addEventListener("resize", handleResize);
 
     return (
-        <MainContainer>
-            <TabBar>
-                <TabItem
-                    active={selectedTab === "TextEditor" ? "active" : ""}
-                    onClick={(e) => handleTab(e)}
-                >
-                    TextEditor
-                </TabItem>
-                <TabItem
-                    active={selectedTab === "SceneEditor" ? "active" : ""}
-                    onClick={(e) => handleTab(e)}
-                >
-                    SceneEditor
-                </TabItem>
-                <TabItem
-                    active={selectedTab === "Animation" ? "active" : ""}
-                    onClick={(e) => handleTab(e)}
-                >
-                    Animation
-                </TabItem>
-            </TabBar>
-            {showTab()}
+        <MainContainer flex={windowWidth >= 1024 ? "row" : ""}>
+            <EditorContent smallScreen={windowWidth >= 1024 ? false : true} />
+            {windowWidth >= 1024 ? <AnimationContent /> : ""}
         </MainContainer>
     );
 }

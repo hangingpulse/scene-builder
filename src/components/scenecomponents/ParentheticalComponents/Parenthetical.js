@@ -5,8 +5,8 @@ import { characterColors } from "../../../data/characterdata";
 
 const StyledParenthetical = styled(motion.div)`
     width: 10rem;
-    padding: 0.5em;
-    margin: 1em;
+    padding: 0.3em;
+    margin: 0.3em;
     margin-left: ${(props) => `calc(${props.character.position * 40}% + 1em)`};
     font-size: 1rem;
     font-family: ${(props) => props.theme.fonts.sansSerif};

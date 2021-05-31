@@ -67,7 +67,6 @@ function useTextParser() {
         sceneArray.forEach((sceneObject) => {
             // don't render empty scene objects:
             if (sceneObject.length) {
-                console.log(sceneObject.length);
                 // test if it is a header Object: only containing Capital letters
                 if (/^[^a-z]+$/.test(sceneObject) && headerObject === "") {
                     headerObject = sceneObject;

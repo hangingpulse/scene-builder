@@ -1,23 +1,40 @@
 import styled from "styled-components";
 
-const MainContainer = styled.div`
+const Container = styled.div`
     width: 100%;
-    min-height: 80vh;
-    background-color: ${(props) => props.theme.colors.background};
+    height: 100%;
 `;
 
-const TabBar = styled.div`
+const MainContainer = styled.div`
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.5rem;
+    flex-direction: ${(props) => props.flex};
+    gap: 0.8rem;
+    height: 90vh;
+
+    background-color: ${(props) => props.theme.colors.background};
+    margin: 1.6rem;
 `;
 
-const TabItem = styled.div`
-    margin: 1rem 1rem;
-    padding: 0.2em;
-    cursor: pointer;
-    border: ${(props) => (props.active === "active" ? "1px solid black" : "")};
+const EditorContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 `;
 
-export { MainContainer, TabBar, TabItem };
+const EditorContainer = styled.div`
+    padding: 1.6em 0.8em;
+    border: 1px solid black;
+    overflow: scroll;
+`;
+
+const AnimationContainer = styled.div`
+    border: 1px solid black;
+`;
+
+export {
+    Container,
+    MainContainer,
+    EditorContentContainer,
+    EditorContainer,
+    AnimationContainer,
+};
