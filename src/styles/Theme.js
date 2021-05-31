@@ -9,7 +9,8 @@ const mainTheme = {
         highlight: "#f38181",
     },
     fonts: {
-        sansSerif: "Lexend",
+        serif: "Lexend",
+        sansSerif: "Cormorand",
         fontSizes: {
             base: "1.6rem",
             baseSmall: "1.4rem",
