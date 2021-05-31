@@ -1,15 +1,13 @@
-import React, { useState, useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import React, { useState } from "react";
 import Animation from "../../editorcomponents/Animation";
 import SceneEditor from "../../editorcomponents/SceneEditor";
 import TextEditor from "../../editorcomponents/TextEditor/TextEditor";
-import { MainContainer, TabBar, TabItem } from "./Main.style";
+import { MainContainer, EditorContainer, TabBar, TabItem } from "./Main.style";
 
 function Main() {
     const [selectedTab, setSelectedTab] = useState("SceneEditor");
 
-    const { sceneState } = useContext(SceneContext);
-    console.log(sceneState);
+    console.log(window.innerWidth);
 
     const handleTab = (e) => {
         setSelectedTab(e.target.innerText);
@@ -32,25 +30,31 @@ function Main() {
         <MainContainer>
             <TabBar>
                 <TabItem
-                    active={selectedTab === "TextEditor" ? "active" : ""}
+                    active={selectedTab === "TextEditor" ? true : false}
                     onClick={(e) => handleTab(e)}
+                    marginRight="-2rem"
+                    marginLeft="0"
                 >
                     TextEditor
                 </TabItem>
                 <TabItem
-                    active={selectedTab === "SceneEditor" ? "active" : ""}
+                    active={selectedTab === "SceneEditor" ? true : false}
                     onClick={(e) => handleTab(e)}
+                    marginRight="-1rem"
+                    marginLeft="-1rem"
                 >
                     SceneEditor
                 </TabItem>
                 <TabItem
-                    active={selectedTab === "Animation" ? "active" : ""}
+                    active={selectedTab === "Animation" ? true : false}
                     onClick={(e) => handleTab(e)}
+                    marginRight="0"
+                    marginLeft="-2rem"
                 >
                     Animation
                 </TabItem>
             </TabBar>
-            {showTab()}
+            <EditorContainer>{showTab()}</EditorContainer>
         </MainContainer>
     );
 }

@@ -10,6 +10,11 @@ const mainTheme = {
     },
     fonts: {
         sansSerif: "Lexend",
+        fontSizes: {
+            base: "1.6rem",
+            baseSmall: "1.4rem",
+            blockLarge: "1.92rem",
+        },
     },
 };
 
