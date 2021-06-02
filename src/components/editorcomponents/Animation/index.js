@@ -24,6 +24,7 @@ function Animation() {
             <SceneComponent
                 sceneItem={sceneState.dialogue[animationIndex]}
                 character={currentCharacter}
+                animation={true}
             />
         );
     };

@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 
 const AnimationComponentWrapper = styled(motion.div)`
     position: absolute;
+    top: 15%;
+    right: 15%;
 `;
 
 function AnimatedComponent({

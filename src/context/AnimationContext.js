@@ -73,6 +73,7 @@ function AnimationContextProvider({ children }) {
                             key={index}
                             sceneItem={dialogue}
                             character={currentCharacter}
+                            animation
                         />
                     </AnimatedComponent>
                 );

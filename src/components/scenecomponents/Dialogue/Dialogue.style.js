@@ -5,7 +5,6 @@ import { characterColors } from "../../../data/characterdata";
 const DialogueContainer = styled(motion.div)`
     width: 20rem;
     padding: 0.3em;
-    margin: 0.3em;
 
     font-size: ${(props) => props.theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
