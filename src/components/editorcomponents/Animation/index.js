@@ -6,6 +6,7 @@ import {
     AnimationContainer,
     CharacterContainerAnimation,
     SceneContentAnimation,
+    AnimationHeader,
 } from "./Animation.style";
 import SceneComponent from "../../scenecomponents/SceneComponent";
 
@@ -24,13 +25,14 @@ function Animation() {
             <SceneComponent
                 sceneItem={sceneState.dialogue[animationIndex]}
                 character={currentCharacter}
-                animation={true}
+                animation
             />
         );
     };
 
     return (
         <AnimationContainer className="AnimationContainer">
+            <AnimationHeader>{sceneState.header}</AnimationHeader>
             {sceneState.characters.map((character, index) => (
                 <CharacterContainerAnimation
                     key={index}

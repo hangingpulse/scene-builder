@@ -17,6 +17,43 @@ const mainTheme = {
             blockLarge: "1.92rem",
         },
     },
+    animationPositions: [
+        {
+            top: "50%",
+            bottom: "",
+            right: "",
+            left: "",
+            translateY: "-50%",
+        },
+        {
+            top: "0",
+            bottom: "",
+            right: "",
+            left: "0",
+            translateY: "0",
+        },
+        {
+            top: "",
+            bottom: "50%",
+            right: "0%",
+            left: "",
+            translateY: "",
+        },
+        {
+            top: "50%",
+            bottom: "",
+            right: "",
+            left: "0",
+            translateY: "0",
+        },
+        {
+            top: "",
+            bottom: "0",
+            right: "0",
+            left: "",
+            translateY: "-100%",
+        },
+    ],
 };
 
 function Theme({ children }) {

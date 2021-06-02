@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
 import { characterColors } from "../../../data/characterdata";
 
-const DialogueContainer = styled(motion.div)`
+const DialogueContainer = styled.div`
     width: 20rem;
     padding: 0.3em;
 

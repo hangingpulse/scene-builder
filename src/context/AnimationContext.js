@@ -64,6 +64,9 @@ function AnimationContextProvider({ children }) {
                     <AnimatedComponent
                         key={index}
                         index={index}
+                        characterIndex={
+                            currentCharacter ? currentCharacter.id : 0
+                        }
                         controls={controls}
                         totalDelay={totalDelay - duration}
                         duration={duration}
