@@ -5,24 +5,24 @@ import Character from "../../scenecomponents/Character";
 import {
     AnimationContainer,
     CharacterContainerAnimation,
+    SceneContentAnimation,
 } from "./Animation.style";
 import SceneComponent from "../../scenecomponents/SceneComponent";
 
 function Animation() {
     const { sceneState } = useContext(SceneContext);
 
-    const { animationItems, animationPlaying, animationItemIndex } =
+    const { animationItems, animationPlaying, animationIndex } =
         useContext(AnimationContext);
 
     const renderCurrentItem = () => {
         const currentCharacter = sceneState.characters.find(
             (character) =>
-                character.id ===
-                sceneState.dialogue[animationItemIndex].character
+                character.id === sceneState.dialogue[animationIndex].character
         );
         return (
             <SceneComponent
-                sceneItem={sceneState.dialogue[animationItemIndex]}
+                sceneItem={sceneState.dialogue[animationIndex]}
                 character={currentCharacter}
             />
         );
@@ -38,7 +38,9 @@ function Animation() {
                     <Character character={character} />
                 </CharacterContainerAnimation>
             ))}
-            {animationPlaying ? animationItems() : renderCurrentItem()}
+            <SceneContentAnimation>
+                {animationPlaying ? animationItems() : renderCurrentItem()}
+            </SceneContentAnimation>
         </AnimationContainer>
     );
 }

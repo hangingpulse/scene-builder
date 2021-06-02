@@ -34,23 +34,19 @@ function AnimationContextProvider({ children }) {
         console.log(currentAnimationList);
         controls.start(({ delay, duration }) => ({
             opacity: [0, 1, 1, 0],
+            visibility: "visible",
             transition: {
                 delay: delay,
                 duration: duration,
                 times: [0, 0.1, 0.9, 1],
             },
-            transitionEnd: { display: "none" },
+            transitionEnd: { visibility: "hidden" },
         }));
     };
 
     const pauseAnimation = () => {
         setAnimationPlaying(false);
         setCurrentAnimationList([...sceneState.dialogue.slice(animationIndex)]);
-    };
-
-    const renderNewItem = (index) => {
-        console.log(animationIndex);
-        setAnimationIndex(index + 1);
     };
 
     const animationItems = () => {
@@ -69,9 +65,8 @@ function AnimationContextProvider({ children }) {
                         key={index}
                         index={index}
                         controls={controls}
-                        totalDelay={totalDelay}
+                        totalDelay={totalDelay - duration}
                         duration={duration}
-                        newItem={renderNewItem}
                         setAnimationIndex={setAnimationIndex}
                     >
                         <SceneComponent
@@ -82,7 +77,7 @@ function AnimationContextProvider({ children }) {
                     </AnimatedComponent>
                 );
             });
-            return dialogueList[0];
+            return dialogueList;
         }
     };
     return (
@@ -95,6 +90,7 @@ function AnimationContextProvider({ children }) {
                 setAnimationPlaying,
                 animationIndex,
                 setAnimationIndex,
+                setCurrentAnimationList,
             }}
         >
             {children}

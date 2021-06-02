@@ -9,6 +9,7 @@ import Parenthetical from "../scenecomponents/Parenthetical";
 
 // Container Styles, maybe outsource it into a styles.js
 const SceneComponentContainer = styled.div`
+    position: absolute;
     width: 80%;
     height: 8rem;
     grid-area: ${(props) =>

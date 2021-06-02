@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { SceneContext } from "../../../context/SceneContextProvider";
 import { AnimationContext } from "../../../context/AnimationContext";
 import styled from "styled-components";
 
@@ -26,11 +27,15 @@ const PlayButton = styled.div`
 
 function AnimationControls() {
     const {
+        pauseAnimation,
         setAnimationPlaying,
         animationPlaying,
         setAnimationIndex,
         animationIndex,
+        setCurrentAnimationList,
     } = useContext(AnimationContext);
+
+    const { sceneState } = useContext(SceneContext);
 
     const playAnimation = () => {
         setAnimationPlaying(true);
@@ -42,9 +47,15 @@ function AnimationControls() {
                 case "next":
                     console.log(animationIndex);
                     setAnimationIndex((prevState) => prevState + 1);
+                    setCurrentAnimationList([
+                        ...sceneState.dialogue.slice(animationIndex + 1),
+                    ]);
                     break;
                 case "previous":
                     setAnimationIndex((prevState) => prevState - 1);
+                    setCurrentAnimationList([
+                        ...sceneState.dialogue.slice(animationIndex - 1),
+                    ]);
                     break;
                 default:
                     break;
@@ -55,9 +66,7 @@ function AnimationControls() {
     return (
         <AnimationControlsContainer>
             <PlayButton onClick={playAnimation}>Play Animation</PlayButton>
-            <button onClick={() => setAnimationPlaying(false)}>
-                Pause Animation
-            </button>
+            <button onClick={pauseAnimation}>Pause Animation</button>
             <button onClick={() => changeItem("previous")}>
                 Previous Item
             </button>

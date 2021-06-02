@@ -12,24 +12,20 @@ const AnimationComponentWrapper = styled(motion.div)`
 function AnimatedComponent({
     children,
     controls,
-    delay,
+    totalDelay,
     duration,
-    onAnimationComplete,
-    animationItemIndex,
-    setAnimationItemIndex,
+    setAnimationIndex,
 }) {
     return (
         <AnimationComponentWrapper
             animate={controls}
-            initial={{ opacity: 0, visibility: "visible" }}
+            initial={{ opacity: 0 }}
             custom={{
-                delay: delay,
+                delay: totalDelay,
                 duration: duration,
             }}
             onAnimationComplete={() => {
-                onAnimationComplete();
-                console.log(animationItemIndex);
-                setAnimationItemIndex((prevState) => prevState + 1);
+                setAnimationIndex((prevState) => prevState + 1);
             }}
         >
             {children}

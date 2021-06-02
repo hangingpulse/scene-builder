@@ -21,4 +21,12 @@ const CharacterContainerAnimation = styled.div`
     grid-area: ${(props) => props.index};
 `;
 
-export { AnimationContainer, CharacterContainerAnimation };
+const SceneContentAnimation = styled.div`
+    grid-area: 2 / 1 / 3 / 5;
+`;
+
+export {
+    AnimationContainer,
+    CharacterContainerAnimation,
+    SceneContentAnimation,
+};
