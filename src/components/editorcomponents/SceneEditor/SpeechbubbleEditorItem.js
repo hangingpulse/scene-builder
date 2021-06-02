@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import EditSpeechbubble from "../../scenecomponents/SpeechbubbleComponents/EditSpeechbubble";
-import StyledSpeechbubble from "../../scenecomponents/SpeechbubbleComponents/Speechbubble.style";
+import EditSpeechbubble from "../../scenecomponents/Dialogue/EditSpeechbubble";
+import Dialogue from "../../scenecomponents/Dialogue/";
 
 function SpeechbubbleEditorItem({ dialogue, character, indexBubble }) {
     const [edit, toggleEdit] = useState(false);
@@ -8,13 +8,11 @@ function SpeechbubbleEditorItem({ dialogue, character, indexBubble }) {
     return (
         <div className="EditOrViewSpeechbubble">
             {!edit && character ? (
-                <StyledSpeechbubble
-                    leftBubble={dialogue.leftBubble}
+                <Dialogue
                     onClick={() => toggleEdit((prevState) => !prevState)}
                     character={character}
-                >
-                    {dialogue.text}
-                </StyledSpeechbubble>
+                    dialogue={dialogue}
+                />
             ) : (
                 <EditSpeechbubble
                     dialogue={dialogue}

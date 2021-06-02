@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { SceneContext } from "../../../context/SceneContextProvider";
-import StyledSpeechbubble from "./Speechbubble.style";
+import { DialogueContainer } from "./Dialogue.style";
 
-const StyledEditSpeechbubble = styled(StyledSpeechbubble)`
+const StyledEditSpeechbubble = styled(DialogueContainer)`
     position: relative;
     transform: translateX(${(props) => (props.leftBubble ? "2rem" : "-2rem")})
         scale(1.2);

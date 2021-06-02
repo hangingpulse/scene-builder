@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
-import Actiontext from "../../scenecomponents/ActiontextComponents/Actiontext";
-import DelayItem from "../../scenecomponents/DelayItem/DelayItem";
-import Parenthetical from "../../scenecomponents/ParentheticalComponents/Parenthetical";
+import Actiontext from "../../scenecomponents/Actiontext";
+import DelayItem from "../../scenecomponents/DelayItem";
+import Parenthetical from "../../scenecomponents/Parenthetical";
 import SpeechbubbleEditorItem from "./SpeechbubbleEditorItem";
 
 function EditorSpeechbubble() {

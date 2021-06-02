@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const AnimationContainer = styled.div`
     width: 100%;
+    height: 50%;
     display: grid;
     grid-template-areas:
         "char1 text1 char2"
@@ -12,20 +13,12 @@ const AnimationContainer = styled.div`
 
     justify-content: center;
     align-items: center;
+
+    border: 1px solid black;
 `;
 
 const CharacterContainerAnimation = styled.div`
     grid-area: ${(props) => props.index};
 `;
 
-const DialogueContainer = styled.div`
-    width: 80%;
-    height: 8rem;
-    grid-area: ${(props) =>
-        props.index === "text0" ? "2 / 2 / 4 / 3" : props.index};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-export { AnimationContainer, CharacterContainerAnimation, DialogueContainer };
+export { AnimationContainer, CharacterContainerAnimation };

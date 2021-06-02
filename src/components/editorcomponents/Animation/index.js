@@ -1,47 +1,35 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
-import useSpeechbubbleAnimation from "../../../hooks/useSpeechbubbleAnimation";
-import Character from "../../scenecomponents/CharacterComponents/Character";
-import StyledSpeechbubble from "../../scenecomponents/SpeechbubbleComponents/Speechbubble.style.js";
-import Actiontext from "../../scenecomponents/ActiontextComponents/Actiontext";
+import { AnimationContext } from "../../../context/AnimationContext";
+import Character from "../../scenecomponents/Character";
 import {
     AnimationContainer,
     CharacterContainerAnimation,
-    DialogueContainer,
 } from "./Animation.style";
+import SceneComponent from "../../scenecomponents/SceneComponent";
 
 function Animation() {
     const { sceneState } = useContext(SceneContext);
 
-    const buildSpeechbubbles = useSpeechbubbleAnimation();
+    const { animationItems, animationPlaying, animationItemIndex } =
+        useContext(AnimationContext);
 
-    console.log(buildSpeechbubbles);
-
-    const editSpeechbubbles = [];
-    const editDialogue = () => {
-        sceneState.characters.forEach((character) => {
-            const firstBubble = sceneState.dialogue.find(
-                (dialogueLine) => character.id === dialogueLine.character
-            );
-            editSpeechbubbles.push(firstBubble);
-            console.log(firstBubble);
-        });
-        editSpeechbubbles.push(
-            sceneState.dialogue.find(
-                (dialogue) => dialogue.type === "ACTIONTEXT"
-            )
+    const renderCurrentItem = () => {
+        const currentCharacter = sceneState.characters.find(
+            (character) =>
+                character.id ===
+                sceneState.dialogue[animationItemIndex].character
         );
-    };
-    editDialogue();
-
-    const getCharacter = (characterId) => {
-        return sceneState.characters.find(
-            (character) => character.id === characterId
+        return (
+            <SceneComponent
+                sceneItem={sceneState.dialogue[animationItemIndex]}
+                character={currentCharacter}
+            />
         );
     };
 
     return (
-        <AnimationContainer>
+        <AnimationContainer className="AnimationContainer">
             {sceneState.characters.map((character, index) => (
                 <CharacterContainerAnimation
                     key={index}
@@ -50,29 +38,12 @@ function Animation() {
                     <Character character={character} />
                 </CharacterContainerAnimation>
             ))}
-            {buildSpeechbubbles(sceneState)}
+            {animationPlaying ? animationItems() : renderCurrentItem()}
         </AnimationContainer>
     );
 }
 
 export default Animation;
-
-/* editSpeechbubbles.map((bubble, index) => (
-                <DialogueContainer
-                    key={index}
-                    index={`text${bubble.character ? bubble.character : 0}`}
-                >
-                    {bubble.type === "ACTIONTEXT" ? (
-                        <Actiontext actiontext={bubble} animation />
-                    ) : (
-                        <StyledSpeechbubble
-                            character={getCharacter(bubble.character)}
-                        >
-                            {bubble.text}
-                        </StyledSpeechbubble>
-                    )}
-                </DialogueContainer>
-            )) */
 
 /*
 PURPOSE:
