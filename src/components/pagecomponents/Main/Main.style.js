@@ -24,6 +24,7 @@ const EditorContainer = styled.div`
     width: 100%;
     padding: 0 0.8em;
     border: 1px solid black;
+    border-top: 3px solid ${({ theme }) => theme.colors.highlight};
     overflow: scroll;
 `;
 

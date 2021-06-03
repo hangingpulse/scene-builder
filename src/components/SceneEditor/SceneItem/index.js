@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import DelayItem from "../../scenecomponents/DelayItem";
 import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
 
 const SceneItemContainer = styled.div`

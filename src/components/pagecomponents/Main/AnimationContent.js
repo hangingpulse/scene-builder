@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { AnimationContextProvider } from "../../../context/AnimationContext";
 import Animation from "../../editorcomponents/Animation";
 import AnimationControls from "../../editorcomponents/Animation/AnimationControls";

@@ -65,7 +65,7 @@ function useTextParser() {
 
     const findSceneObjects = (text) => {
         const sceneObjects = [];
-        const characterObjects = [...sceneState.characters];
+        const characterObjects = [];
         let headerObject = "";
         const sceneArray = text.split(/\n\n/);
 
@@ -121,6 +121,7 @@ function useTextParser() {
     const saveScene = (text) => {
         const [characterObjects, sceneObjects, headerObject] =
             findSceneObjects(text);
+        console.log(characterObjects);
         dispatch({
             type: "EDIT SCENE",
             payload: {

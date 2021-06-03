@@ -13,7 +13,7 @@ function Character({ character }) {
             color={characterColors[character.colorIndex]}
         >
             <CharacterImage
-                src={characterImages[character.imageIndex]}
+                src={characterImages[character.imageIndex - 1]}
                 alt={character.name}
             />
             <CharacterName>{character.name}</CharacterName>
