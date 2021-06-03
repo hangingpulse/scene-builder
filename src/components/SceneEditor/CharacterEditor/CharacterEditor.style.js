@@ -22,7 +22,7 @@ const BlurOverlay = styled.div`
         rgba(255, 255, 255, 0),
         ${({ theme }) => theme.colors.primary}
     );
-    height: 4em;
+    height: 2em;
     z-index: 10;
 `;
 

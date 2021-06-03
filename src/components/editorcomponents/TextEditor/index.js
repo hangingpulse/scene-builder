@@ -4,6 +4,7 @@ import styled from "styled-components";
 import dummyText from "../../../data/dummyText";
 import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
 import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
+import useOpenApi from "../../../hooks/useOpenApi";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
@@ -16,11 +17,18 @@ const StyledTextArea = styled.textarea`
 function TextEditor() {
     const { sceneState } = useContext(SceneContext);
     const [text, setText] = useState(dummyText);
+    const [getPrompt, openApiText] = useOpenApi();
 
     useEffect(() => {
         const sceneText = changeObjectToTextParser(sceneState);
         setText(sceneText);
     }, [sceneState]);
+
+    useEffect(() => {
+        if (openApiText.length) {
+            setText(text + openApiText);
+        }
+    }, [openApiText]);
 
     const saveScene = useTextToObjectParser();
 
@@ -28,15 +36,20 @@ function TextEditor() {
         saveScene(text);
     };
 
+    const getTextFromOpenApi = () => {
+        getPrompt(text);
+    };
+
     return (
         <div>
+            <button className="SaveButton" onClick={handleClick}>
+                Save
+            </button>
+            <button onClick={() => getPrompt(text)}>Generate new lines</button>
             <StyledTextArea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             ></StyledTextArea>
-            <button className="SaveButton" onClick={handleClick}>
-                Save
-            </button>
         </div>
     );
 }

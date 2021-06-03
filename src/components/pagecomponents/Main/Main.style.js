@@ -26,7 +26,6 @@ const EditorContainer = styled.div`
     padding: 0 0.8em;
     border: 1px solid black;
     border-top: 3px solid ${({ theme }) => theme.colors.highlight};
-    overflow: hidden;
 `;
 
 // only the editor content without the tabbar
