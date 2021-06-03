@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TextEditor from "../../editorcomponents/TextEditor";
-import SceneEditor from "../../editorcomponents/SceneEditor/";
+import SceneEditor from "../../SceneEditor";
 import Animation from "../../editorcomponents/Animation";
 import TabBar from "../../modularcomponents/TabBar";
 import { EditorContentContainer, EditorContainer } from "./Main.style";

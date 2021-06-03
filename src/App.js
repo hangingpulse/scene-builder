@@ -6,10 +6,13 @@ import Footer from "./components/pagecomponents/Footer/Footer";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { SceneContextProvider } from "./context/SceneContextProvider";
+import { css } from "styled-components";
 
 const AppBody = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
 `;
 
 function App() {

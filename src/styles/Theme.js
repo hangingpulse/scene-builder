@@ -1,6 +1,22 @@
-import { ThemeProvider } from "styled-components";
+import { css, ThemeProvider } from "styled-components";
+
+const sizes = {
+    mobile: 320,
+    tablet: 500,
+    desktopSmall: 1000,
+    desktopLarge: 1200,
+};
+const media = Object.keys(sizes).reduce((acc, label) => {
+    acc[label] = (...args) => css`
+        @media (min-width: ${sizes[label]}px) {
+            ${css(...args)};
+        }
+    `;
+    return acc;
+}, {});
 
 const mainTheme = {
+    ...media,
     colors: {
         primary: "#756c83",
         primaryLight: "#EBE9ED",
@@ -15,6 +31,8 @@ const mainTheme = {
             base: "1.6rem",
             baseSmall: "1.4rem",
             blockLarge: "1.92rem",
+            header2: "2.77rem",
+            header2Small: "2.02rem",
         },
     },
     animationPositions: [

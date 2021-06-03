@@ -1,7 +1,7 @@
 import React from "react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-import ColorSelection from "../../editorcomponents/SceneEditor/ColorSelection";
+import ColorSelection from "../../SceneEditor/ColorSelection";
 import { CharacterImage } from "./Character.style";
 import {
     StyledEditCharacter,

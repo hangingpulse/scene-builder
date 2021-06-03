@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import { CharacterContainer } from "../../scenecomponents/Character/Character.style";
-import EditCharacterModal from "./EditCharacterModal";
+import EditCharacterModal from "../Character/EditCharacterModal";
 import Character from "../../scenecomponents/Character";
 
 function CharacterEditor() {

@@ -24,7 +24,9 @@ function Animation() {
                 character.id === sceneState.dialogue[animationIndex].character
         );
         return (
-            <AnimationPauseWrapper>
+            <AnimationPauseWrapper
+                characterIndex={currentCharacter ? currentCharacter.id : 0}
+            >
                 <SceneComponent
                     sceneItem={sceneState.dialogue[animationIndex]}
                     character={currentCharacter}

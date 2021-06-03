@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { SceneContext } from "../context/SceneContextProvider";
+import uuid from "react-uuid";
 
 function useTextParser() {
     const { sceneState, dispatch } = useContext(SceneContext);
@@ -7,6 +8,7 @@ function useTextParser() {
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
+            id: uuid(),
             type: "ACTIONTEXT",
             text: actiontextLine,
             length: 2 + actiontextLine.length * 0.05,
@@ -34,6 +36,7 @@ function useTextParser() {
             // Check if Dialogue Line is a parenthetical
             if (/\(.*\)/.test(dialogueLine)) {
                 return {
+                    id: uuid(),
                     type: "PARENTHETICAL",
                     text: dialogueLine,
                     character: characterId,
@@ -45,6 +48,7 @@ function useTextParser() {
             // Check if dialogue line is dialogue
             if (/.*/.test(dialogueLine)) {
                 return {
+                    id: uuid(),
                     type: "DIALOGUE",
                     text: dialogueLine,
                     character: characterId,

@@ -1,5 +1,5 @@
 import React from "react";
-import { characterColors } from "../../../data/characterdata";
+import { characterColors } from "../../data/characterdata";
 import styled from "styled-components";
 import { motion, AnimateSharedLayout } from "framer-motion";
 

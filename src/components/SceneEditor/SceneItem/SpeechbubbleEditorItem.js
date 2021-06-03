@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditSpeechbubble from "../../scenecomponents/Dialogue/EditSpeechbubble";
-import Dialogue from "../../scenecomponents/Dialogue/";
+import Dialogue from "../../scenecomponents/Dialogue";
 
 function SpeechbubbleEditorItem({ dialogue, character, indexBubble }) {
     const [edit, toggleEdit] = useState(false);
