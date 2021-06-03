@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { characterColors } from "../../../data/characterdata";
 
 const StyledParenthetical = styled(motion.div)`
-    width: 10rem;
+    max-width: 10rem;
+    width: 100%;
     padding: 0.3em;
-    margin: 0.3em;
     font-size: ${(props) => props.theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
     border: 2px solid ${(props) => characterColors[props.character.colorIndex]};

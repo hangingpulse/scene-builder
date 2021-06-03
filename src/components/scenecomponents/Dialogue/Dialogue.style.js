@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { characterColors } from "../../../data/characterdata";
 
 const DialogueContainer = styled.div`
-    width: 20rem;
+    width: 100%;
     padding: 0.3em;
 
     font-size: ${(props) => props.theme.fonts.fontSizes.base};

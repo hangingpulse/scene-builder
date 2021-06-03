@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledDelayItem = styled.div`
-    width: 30%;
+    width: 90%;
     margin: 0.3em auto;
     padding: 0.2em;
     border: 1px dotted black;
@@ -10,6 +10,7 @@ const StyledDelayItem = styled.div`
     background-color: ${(props) => props.theme.colors.primaryLight};
     opacity: 0.5;
 
+    font-size: ${({ theme }) => theme.fonts.fontSizes.blockSmall};
     text-align: center;
 
     &:hover {
@@ -18,7 +19,7 @@ const StyledDelayItem = styled.div`
 `;
 
 function DelayItem() {
-    return <StyledDelayItem>Edit Pause, Add Item</StyledDelayItem>;
+    return <StyledDelayItem></StyledDelayItem>;
 }
 
 export default DelayItem;

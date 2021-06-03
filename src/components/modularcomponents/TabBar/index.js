@@ -5,29 +5,29 @@ function TabBar({ selectedTab, setSelectedTab, smallScreen }) {
     return (
         <TabBarContainer>
             <TabItem
-                active={selectedTab === "TextEditor" ? true : false}
+                active={selectedTab === "Write" ? true : false}
                 onClick={(e) => setSelectedTab(e.target.innerText)}
                 marginRight="-2rem"
                 marginLeft="0"
             >
-                TextEditor
+                Write
             </TabItem>
             <TabItem
-                active={selectedTab === "SceneEditor" ? true : false}
+                active={selectedTab === "Edit" ? true : false}
                 onClick={(e) => setSelectedTab(e.target.innerText)}
                 marginRight="-1rem"
                 marginLeft="-1rem"
             >
-                SceneEditor
+                Edit
             </TabItem>
             {smallScreen && (
                 <TabItem
-                    active={selectedTab === "Animation" ? true : false}
+                    active={selectedTab === "View" ? true : false}
                     onClick={(e) => setSelectedTab(e.target.innerText)}
                     marginRight="0"
                     marginLeft="-2rem"
                 >
-                    Animation
+                    View
                 </TabItem>
             )}
         </TabBarContainer>

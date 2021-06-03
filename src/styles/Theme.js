@@ -30,6 +30,7 @@ const mainTheme = {
         fontSizes: {
             base: "1.6rem",
             baseSmall: "1.4rem",
+            blockSmall: "1.17rem",
             blockLarge: "1.92rem",
             header2: "2.77rem",
             header2Small: "2.02rem",

@@ -2,11 +2,17 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { SceneEditorContext } from "../../../context/SceneEditorContext";
 
-import DelayItem from "../../scenecomponents/DelayItem";
+import DelayItem from "../DelayItem";
 import SceneItem from "../SceneItem";
+import SceneAndDelayItemWrapper from "./SceneAndDelayItemWrapper";
 
 const SceneItemEditorContainer = styled.div`
+    position: relative;
     width: 100%;
+    height: 95vh;
+    padding-top: 0.8em;
+    padding-bottom: 10rem;
+    overflow: scroll;
 `;
 
 function SceneItemEditor() {
@@ -24,41 +30,44 @@ function SceneItemEditor() {
         const sceneArray = editorState.dialogue.map((dialogue, index) => {
             if (dialogue.type === "ACTIONTEXT") {
                 return (
-                    <div key={index}>
+                    <SceneAndDelayItemWrapper key={index}>
                         <DelayItem editorIndex={index} />
                         <SceneItem
                             key={index}
                             editorIndex={index}
                             sceneItem={dialogue}
                             character={findCharacter(dialogue.character)}
+                            characterCount={editorState.characters.length}
                         />
-                    </div>
+                    </SceneAndDelayItemWrapper>
                 );
             }
             if (dialogue.type === "PARENTHETICAL") {
                 return (
-                    <div key={index}>
+                    <SceneAndDelayItemWrapper key={index}>
                         <DelayItem editorIndex={index} />
                         <SceneItem
                             key={index}
                             editorIndex={index}
                             sceneItem={dialogue}
                             character={findCharacter(dialogue.character)}
+                            characterCount={editorState.characters.length}
                         />
-                    </div>
+                    </SceneAndDelayItemWrapper>
                 );
             }
             if (dialogue.type === "DIALOGUE") {
                 return (
-                    <div key={index}>
+                    <SceneAndDelayItemWrapper key={index}>
                         <DelayItem editorIndex={index} />
                         <SceneItem
                             key={index}
                             editorIndex={index}
                             sceneItem={dialogue}
                             character={findCharacter(dialogue.character)}
+                            characterCount={editorState.characters.length}
                         />
-                    </div>
+                    </SceneAndDelayItemWrapper>
                 );
             }
             return "";

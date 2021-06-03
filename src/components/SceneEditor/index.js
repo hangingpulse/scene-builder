@@ -7,18 +7,18 @@ import HeaderEditor from "./HeaderEditor";
 
 const SceneEditorContainer = styled.div`
     width: 100%;
+    height: 85vh;
     display: flex;
     flex-direction: column;
+    overflow: inherit;
 `;
 
 function SceneEditor() {
     return (
         <SceneEditorContainer>
-            <SceneEditorContextProvider>
-                <HeaderEditor />
-                <CharacterEditor />
-                <SceneItemEditor />
-            </SceneEditorContextProvider>
+            <HeaderEditor />
+            <CharacterEditor />
+            <SceneItemEditor />
         </SceneEditorContainer>
     );
 }

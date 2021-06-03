@@ -22,10 +22,11 @@ const EditorContentContainer = styled.div`
 // including the tab bar
 const EditorContainer = styled.div`
     width: 100%;
+    height: 90%;
     padding: 0 0.8em;
     border: 1px solid black;
     border-top: 3px solid ${({ theme }) => theme.colors.highlight};
-    overflow: scroll;
+    overflow: hidden;
 `;
 
 // only the editor content without the tabbar

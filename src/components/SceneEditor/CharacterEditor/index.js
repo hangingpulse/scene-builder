@@ -1,9 +1,8 @@
 import React, { useContext, useState } from "react";
 import { SceneEditorContext } from "../../../context/SceneEditorContext";
-import { CharacterContainer } from "../../scenecomponents/Character/Character.style";
 import Character from "../../scenecomponents/Character";
 import CharacterWrapperEditor from "../Character/CharacterWrapperEditor";
-import { CharacterEditorContainer } from "./CharacterEditor.style";
+import { CharacterEditorContainer, BlurOverlay } from "./CharacterEditor.style";
 
 function CharacterEditor() {
     const { editorState } = useContext(SceneEditorContext);
@@ -26,6 +25,7 @@ function CharacterEditor() {
                     <Character character={character} />
                 </CharacterWrapperEditor>
             ))}
+            <BlurOverlay />
         </CharacterEditorContainer>
     );
 }

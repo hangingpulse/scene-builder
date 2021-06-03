@@ -7,10 +7,8 @@ import { AnimationContentContainer } from "./Main.style.js";
 function AnimationContent() {
     return (
         <AnimationContentContainer>
-            <AnimationContextProvider>
-                <Animation />
-                <AnimationControls />
-            </AnimationContextProvider>
+            <Animation />
+            <AnimationControls />
         </AnimationContentContainer>
     );
 }

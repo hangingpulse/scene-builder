@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import TextEditor from "../../editorcomponents/TextEditor";
 import SceneEditor from "../../SceneEditor";
-import Animation from "../../editorcomponents/Animation";
+import AnimationContent from "./AnimationContent";
 import TabBar from "../../modularcomponents/TabBar";
 import { EditorContentContainer, EditorContainer } from "./Main.style";
 
 function EditorContent({ smallScreen }) {
-    const [selectedTab, setSelectedTab] = useState("SceneEditor");
+    const [selectedTab, setSelectedTab] = useState("Edit");
 
     const showTab = () => {
         switch (selectedTab) {
-            case "TextEditor":
+            case "Write":
                 return <TextEditor />;
-            case "SceneEditor":
+            case "Edit":
                 return <SceneEditor />;
-            case "Animation":
-                return <Animation />;
+            case "View":
+                return <AnimationContent />;
             default:
                 return;
         }
