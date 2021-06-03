@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import { AnimationContext } from "../../../context/AnimationContext";
 import Character from "../../scenecomponents/Character";
@@ -8,7 +8,8 @@ import {
     SceneContentAnimation,
     AnimationHeader,
 } from "./Animation.style";
-import SceneComponent from "../../scenecomponents/SceneComponent";
+import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
+import AnimationPauseWrapper from "../../scenecomponents/SceneComponentWrapper/AnimationPauseWrapper";
 
 function Animation() {
     const { sceneState } = useContext(SceneContext);
@@ -16,17 +17,20 @@ function Animation() {
     const { animationItems, animationPlaying, animationIndex } =
         useContext(AnimationContext);
 
+    // This returns the SceneItem that is currently animated if you pause the animation
     const renderCurrentItem = () => {
         const currentCharacter = sceneState.characters.find(
             (character) =>
                 character.id === sceneState.dialogue[animationIndex].character
         );
         return (
-            <SceneComponent
-                sceneItem={sceneState.dialogue[animationIndex]}
-                character={currentCharacter}
-                animation
-            />
+            <AnimationPauseWrapper>
+                <SceneComponent
+                    sceneItem={sceneState.dialogue[animationIndex]}
+                    character={currentCharacter}
+                    animation
+                />
+            </AnimationPauseWrapper>
         );
     };
 

@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import SceneComponent from "../SceneComponentWrapper";
 
 // This component turns a scene component into an animated component by wrapping it
 
-const AnimationComponentWrapper = styled(motion.div)`
+const AnimationPlayingContainer = styled(motion.div)`
     position: absolute;
     top: ${(props) => props.theme.animationPositions[props.index].top};
     bottom: ${(props) => props.theme.animationPositions[props.index].bottom};
@@ -24,7 +22,7 @@ const AnimationComponentWrapper = styled(motion.div)`
     max-height: 50%;
 `;
 
-function AnimatedComponent({
+function AnimationPlayingWrapper({
     children,
     controls,
     totalDelay,
@@ -33,7 +31,7 @@ function AnimatedComponent({
     characterIndex,
 }) {
     return (
-        <AnimationComponentWrapper
+        <AnimationPlayingContainer
             animate={controls}
             initial={{ opacity: 0 }}
             custom={{
@@ -46,9 +44,8 @@ function AnimatedComponent({
             index={characterIndex}
         >
             {children}
-        </AnimationComponentWrapper>
+        </AnimationPlayingContainer>
     );
 }
 
-export default AnimatedComponent;
-export { AnimationComponentWrapper };
+export default AnimationPlayingWrapper;

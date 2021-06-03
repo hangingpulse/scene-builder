@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useAnimation } from "framer-motion";
 import { SceneContext } from "./SceneContextProvider";
-import AnimatedComponent from "../components/scenecomponents/AnimatedComponent/AnimatedComponent";
-import SceneComponent from "../components/scenecomponents/SceneComponent";
+import SceneComponent from "../components/scenecomponents/SceneComponentWrapper/SceneComponent";
+import AnimationPlayingWrapper from "../components/scenecomponents/SceneComponentWrapper/AnimationPlayingWrapper";
 
 const AnimationContext = createContext();
 
@@ -61,7 +61,7 @@ function AnimationContextProvider({ children }) {
                 totalDelay += dialogue.delay + duration;
 
                 return (
-                    <AnimatedComponent
+                    <AnimationPlayingWrapper
                         key={index}
                         index={index}
                         characterIndex={
@@ -78,7 +78,7 @@ function AnimationContextProvider({ children }) {
                             character={currentCharacter}
                             animation
                         />
-                    </AnimatedComponent>
+                    </AnimationPlayingWrapper>
                 );
             });
             return dialogueList;
