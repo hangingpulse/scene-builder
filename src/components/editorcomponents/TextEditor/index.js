@@ -1,23 +1,25 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import styled from "styled-components";
-import dummyText from "../../../data/dummyText";
 import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
 import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
-import useOpenApi from "../../../hooks/useOpenApi";
+import useOpenAI from "../../../hooks/useOpenAI";
+
+import Button from "../../modularcomponents/Buttons";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
     height: 75vh;
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 
 function TextEditor() {
     const { sceneState } = useContext(SceneContext);
-    const [text, setText] = useState(dummyText);
-    const [getPrompt, openApiText] = useOpenApi();
+    const [text, setText] = useState();
+    const saveScene = useTextToObjectParser();
+    const [getPrompt, openAIText] = useOpenAI();
 
     useEffect(() => {
         const sceneText = changeObjectToTextParser(sceneState);
@@ -25,27 +27,26 @@ function TextEditor() {
     }, [sceneState]);
 
     useEffect(() => {
-        if (openApiText.length) {
-            setText(text + openApiText);
+        if (openAIText.length) {
+            setText((text) => text + openAIText);
         }
-    }, [openApiText]);
-
-    const saveScene = useTextToObjectParser();
+    }, [openAIText]);
 
     const handleClick = () => {
         saveScene(text);
     };
 
-    const getTextFromOpenApi = () => {
+    const getTextFromOpenAI = () => {
+        console.log(text);
         getPrompt(text);
     };
 
     return (
         <div>
-            <button className="SaveButton" onClick={handleClick}>
+            <Button highlighted onClick={handleClick}>
                 Save
-            </button>
-            <button onClick={() => getPrompt(text)}>Generate new lines</button>
+            </Button>
+            <Button onClick={getTextFromOpenAI}>Generate new lines</Button>
             <StyledTextArea
                 value={text}
                 onChange={(e) => setText(e.target.value)}

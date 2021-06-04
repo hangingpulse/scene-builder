@@ -1,7 +1,16 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import { AnimationContext } from "../../../context/AnimationContext";
-import styled from "styled-components";
+import {
+    FaPlay,
+    FaPause,
+    FaStepForward,
+    FaStepBackward,
+    FaFastForward,
+    FaFastBackward,
+} from "react-icons/fa";
+import Button from "../../modularcomponents/Buttons";
 
 const AnimationControlsContainer = styled.div`
     width: 100%;
@@ -65,12 +74,18 @@ function AnimationControls() {
 
     return (
         <AnimationControlsContainer>
-            <PlayButton onClick={playAnimation}>Play Animation</PlayButton>
-            <button onClick={pauseAnimation}>Pause Animation</button>
-            <button onClick={() => changeItem("previous")}>
-                Previous Item
-            </button>
-            <button onClick={() => changeItem("next")}>Next Item</button>
+            <Button round onClick={() => changeItem("previous")}>
+                <FaStepBackward size={20} />
+            </Button>
+            <Button round highlighted onClick={playAnimation}>
+                <FaPlay size={20} />
+            </Button>
+            <Button round onClick={pauseAnimation}>
+                <FaPause size={20} />
+            </Button>
+            <Button round onClick={() => changeItem("next")}>
+                <FaStepForward size={20} />
+            </Button>
         </AnimationControlsContainer>
     );
 }

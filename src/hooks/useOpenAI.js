@@ -1,14 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 
-function useOpenApi() {
-    const [openApiText, setOpenApiText] = useState("");
+function useOpenAI() {
+    const [openAIText, setOpenAIText] = useState("");
 
     const getPromptURL = `https://api.openai.com/v1/engines/curie/completions`;
 
     const header = {
         headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_OPENAPI_TOKEN}`,
+            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_TOKEN}`,
         },
     };
 
@@ -25,12 +25,13 @@ function useOpenApi() {
             frequency_penalty: 0.3,
         };
         console.log(text);
-        axios
-            .post(getPromptURL, promptRequestBody, header)
-            .then((res) => setOpenApiText(res.data.choices[0].text));
+        axios.post(getPromptURL, promptRequestBody, header).then((res) => {
+            console.log(res.data);
+            setOpenAIText(res.data.choices[0].text);
+        });
     };
 
-    return [getPrompt, openApiText];
+    return [getPrompt, openAIText];
 }
 
-export default useOpenApi;
+export default useOpenAI;

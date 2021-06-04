@@ -10,8 +10,6 @@ const SceneItemWrapperContainer = styled.div`
 `;
 
 function SceneItemWrapper({ children, characterCount, characterPosition }) {
-    console.log(characterCount);
-    console.log(characterPosition * (6 / (characterCount - 1)) + 1);
     return (
         <SceneItemWrapperContainer
             characterPosition={characterPosition}
