@@ -12,7 +12,7 @@ const SceneComponentContainer = styled.div`
     width: 100%;
 `;
 
-function SceneComponent({ sceneItem, character, animation }) {
+function SceneComponent({ sceneItem, character, animation, onClick }) {
     // fills the wrapper with the needed scene item
     const getDialogueComponent = () => {
         switch (sceneItem.type) {
@@ -35,7 +35,7 @@ function SceneComponent({ sceneItem, character, animation }) {
     };
 
     return (
-        <SceneComponentContainer>
+        <SceneComponentContainer onClick={onClick}>
             {getDialogueComponent()}
         </SceneComponentContainer>
     );

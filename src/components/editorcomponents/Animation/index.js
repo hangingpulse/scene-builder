@@ -17,6 +17,8 @@ function Animation() {
     const { animationItems, animationPlaying, animationIndex } =
         useContext(AnimationContext);
 
+    console.log(animationIndex);
+
     // This returns the SceneItem that is currently animated if you pause the animation
     const renderCurrentItem = () => {
         const currentCharacter = sceneState.characters.find(

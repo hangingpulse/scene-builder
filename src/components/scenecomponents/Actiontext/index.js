@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import SceneItemBase from "../SceneItem.style";
 
-const StyledActiontext = styled(motion.div)`
+const StyledActiontext = styled(SceneItemBase)`
     width: 100%;
     padding: 0.3em;
     border: 2px solid black;

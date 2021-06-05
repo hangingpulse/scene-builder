@@ -23,17 +23,6 @@ const AnimationControlsContainer = styled.div`
     padding: 1.2em;
 `;
 
-const PlayButton = styled.div`
-    padding: 0.4em;
-
-    background-color: ${(props) => props.theme.colors.highlight};
-    border: 2px black solid;
-
-    &:hover {
-        cursor: pointer;
-    }
-`;
-
 function AnimationControls() {
     const {
         pauseAnimation,
@@ -74,16 +63,16 @@ function AnimationControls() {
 
     return (
         <AnimationControlsContainer>
-            <Button round onClick={() => changeItem("previous")}>
+            <Button square="3em" onClick={() => changeItem("previous")}>
                 <FaStepBackward size={20} />
             </Button>
-            <Button round highlighted onClick={playAnimation}>
+            <Button square="3em" highlighted onClick={playAnimation}>
                 <FaPlay size={20} />
             </Button>
-            <Button round onClick={pauseAnimation}>
+            <Button square="3em" onClick={pauseAnimation}>
                 <FaPause size={20} />
             </Button>
-            <Button round onClick={() => changeItem("next")}>
+            <Button square="3em" onClick={() => changeItem("next")}>
                 <FaStepForward size={20} />
             </Button>
         </AnimationControlsContainer>
