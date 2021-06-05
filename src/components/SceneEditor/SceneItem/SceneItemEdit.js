@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import SceneItemBase from "../../scenecomponents/SceneItem.style";
-import Button, {
-    CloseButton,
-    DeleteButton,
-} from "../../modularcomponents/Buttons";
+import { CloseButton, DeleteButton } from "../../modularcomponents/Buttons";
 import { NumberInput, TextArea } from "../../modularcomponents/Inputs";
 import Toggle from "../../modularcomponents/Toggle";
 import { SceneItemEditContainer } from "./SceneItem.style";

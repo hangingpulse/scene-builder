@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { SceneEditorContextProvider } from "../../context/SceneEditorContext";
 import SceneItemEditor from "./SceneItemEditor";
 import CharacterEditor from "./CharacterEditor";
 import HeaderEditor from "./HeaderEditor";
+import SceneElementsEditor from "./SceneElementsEditor";
+import { EditButton } from "../modularcomponents/Buttons";
 
 const SceneEditorContainer = styled.div`
     width: 100%;
@@ -14,8 +15,12 @@ const SceneEditorContainer = styled.div`
 `;
 
 function SceneEditor() {
+    const [editModal, toggleEditModal] = useState(true);
+
     return (
         <SceneEditorContainer>
+            <EditButton onClick={() => toggleEditModal(true)} />
+            {editModal && <SceneElementsEditor />}
             <HeaderEditor />
             <CharacterEditor />
             <SceneItemEditor />

@@ -26,10 +26,19 @@ const IconButtonContainer = styled.div`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin: 0.4em;
+    padding: 0.4em;
+
+    border-radius: 0.4rem;
+
+    background-color: ${({ theme, background }) =>
+        background && theme.colors.primary};
 
     &:hover {
         cursor: pointer;
+    }
+
+    & .Icon {
+        color: ${(props) => props.theme.colors.highlight};
     }
 `;
 

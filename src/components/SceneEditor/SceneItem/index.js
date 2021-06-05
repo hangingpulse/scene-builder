@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
 import SceneItemWrapper from "./SceneItemWrapper";
 import SceneItemEdit from "./SceneItemEdit";

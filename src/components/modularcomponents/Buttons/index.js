@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { ButtonContainer, IconButtonContainer } from "./Button.style";
 
 // What Buttons do I need?:
@@ -19,9 +19,17 @@ function CloseButton({ onClick }) {
 
 function DeleteButton({ onClick, size }) {
     return (
-        <ButtonContainer onClick={onClick} square={size} highlighted>
-            <FaTrashAlt />
-        </ButtonContainer>
+        <IconButtonContainer onClick={onClick} background>
+            <FaTrashAlt className="Icon" />
+        </IconButtonContainer>
+    );
+}
+
+function EditButton({ onClick, size }) {
+    return (
+        <IconButtonContainer onClick={onClick}>
+            <FaEdit className="Icon" />
+        </IconButtonContainer>
     );
 }
 
@@ -38,4 +46,4 @@ function Button({ children, onClick, highlighted, square }) {
 }
 
 export default Button;
-export { CloseButton, DeleteButton };
+export { CloseButton, DeleteButton, EditButton };
