@@ -10,8 +10,10 @@ const SceneItemEditorContainer = styled.div`
     position: relative;
     width: 100%;
     height: 95vh;
+    padding: 0 0.8rem;
     padding-top: 0.8em;
     padding-bottom: 10rem;
+    background-color: ${({ theme }) => theme.colors.background};
     overflow: scroll;
 `;
 

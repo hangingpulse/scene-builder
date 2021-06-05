@@ -5,7 +5,7 @@ import { characterColors } from "../../data/characterdata";
 const SceneItemBase = styled(motion.div)`
     width: 100%;
     padding: 0.3em;
-    border: 2px solid
+    border: 4px solid
         ${({ character }) =>
             character ? characterColors[character.colorIndex] : "black"};
     background-color: ${(props) => props.theme.colors.primaryLight};

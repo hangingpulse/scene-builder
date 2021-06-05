@@ -22,6 +22,7 @@ const mainTheme = {
         primaryLight: "#EBE9ED",
         secondary: "#b9e1dc",
         background: "#fbfbfb",
+        backgroundDark: "#121212",
         highlight: "#f38181",
     },
     fonts: {
