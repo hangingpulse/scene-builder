@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
+import { TiPlusOutline } from "react-icons/ti";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { ButtonContainer, IconButtonContainer } from "./Button.style";
 
@@ -33,6 +34,14 @@ function EditButton({ onClick, size }) {
     );
 }
 
+function AddButton({ onClick, size }) {
+    return (
+        <IconButtonContainer onClick={onClick}>
+            <TiPlusOutline size={size} />
+        </IconButtonContainer>
+    );
+}
+
 function Button({ children, onClick, highlighted, square }) {
     return (
         <ButtonContainer
@@ -46,4 +55,4 @@ function Button({ children, onClick, highlighted, square }) {
 }
 
 export default Button;
-export { CloseButton, DeleteButton, EditButton };
+export { CloseButton, DeleteButton, EditButton, AddButton };

@@ -1,9 +1,9 @@
 import React from "react";
 import { ModalBackground, ModalContainer } from "./Modal.style";
 
-function Modal({ children }) {
+function Modal({ children, onClick }) {
     return (
-        <ModalBackground>
+        <ModalBackground onClick={onClick}>
             <ModalContainer>{children}</ModalContainer>
         </ModalBackground>
     );

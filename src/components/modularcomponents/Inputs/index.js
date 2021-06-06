@@ -11,8 +11,10 @@ function Input({ value, onChange }) {
     return <InputContainer value={value} onChange={onChange} />;
 }
 
-function TextArea({ value, onChange }) {
-    return <TextAreaContainer value={value} onChange={onChange} />;
+function TextArea({ value, onChange, height }) {
+    return (
+        <TextAreaContainer value={value} onChange={onChange} height={height} />
+    );
 }
 
 function NumberInput({ value, onChange, children }) {

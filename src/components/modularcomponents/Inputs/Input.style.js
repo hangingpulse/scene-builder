@@ -12,7 +12,7 @@ const TextAreaContainer = styled.textarea`
     margin: 0.2em;
     padding: 0.2em;
     width: 90%;
-    height: ${({ height }) => (height ? height : "")};
+    height: calc(${({ theme }) => theme.fonts.fontSizes.base} + 0.7em);
     resize: none;
 
     background-color: white;

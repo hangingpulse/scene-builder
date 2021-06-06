@@ -1,25 +1,31 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { DelayItemContainer, EditPause } from "./DelayItem.style";
+import { NumberInput } from "../../modularcomponents/Inputs";
 
-const StyledDelayItem = styled.div`
-    width: 90%;
-    margin: 0.3em auto;
-    padding: 0.2em;
-    border: 1px dotted black;
-    border-radius: 2em;
-    background-color: ${(props) => props.theme.colors.primaryLight};
-    opacity: 0.5;
+function DelayItem({ index, sceneItemAfter, sceneItemBefore }) {
+    const [hover, setHover] = useState(false);
 
-    font-size: ${({ theme }) => theme.fonts.fontSizes.blockSmall};
-    text-align: center;
-
-    &:hover {
-        width: 80%;
-    }
-`;
-
-function DelayItem() {
-    return <StyledDelayItem></StyledDelayItem>;
+    return (
+        <DelayItemContainer
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            whileHover={{ opacity: 1, height: "5rem" }}
+        >
+            <EditPause>
+                {hover ? (
+                    <NumberInput
+                        value={sceneItemAfter ? sceneItemAfter.delay : 0}
+                    >
+                        Pause
+                    </NumberInput>
+                ) : sceneItemAfter ? (
+                    sceneItemAfter.delay
+                ) : (
+                    0
+                )}
+            </EditPause>
+        </DelayItemContainer>
+    );
 }
 
 export default DelayItem;

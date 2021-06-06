@@ -33,7 +33,10 @@ function SceneItemEditor() {
             if (dialogue.type === "ACTIONTEXT") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
-                        <DelayItem editorIndex={index} />
+                        <DelayItem
+                            editorIndex={index}
+                            sceneItemAfter={dialogue}
+                        />
                         <SceneItem
                             key={index}
                             editorIndex={index}
@@ -47,7 +50,10 @@ function SceneItemEditor() {
             if (dialogue.type === "PARENTHETICAL") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
-                        <DelayItem editorIndex={index} />
+                        <DelayItem
+                            editorIndex={index}
+                            sceneItemAfter={dialogue}
+                        />
                         <SceneItem
                             key={index}
                             editorIndex={index}
@@ -61,7 +67,10 @@ function SceneItemEditor() {
             if (dialogue.type === "DIALOGUE") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
-                        <DelayItem editorIndex={index} />
+                        <DelayItem
+                            editorIndex={index}
+                            sceneItemAfter={dialogue}
+                        />
                         <SceneItem
                             key={index}
                             editorIndex={index}

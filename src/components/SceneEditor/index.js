@@ -1,28 +1,44 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import Modal from "../../components/modularcomponents/Modal";
 import SceneItemEditor from "./SceneItemEditor";
-import CharacterEditor from "./CharacterEditor";
-import HeaderEditor from "./HeaderEditor";
+import SceneElementsDisplay from "./SceneElementsDisplay";
 import SceneElementsEditor from "./SceneElementsEditor";
 import { EditButton } from "../modularcomponents/Buttons";
 
 const SceneEditorContainer = styled.div`
+    position: relative;
     width: 100%;
     height: 85vh;
     display: flex;
     flex-direction: column;
     overflow: inherit;
+
+    & .EditButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
 `;
 
 function SceneEditor() {
-    const [editModal, toggleEditModal] = useState(true);
+    const [editModal, toggleEditModal] = useState(false);
 
     return (
         <SceneEditorContainer>
-            <EditButton onClick={() => toggleEditModal(true)} />
-            {editModal && <SceneElementsEditor />}
-            <HeaderEditor />
-            <CharacterEditor />
+            <div className="EditButton">
+                <EditButton onClick={() => toggleEditModal(true)} />
+            </div>
+            {editModal && (
+                <Modal
+                    onClick={(e) =>
+                        e.target === e.currentTarget && toggleEditModal(false)
+                    }
+                >
+                    <SceneElementsEditor />
+                </Modal>
+            )}
+            <SceneElementsDisplay />
             <SceneItemEditor />
         </SceneEditorContainer>
     );
