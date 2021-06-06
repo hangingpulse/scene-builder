@@ -6,15 +6,24 @@ import { AddButton } from "../../modularcomponents/Buttons";
 function DelayItem({ index, sceneItemAfter, sceneItemBefore }) {
     const [hover, setHover] = useState(false);
 
+    const canHover = window.matchMedia("(hover: hover)").matches;
+
     return (
         <DelayItemContainer
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
+            onClick={(e) =>
+                e.target === e.currentTarget &&
+                !canHover &&
+                setHover((prevState) => !prevState)
+            }
             whileHover={{
                 opacity: 1,
                 height: "5rem",
                 transition: { duration: 0.2 },
             }}
+            height={hover && !canHover ? "5rem" : "2rem"}
+            opacity={!hover && !canHover ? 0.5 : 1}
         >
             <EditPause>
                 {hover ? (
