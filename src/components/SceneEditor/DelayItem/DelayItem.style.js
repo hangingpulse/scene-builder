@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 const DelayItemContainer = styled(motion.div)`
-    width: 80%;
+    width: 30%;
+    height: 2rem;
     margin: 0.3em auto;
-    padding: 0.2em;
     border: 1px dotted black;
     border-radius: 0.4em;
     background-color: ${(props) => props.theme.colors.primaryLight};
@@ -14,10 +14,8 @@ const DelayItemContainer = styled(motion.div)`
     text-align: center;
 
     display: flex;
-
-    &:hover {
-        opacity: 1;
-    }
+    align-items: center;
+    justify-content: space-around;
 `;
 
 const EditPause = styled.div``;

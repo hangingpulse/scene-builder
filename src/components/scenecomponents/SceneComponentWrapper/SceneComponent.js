@@ -8,9 +8,7 @@ import Parenthetical from "../Parenthetical";
 // There might be two different versions, depending on whether it is an Animation Item or a Scene Editor Item
 
 // Container Styles, maybe outsource it into a styles.js
-const SceneComponentContainer = styled.div`
-    width: 100%;
-`;
+const SceneComponentContainer = styled.div``;
 
 function SceneComponent({ sceneItem, character, animation, onClick }) {
     // fills the wrapper with the needed scene item

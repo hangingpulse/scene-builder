@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 /********************* TEXT INPUT COMPONENT ***************** */
 
@@ -30,7 +31,7 @@ const TextAreaContainer = styled.textarea`
 
 /********************* NUMBER INPUT COMPONENT ***************** */
 
-const NumberInputContainer = styled.div`
+const NumberInputContainer = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: space-between;

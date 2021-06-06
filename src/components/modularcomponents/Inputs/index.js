@@ -17,9 +17,20 @@ function TextArea({ value, onChange, height }) {
     );
 }
 
-function NumberInput({ value, onChange, children }) {
+function NumberInput({
+    value,
+    onChange,
+    children,
+    animate,
+    initial,
+    transition,
+}) {
     return (
-        <NumberInputContainer>
+        <NumberInputContainer
+            animate={animate}
+            initial={initial}
+            transition={transition}
+        >
             <NumberInputLabel>{children}</NumberInputLabel>
             <NumberInputField
                 type="number"

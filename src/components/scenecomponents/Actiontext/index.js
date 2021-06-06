@@ -3,7 +3,6 @@ import styled from "styled-components";
 import SceneItemBase from "../SceneItem.style";
 
 const StyledActiontext = styled(SceneItemBase)`
-    width: 100%;
     padding: 0.3em;
     border: 2px solid black;
     background-color: ${(props) => props.theme.colors.primaryLight};

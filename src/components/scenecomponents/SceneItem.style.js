@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { characterColors } from "../../data/characterdata";
 
 const SceneItemBase = styled(motion.div)`
-    width: 100%;
     padding: 0.3em;
     border: 4px solid
         ${({ character }) =>
