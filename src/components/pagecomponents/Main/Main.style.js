@@ -8,11 +8,9 @@ const Container = styled.div`
 const MainContainer = styled.div`
     display: flex;
     flex-direction: ${(props) => props.flex};
-    gap: 0.8rem;
-    height: 90vh;
 
     background-color: ${(props) => props.theme.colors.background};
-    margin: 1.6rem;
+    margin: 0.8em;
 `;
 
 const EditorContentContainer = styled.div`
@@ -21,13 +19,18 @@ const EditorContentContainer = styled.div`
     width: 100%;
 `;
 
+// including the tab bar
 const EditorContainer = styled.div`
-    padding: 1.6em 0.8em;
+    width: 100%;
+    height: 90%;
+    padding: 0 0.8em;
     border: 1px solid black;
-    overflow: scroll;
+    border-top: 3px solid ${({ theme }) => theme.colors.highlight};
 `;
 
-const AnimationContainer = styled.div`
+// only the editor content without the tabbar
+const AnimationContentContainer = styled.div`
+    width: 100%;
     border: 1px solid black;
 `;
 
@@ -36,5 +39,5 @@ export {
     MainContainer,
     EditorContentContainer,
     EditorContainer,
-    AnimationContainer,
+    AnimationContentContainer,
 };

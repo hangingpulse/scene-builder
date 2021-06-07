@@ -1,12 +1,14 @@
 import React from "react";
 import Animation from "../../editorcomponents/Animation";
-import { AnimationContainer } from "./Main.style.js";
+import AnimationControls from "../../editorcomponents/Animation/AnimationControls";
+import { AnimationContentContainer } from "./Main.style.js";
 
 function AnimationContent() {
     return (
-        <AnimationContainer>
+        <AnimationContentContainer>
             <Animation />
-        </AnimationContainer>
+            <AnimationControls />
+        </AnimationContentContainer>
     );
 }
 

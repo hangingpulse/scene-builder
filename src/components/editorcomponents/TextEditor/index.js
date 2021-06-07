@@ -1,42 +1,56 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SceneContext } from "../../../context/SceneContextProvider";
 import styled from "styled-components";
-import dummyText from "../../../data/dummyText";
 import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
 import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
+import useOpenAI from "../../../hooks/useOpenAI";
+
+import Button from "../../modularcomponents/Buttons";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
     height: 75vh;
     padding: 0.5rem;
-    font-size: 1.2rem;
+    font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 
 function TextEditor() {
     const { sceneState } = useContext(SceneContext);
-    const [text, setText] = useState(dummyText);
+    const [text, setText] = useState();
+    const saveScene = useTextToObjectParser();
+    const [getPrompt, openAIText] = useOpenAI();
 
     useEffect(() => {
         const sceneText = changeObjectToTextParser(sceneState);
         setText(sceneText);
     }, [sceneState]);
 
-    const saveScene = useTextToObjectParser();
+    useEffect(() => {
+        if (openAIText.length) {
+            setText((text) => text + openAIText);
+        }
+    }, [openAIText]);
 
     const handleClick = () => {
         saveScene(text);
     };
 
+    const getTextFromOpenAI = () => {
+        console.log(text);
+        getPrompt(text);
+    };
+
     return (
         <div>
+            <Button highlighted onClick={handleClick}>
+                Save
+            </Button>
+            <Button onClick={getTextFromOpenAI}>Generate new lines</Button>
             <StyledTextArea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             ></StyledTextArea>
-            <button className="SaveButton" onClick={handleClick}>
-                Save
-            </button>
         </div>
     );
 }

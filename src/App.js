@@ -6,10 +6,14 @@ import Footer from "./components/pagecomponents/Footer/Footer";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { SceneContextProvider } from "./context/SceneContextProvider";
+import { AnimationContextProvider } from "./context/AnimationContext";
+import { SceneEditorContextProvider } from "./context/SceneEditorContext";
 
 const AppBody = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid black;
 `;
 
 function App() {
@@ -19,7 +23,11 @@ function App() {
             <AppBody>
                 <Header />
                 <SceneContextProvider>
-                    <Main />
+                    <SceneEditorContextProvider>
+                        <AnimationContextProvider>
+                            <Main />
+                        </AnimationContextProvider>
+                    </SceneEditorContextProvider>
                 </SceneContextProvider>
                 <Footer />
             </AppBody>

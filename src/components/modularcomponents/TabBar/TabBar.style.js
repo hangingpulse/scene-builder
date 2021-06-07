@@ -13,7 +13,7 @@ const TabItem = styled.div`
     width: 100%;
     height: 100%;
 
-    padding: 0.8rem;
+    padding: 0.4rem;
     cursor: pointer;
     background-color: ${(props) =>
         props.active

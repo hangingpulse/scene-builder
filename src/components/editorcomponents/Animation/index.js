@@ -1,34 +1,58 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
 import { SceneContext } from "../../../context/SceneContextProvider";
-import useSpeechbubbleAnimation from "../../../hooks/useSpeechbubbleAnimation";
-import Character from "../../scenecomponents/CharacterComponents/Character";
-
-const Characters = styled.div`
-    display: flex;
-    justify-content: space-around;
-`;
-
-const Dialogue = styled.div`
-    height: 10rem;
-`;
+import { AnimationContext } from "../../../context/AnimationContext";
+import Character from "../../scenecomponents/Character";
+import {
+    AnimationContainer,
+    CharacterContainerAnimation,
+    SceneContentAnimation,
+    AnimationHeader,
+} from "./Animation.style";
+import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
+import AnimationPauseWrapper from "../../scenecomponents/SceneComponentWrapper/AnimationPauseWrapper";
 
 function Animation() {
-    const { sceneState } = useContext(SceneContext);
-    const onlyDialogue = sceneState.dialogue.filter(
-        (dialogue) => dialogue.type === "DIALOGUE"
-    );
-    const buildSpeechbubbles = useSpeechbubbleAnimation();
+    const { animationItems, animationPlaying, animationIndex, animationState } =
+        useContext(AnimationContext);
+    // This returns the SceneItem that is currently animated if you pause the animation
+    const renderCurrentItem = () => {
+        if (animationState.dialogue.length) {
+            const currentCharacter = animationState.characters.find(
+                (character) =>
+                    character.id ===
+                    animationState.dialogue[animationIndex].character
+            );
+            return (
+                <AnimationPauseWrapper
+                    characterIndex={
+                        currentCharacter ? currentCharacter.position + 1 : 0
+                    }
+                >
+                    <SceneComponent
+                        sceneItem={animationState.dialogue[animationIndex]}
+                        character={currentCharacter}
+                        animation
+                    />
+                </AnimationPauseWrapper>
+            );
+        }
+    };
 
     return (
-        <div className="Animation">
-            <Dialogue>{buildSpeechbubbles(onlyDialogue)}</Dialogue>
-            <Characters>
-                {sceneState.characters.map((character, index) => (
-                    <Character key={index} character={character} />
-                ))}
-            </Characters>
-        </div>
+        <AnimationContainer className="AnimationContainer">
+            <AnimationHeader>{animationState.header}</AnimationHeader>
+            {animationState.characters.map((character, index) => (
+                <CharacterContainerAnimation
+                    key={index}
+                    position={`char${character.position}`}
+                >
+                    <Character character={character} />
+                </CharacterContainerAnimation>
+            ))}
+            <SceneContentAnimation>
+                {animationPlaying ? animationItems() : renderCurrentItem()}
+            </SceneContentAnimation>
+        </AnimationContainer>
     );
 }
 

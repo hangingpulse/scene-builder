@@ -7,7 +7,14 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: inherit;
     }
     html {
-        font-size: 62.5%;
+        font-size: 50%;
+        ${({ theme }) => theme.tablet`
+            font-size: 55%;
+        `}
+        ${({ theme }) => theme.desktopSmall`
+            font-size: 62.5%;
+        `}
+
     }
     body {
         box-sizing: border-box;

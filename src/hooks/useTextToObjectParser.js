@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { SceneContext } from "../context/SceneContextProvider";
+import uuid from "react-uuid";
 
 function useTextParser() {
     const { sceneState, dispatch } = useContext(SceneContext);
@@ -7,9 +8,10 @@ function useTextParser() {
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
+            id: uuid(),
             type: "ACTIONTEXT",
             text: actiontextLine,
-            duration: 2 + actiontextLine.length * 0.05,
+            length: 2 + actiontextLine.length * 0.05,
             delay: 0,
             display: true,
         }));
@@ -34,10 +36,11 @@ function useTextParser() {
             // Check if Dialogue Line is a parenthetical
             if (/\(.*\)/.test(dialogueLine)) {
                 return {
+                    id: uuid(),
                     type: "PARENTHETICAL",
                     text: dialogueLine,
                     character: characterId,
-                    duration: 2 + dialogueLine.length * 0.05,
+                    length: 2 + dialogueLine.length * 0.05,
                     delay: 0,
                     display: false,
                 };
@@ -45,10 +48,12 @@ function useTextParser() {
             // Check if dialogue line is dialogue
             if (/.*/.test(dialogueLine)) {
                 return {
+                    id: uuid(),
                     type: "DIALOGUE",
                     text: dialogueLine,
                     character: characterId,
-                    duration: 2 + dialogueLine.length * 0.05,
+                    length:
+                        Math.round((2 + dialogueLine.length * 0.05) * 10) / 10,
                     delay: 0,
                     display: true,
                 };
@@ -60,7 +65,7 @@ function useTextParser() {
 
     const findSceneObjects = (text) => {
         const sceneObjects = [];
-        const characterObjects = [...sceneState.characters];
+        const characterObjects = [];
         let headerObject = "";
         const sceneArray = text.split(/\n\n/);
 
@@ -116,6 +121,7 @@ function useTextParser() {
     const saveScene = (text) => {
         const [characterObjects, sceneObjects, headerObject] =
             findSceneObjects(text);
+        console.log(characterObjects);
         dispatch({
             type: "EDIT SCENE",
             payload: {
