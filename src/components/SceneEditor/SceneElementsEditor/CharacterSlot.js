@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import uuid from "react-uuid";
+import { characterColors, characterImages } from "../../../data/characterdata";
 import { AddButton } from "../../modularcomponents/Buttons";
+import {
+    SceneEditorContext,
+    SceneEditorContextProvider,
+} from "../../../context/SceneEditorContext";
 
 const CharacterSlotContainer = styled.div`
     width: 100%;
@@ -22,14 +28,34 @@ const EmptySlot = styled.div`
     font-size: ${({ theme }) => theme.fonts.fontSizes.block};
 `;
 
-function CharacterSlot({ children, character, position }) {
+function CharacterSlot({ children, setCharacters, characters, position }) {
+    const addCharacter = () => {
+        console.log(characters);
+        if (characters.length < 4) {
+            setCharacters([
+                ...characters,
+                {
+                    id: uuid(),
+                    name: "NAME",
+                    position: position,
+                    colorIndex: Math.floor(
+                        Math.random() * characterColors.length
+                    ),
+                    imageIndex: Math.floor(
+                        Math.random() * characterImages.length
+                    ),
+                },
+            ]);
+        }
+    };
+
     return (
         <CharacterSlotContainer position={position}>
             {children ? (
                 children
             ) : (
                 <EmptySlot>
-                    <AddButton size="5rem" />
+                    <AddButton size="5rem" onClick={addCharacter} />
                     <div className="AddCharacterLabel">Add New Character</div>
                 </EmptySlot>
             )}

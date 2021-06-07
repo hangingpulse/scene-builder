@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { SceneEditorContext } from "../../../context/SceneEditorContext";
 import {
     CharacterEditContainer,
     StyledCharacterEdit,
@@ -6,26 +7,103 @@ import {
 import { CharacterImage } from "../../scenecomponents/Character/Character.style";
 import ColorSelection from "../../modularcomponents/ColorSelection";
 import { TextArea } from "../../modularcomponents/Inputs";
+import { DeleteButton } from "../../modularcomponents/Buttons";
 import { characterColors, characterImages } from "../../../data/characterdata";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-function CharacterEdit({ character }) {
+function CharacterEdit({ currentCharacter, setCharacters, characters }) {
+    console.log(currentCharacter, characters);
+    const characterIndex = characters.findIndex(
+        (character) => character.id === currentCharacter.id
+    );
+
+    const deleteCharacter = () => {
+        const newCharacterArray = characters.filter(
+            (character) => character.id !== currentCharacter.id
+        );
+        setCharacters([...newCharacterArray]);
+    };
+
+    const changeCharacter = (type, value) => {
+        switch (type) {
+            case "NAME":
+                const charactersWithNewName = [...characters];
+                charactersWithNewName[characterIndex].name = value;
+                setCharacters([...charactersWithNewName]);
+                break;
+            case "PREVIOUS IMAGE":
+                const indexBefore =
+                    currentCharacter.imageIndex === 0
+                        ? characterImages.length - 1
+                        : currentCharacter.imageIndex - 1;
+                const charactersWithPreviousImage = [...characters];
+                charactersWithPreviousImage[characterIndex].imageIndex =
+                    indexBefore;
+                setCharacters([...charactersWithPreviousImage]);
+                break;
+            case "NEXT IMAGE":
+                const indexAfter =
+                    currentCharacter.imageIndex === characterImages.length - 1
+                        ? 0
+                        : currentCharacter.imageIndex + 1;
+                const charactersWithNextImage = [...characters];
+                charactersWithNextImage[characterIndex].imageIndex = indexAfter;
+                setCharacters([...charactersWithNextImage]);
+                break;
+            case "COLOR":
+                const charactersWithNewColor = [...characters];
+                charactersWithNewColor[characterIndex].colorIndex = value;
+                setCharacters([...charactersWithNewColor]);
+                break;
+            case "POSITION":
+                const charactersWithNewPosition = [...characters];
+                charactersWithNewPosition[characterIndex].position = value;
+                setCharacters([...charactersWithNewPosition]);
+                break;
+            default:
+                return;
+        }
+
+        setCharacters([...characters]);
+    };
+
     return (
-        <CharacterEditContainer position={character.position}>
+        <CharacterEditContainer position={currentCharacter.position}>
             <StyledCharacterEdit
-                character={character}
-                color={characterColors[character.colorIndex]}
+                character={currentCharacter}
+                color={characterColors[currentCharacter.colorIndex]}
             >
-                <ColorSelection selectedColor={character.colorIndex} />
+                <ColorSelection
+                    selectedColor={currentCharacter.colorIndex}
+                    changeCharacter={changeCharacter}
+                />
                 <div className="ImageSelection">
-                    <FaAngleLeft size="2em" />
-                    <CharacterImage
-                        src={characterImages[character.imageIndex]}
-                        alt={character.name}
+                    <FaAngleLeft
+                        size="2em"
+                        onClick={() => changeCharacter("PREVIOUS IMAGE")}
                     />
-                    <FaAngleRight size="2em" />
+                    <CharacterImage
+                        src={characterImages[currentCharacter.imageIndex]}
+                        alt={currentCharacter.name}
+                    />
+                    <FaAngleRight
+                        size="2em"
+                        onClick={() => changeCharacter("NEXT IMAGE")}
+                    />
                 </div>
-                <TextArea value={character.name} height="2.5rem" />
+                <div className="NameAndDelete">
+                    <TextArea
+                        value={currentCharacter.name}
+                        height="2.5rem"
+                        onChange={(e) =>
+                            changeCharacter(
+                                "NAME",
+                                e.target.value.toUpperCase()
+                            )
+                        }
+                    />
+                    <DeleteButton onClick={deleteCharacter} />
+                </div>
             </StyledCharacterEdit>
         </CharacterEditContainer>
     );

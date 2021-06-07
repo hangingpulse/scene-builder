@@ -12,39 +12,39 @@ import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneCom
 import AnimationPauseWrapper from "../../scenecomponents/SceneComponentWrapper/AnimationPauseWrapper";
 
 function Animation() {
-    const { sceneState } = useContext(SceneContext);
-
-    const { animationItems, animationPlaying, animationIndex } =
+    const { animationItems, animationPlaying, animationIndex, animationState } =
         useContext(AnimationContext);
-
-    console.log(animationIndex);
-
     // This returns the SceneItem that is currently animated if you pause the animation
     const renderCurrentItem = () => {
-        const currentCharacter = sceneState.characters.find(
-            (character) =>
-                character.id === sceneState.dialogue[animationIndex].character
-        );
-        return (
-            <AnimationPauseWrapper
-                characterIndex={currentCharacter ? currentCharacter.id : 0}
-            >
-                <SceneComponent
-                    sceneItem={sceneState.dialogue[animationIndex]}
-                    character={currentCharacter}
-                    animation
-                />
-            </AnimationPauseWrapper>
-        );
+        if (animationState.dialogue.length) {
+            const currentCharacter = animationState.characters.find(
+                (character) =>
+                    character.id ===
+                    animationState.dialogue[animationIndex].character
+            );
+            return (
+                <AnimationPauseWrapper
+                    characterIndex={
+                        currentCharacter ? currentCharacter.position + 1 : 0
+                    }
+                >
+                    <SceneComponent
+                        sceneItem={animationState.dialogue[animationIndex]}
+                        character={currentCharacter}
+                        animation
+                    />
+                </AnimationPauseWrapper>
+            );
+        }
     };
 
     return (
         <AnimationContainer className="AnimationContainer">
-            <AnimationHeader>{sceneState.header}</AnimationHeader>
-            {sceneState.characters.map((character, index) => (
+            <AnimationHeader>{animationState.header}</AnimationHeader>
+            {animationState.characters.map((character, index) => (
                 <CharacterContainerAnimation
                     key={index}
-                    index={`char${character.id}`}
+                    position={`char${character.position}`}
                 >
                     <Character character={character} />
                 </CharacterContainerAnimation>

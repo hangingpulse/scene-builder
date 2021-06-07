@@ -6,12 +6,12 @@ import { motion } from "framer-motion";
 
 const AnimationPlayingContainer = styled(motion.div)`
     position: absolute;
-    top: ${(props) => props.theme.animationPositions[props.index].top};
-    bottom: ${(props) => props.theme.animationPositions[props.index].bottom};
-    right: ${(props) => props.theme.animationPositions[props.index].right};
-    left: ${(props) => props.theme.animationPositions[props.index].left};
+    top: ${(props) => props.theme.animationPositions[props.position].top};
+    bottom: ${(props) => props.theme.animationPositions[props.position].bottom};
+    right: ${(props) => props.theme.animationPositions[props.position].right};
+    left: ${(props) => props.theme.animationPositions[props.position].left};
     transform: translateY(
-        ${(props) => props.theme.animationPositions[props.index].translateY}
+        ${(props) => props.theme.animationPositions[props.position].translateY}
     );
     transform-origin: center;
     display: flex;
@@ -41,7 +41,7 @@ function AnimationPlayingWrapper({
             onAnimationComplete={() => {
                 setAnimationIndex((prevState) => prevState + 1);
             }}
-            index={characterIndex}
+            position={characterIndex}
         >
             {children}
         </AnimationPlayingContainer>

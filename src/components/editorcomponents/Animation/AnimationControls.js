@@ -31,6 +31,7 @@ function AnimationControls() {
         setAnimationIndex,
         animationIndex,
         setCurrentAnimationList,
+        animationState,
     } = useContext(AnimationContext);
 
     const { sceneState } = useContext(SceneContext);
@@ -43,16 +44,24 @@ function AnimationControls() {
         if (!animationPlaying) {
             switch (direction) {
                 case "next":
-                    console.log(animationIndex);
-                    setAnimationIndex((prevState) => prevState + 1);
+                    const nextAnimationIndex =
+                        animationIndex >= animationState.dialogue.length - 1
+                            ? 0
+                            : animationIndex + 1;
+                    setAnimationIndex(nextAnimationIndex);
                     setCurrentAnimationList([
-                        ...sceneState.dialogue.slice(animationIndex + 1),
+                        ...sceneState.dialogue.slice(nextAnimationIndex),
                     ]);
                     break;
                 case "previous":
-                    setAnimationIndex((prevState) => prevState - 1);
+                    const previousAnimationIndex =
+                        animationIndex === 0
+                            ? animationState.dialogue.length - 1
+                            : animationIndex - 1;
+
+                    setAnimationIndex(previousAnimationIndex);
                     setCurrentAnimationList([
-                        ...sceneState.dialogue.slice(animationIndex - 1),
+                        ...sceneState.dialogue.slice(previousAnimationIndex),
                     ]);
                     break;
                 default:

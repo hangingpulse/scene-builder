@@ -8,6 +8,8 @@ function useSceneContext() {
     const reducer = (sceneState, action) => {
         switch (action.type) {
             case "LOAD SCENE":
+                console.log(action.payload);
+                action.payload.characters.filter((character) => character);
                 return {
                     ...action.payload,
                 };
@@ -22,24 +24,42 @@ function useSceneContext() {
                 console.log(newState);
 
                 return newState;
-            case "DELETE SCENE":
-                return;
-            case "ADD BUBBLE":
-                return;
-            case "DELETE BUBBLE":
-                return;
-            case "EDIT BUBBLE":
-                sceneState.dialogue[action.payload.index] =
-                    action.payload.bubble;
-                return { ...sceneState };
-            case "EDIT CHARACTER":
-                sceneState.characters[action.payload.index] =
-                    action.payload.newCharacterState;
-                return { ...sceneState };
-            case "ADD CHARACTER":
-                return;
-            case "DELETE CHARACTER":
-                return;
+            case "DELETE SCENEITEM":
+                const dialogueWithoutDeletedItem = [...sceneState.dialogue];
+                dialogueWithoutDeletedItem.splice(action.payload, 1);
+                return {
+                    ...sceneState,
+                    dialogue: [...dialogueWithoutDeletedItem],
+                };
+            case "ADD SCENEITEM":
+                const dialogueWithNewItem = [...sceneState.dialogue];
+                dialogueWithNewItem.splice(
+                    action.payload.index,
+                    0,
+                    action.payload.sceneItem
+                );
+                return { ...sceneState, dialogue: [...dialogueWithNewItem] };
+
+            case "EDIT SCENEITEM":
+                const dialogueWithEditedItem = [...sceneState.dialogue];
+
+                dialogueWithEditedItem[action.payload.index] =
+                    action.payload.sceneItem;
+                return { ...sceneState, dialogue: [...dialogueWithEditedItem] };
+            case "UPDATE SCENEELEMENTS":
+                console.log(action.payload);
+                const characterIndexArray = action.payload.characters.map(
+                    (character) => character.id
+                );
+                const newDialogueArray = sceneState.dialogue.filter(
+                    (item) => !characterIndexArray.includes(item.character)
+                );
+                return {
+                    ...sceneState,
+                    header: action.payload.header,
+                    characters: action.payload.characters,
+                    dialogue: newDialogueArray,
+                };
             default:
                 return sceneState;
         }

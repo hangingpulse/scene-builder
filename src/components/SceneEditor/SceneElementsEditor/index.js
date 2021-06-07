@@ -4,6 +4,7 @@ import { SceneContext } from "../../../context/SceneContextProvider";
 import CharacterEdit from "./CharacterEdit";
 import CharacterSlot from "./CharacterSlot";
 import { TextArea } from "../../modularcomponents/Inputs";
+import Button from "../../modularcomponents/Buttons";
 import {
     SceneElementsEditorContainer,
     HeaderInputContainer,
@@ -13,22 +14,48 @@ import {
 
 function SceneElementsEditor() {
     const { editorState } = useContext(SceneEditorContext);
-    const { dispatch } = useContext(SceneContext);
+    const { dispatch, sceneState } = useContext(SceneContext);
     const [header, setHeader] = useState(editorState.header);
+    const [characters, setCharacters] = useState(editorState.characters);
 
+    console.log(sceneState.characters, characters);
     const slotPositions = [0, 1, 2, 3];
 
-    console.log(editorState.characters);
+    // Updates all the new Scene Element changes at once
+    const updateSceneElements = () => {
+        dispatch({
+            type: "UPDATE SCENEELEMENTS",
+            payload: {
+                header,
+                characters,
+            },
+        });
+    };
+
+    // Should reset all Scene elements to intitial state
+    const resetSceneElements = () => {
+        setCharacters([...editorState.characters]);
+        setHeader(editorState.header);
+    };
 
     const fillSlots = () => {
         return slotPositions.map((slot, index) => {
-            const currentCharacter = editorState.characters.find(
+            const currentCharacter = characters.find(
                 (character) => character.position === slot
             );
             return (
-                <CharacterSlot key={index} position={slot}>
+                <CharacterSlot
+                    key={index}
+                    position={slot}
+                    characters={characters}
+                    setCharacters={setCharacters}
+                >
                     {currentCharacter ? (
-                        <CharacterEdit character={currentCharacter} />
+                        <CharacterEdit
+                            currentCharacter={currentCharacter}
+                            characters={characters}
+                            setCharacters={setCharacters}
+                        />
                     ) : (
                         ""
                     )}
@@ -42,9 +69,15 @@ function SceneElementsEditor() {
             <HeaderInputContainer>
                 <TextArea
                     value={header}
-                    onChange={(e) => setHeader(e.target.value)}
+                    onChange={(e) => setHeader(e.target.value.toUpperCase())}
                     height="2.4rem"
                 />
+                <Button highlighted onClick={resetSceneElements}>
+                    Reset
+                </Button>
+                <Button highlighted onClick={updateSceneElements}>
+                    Update
+                </Button>
             </HeaderInputContainer>
 
             {fillSlots()}

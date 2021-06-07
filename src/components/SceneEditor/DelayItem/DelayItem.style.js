@@ -8,7 +8,7 @@ const DelayItemContainer = styled(motion.div)`
     border: 1px dotted black;
     border-radius: 0.4em;
     background-color: ${(props) => props.theme.colors.primaryLight};
-    opacity: ${({ opacity }) => (opacity ? opacity : 0.5)};
+    opacity: 0.5;
 
     font-size: ${({ theme }) => theme.fonts.fontSizes.blockSmall};
     text-align: center;

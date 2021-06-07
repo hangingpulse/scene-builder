@@ -5,8 +5,8 @@ const AnimationContainer = styled.div`
     display: grid;
     grid-template-areas:
         "head head head"
-        "char1 text char2"
-        "char3 text char4";
+        "char0 text char1"
+        "char2 text char3";
     grid-template-columns: 1fr minmax(15rem, 2fr) 1fr;
     grid-template-rows: 10% 1fr 1fr;
     column-gap: 0.6rem;

@@ -8,15 +8,27 @@ const AnimationContext = createContext();
 
 function AnimationContextProvider({ children }) {
     const { sceneState } = useContext(SceneContext);
-    const [animationPlaying, setAnimationPlaying] = useState(false);
+
+    // Stores our current animation state to keep it separated from the scene state
+    const [animationState, setAnimationState] = useState({ ...sceneState });
+
+    // stores the list of items that will be animated (for example for pausing and playing)
+    const [currentAnimationList, setCurrentAnimationList] = useState([
+        ...animationState.dialogue,
+    ]);
 
     // stores the index of the Item that is currently animated
     const [animationIndex, setAnimationIndex] = useState(0);
 
-    // stores the list of items that will be animated (for example for pausing and playing)
-    const [currentAnimationList, setCurrentAnimationList] = useState([
-        ...sceneState.dialogue,
-    ]);
+    const [animationPlaying, setAnimationPlaying] = useState(false);
+
+    useEffect(() => {
+        setAnimationState({ ...sceneState });
+    }, [sceneState]);
+
+    useEffect(() => {
+        setCurrentAnimationList(animationState.dialogue);
+    }, [animationState]);
 
     // Animation for the speechbubbles, using the useAnimation hook
 
@@ -24,14 +36,12 @@ function AnimationContextProvider({ children }) {
 
     // the animation has custom properties for delay and duration that are passed in
     useEffect(() => {
-        console.log(animationPlaying);
         if (animationPlaying) {
             startAnimation();
         }
     }, [animationPlaying]);
 
     const startAnimation = () => {
-        console.log(currentAnimationList);
         controls.start(({ delay, duration }) => ({
             opacity: [0, 1, 1, 0],
             visibility: "visible",
@@ -46,10 +56,17 @@ function AnimationContextProvider({ children }) {
 
     const pauseAnimation = () => {
         setAnimationPlaying(false);
-        setCurrentAnimationList([...sceneState.dialogue.slice(animationIndex)]);
+        setCurrentAnimationList([
+            ...animationState.dialogue.slice(animationIndex),
+        ]);
     };
 
     const animationItems = () => {
+        if (animationIndex > animationState.dialogue.length - 1) {
+            setAnimationPlaying(false);
+            setAnimationIndex(0);
+        }
+
         if (animationPlaying) {
             let totalDelay = 0;
 
@@ -65,7 +82,7 @@ function AnimationContextProvider({ children }) {
                         key={index}
                         index={index}
                         characterIndex={
-                            currentCharacter ? currentCharacter.id : 0
+                            currentCharacter ? currentCharacter.position + 1 : 0
                         }
                         controls={controls}
                         totalDelay={totalDelay - duration}
@@ -95,6 +112,7 @@ function AnimationContextProvider({ children }) {
                 animationIndex,
                 setAnimationIndex,
                 setCurrentAnimationList,
+                animationState,
             }}
         >
             {children}

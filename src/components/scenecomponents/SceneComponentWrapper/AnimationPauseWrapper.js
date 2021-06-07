@@ -7,12 +7,12 @@ import styled from "styled-components";
 // Container Styles, maybe outsource it into a styles.js
 const AnimationPauseContainer = styled.div`
     position: absolute;
-    top: ${(props) => props.theme.animationPositions[props.index].top};
-    bottom: ${(props) => props.theme.animationPositions[props.index].bottom};
-    right: ${(props) => props.theme.animationPositions[props.index].right};
-    left: ${(props) => props.theme.animationPositions[props.index].left};
+    top: ${(props) => props.theme.animationPositions[props.position].top};
+    bottom: ${(props) => props.theme.animationPositions[props.position].bottom};
+    right: ${(props) => props.theme.animationPositions[props.position].right};
+    left: ${(props) => props.theme.animationPositions[props.position].left};
     transform: translateY(
-        ${(props) => props.theme.animationPositions[props.index].translateY}
+        ${(props) => props.theme.animationPositions[props.position].translateY}
     );
     transform-origin: center;
 
@@ -25,7 +25,7 @@ const AnimationPauseContainer = styled.div`
 
 function AnimationPauseWrapper({ characterIndex, children }) {
     return (
-        <AnimationPauseContainer index={characterIndex}>
+        <AnimationPauseContainer position={characterIndex}>
             {children}
         </AnimationPauseContainer>
     );

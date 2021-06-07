@@ -8,7 +8,7 @@ import {
 
 // const SelectorRing = styled(ColorButton)``;
 
-function ColorSelection({ selectedColor, editCharacterState }) {
+function ColorSelection({ selectedColor, changeCharacter }) {
     return (
         <ColorSelectionContainer>
             <AnimateSharedLayout>
@@ -17,12 +17,7 @@ function ColorSelection({ selectedColor, editCharacterState }) {
                         key={index}
                         color={color}
                         selected={index === selectedColor ? true : false}
-                        onClick={() =>
-                            editCharacterState({
-                                type: "CHANGE COLOR",
-                                payload: index,
-                            })
-                        }
+                        onClick={() => changeCharacter("COLOR", index)}
                     ></ColorButton>
                 ))}
             </AnimateSharedLayout>

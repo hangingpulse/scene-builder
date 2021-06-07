@@ -24,6 +24,7 @@ const HeaderInputContainer = styled.div`
     width: 100%;
     grid-area: head;
     align-self: center;
+    display: flex;
 `;
 
 const CharacterEditContainer = styled.div`
@@ -33,6 +34,10 @@ const CharacterEditContainer = styled.div`
     & .ImageSelection {
         display: flex;
         align-items: center;
+    }
+
+    & .NameAndDelete {
+        display: flex;
     }
 
     &:hover {

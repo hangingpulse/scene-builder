@@ -7,6 +7,7 @@ const ButtonContainer = styled.div`
     justify-content: center;
     align-items: center;
 
+    font-family: ${({ theme }) => theme.fonts.serif};
     font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     padding: 0.2em;
     margin: 0.4em;

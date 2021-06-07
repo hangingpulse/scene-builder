@@ -18,9 +18,9 @@ function CloseButton({ onClick }) {
     );
 }
 
-function DeleteButton({ onClick, size }) {
+function DeleteButton({ onClick, background }) {
     return (
-        <IconButtonContainer onClick={onClick} background>
+        <IconButtonContainer onClick={onClick} background={background}>
             <FaTrashAlt className="Icon" />
         </IconButtonContainer>
     );

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { SceneEditorContext } from "../../../context/SceneEditorContext";
 import { DelayItemContainer, EditPause } from "./DelayItem.style";
 import { NumberInput } from "../../modularcomponents/Inputs";
 import { AddButton } from "../../modularcomponents/Buttons";
 
-function DelayItem({ index, sceneItemAfter, sceneItemBefore }) {
+function DelayItem({ editorIndex, sceneItemAfter, sceneItemBefore }) {
+    const { addSceneItem } = useContext(SceneEditorContext);
     const [hover, setHover] = useState(false);
 
     const canHover = window.matchMedia("(hover: hover)").matches;
@@ -23,7 +25,7 @@ function DelayItem({ index, sceneItemAfter, sceneItemBefore }) {
                 transition: { duration: 0.2 },
             }}
             height={hover && !canHover ? "5rem" : "2rem"}
-            opacity={!hover && !canHover ? 0.5 : 1}
+            animate
         >
             <EditPause>
                 {hover ? (
@@ -43,7 +45,10 @@ function DelayItem({ index, sceneItemAfter, sceneItemBefore }) {
                     </div>
                 )}
             </EditPause>
-            <AddButton size={hover ? "3rem" : "2rem"} />
+            <AddButton
+                size={hover ? "3rem" : "2rem"}
+                onClick={() => addSceneItem(editorIndex)}
+            />
         </DelayItemContainer>
     );
 }

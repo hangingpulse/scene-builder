@@ -6,7 +6,7 @@ import { SceneItemContainer } from "./SceneItem.style";
 
 // Build in the Edit Toggle on this mode? Connect the delay and the scene item on this level
 
-function SceneItem({ sceneItem, character, characterCount }) {
+function SceneItem({ sceneItem, character, characterCount, editorIndex }) {
     const [editSceneItem, toggleEditSceneItem] = useState(false);
 
     return (
@@ -16,6 +16,7 @@ function SceneItem({ sceneItem, character, characterCount }) {
                     character={character}
                     sceneItem={sceneItem}
                     toggleEditSceneItem={toggleEditSceneItem}
+                    editorIndex={editorIndex}
                 />
             ) : (
                 <SceneItemWrapper
