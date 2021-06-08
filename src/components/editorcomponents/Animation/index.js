@@ -16,11 +16,11 @@ function Animation() {
         useContext(AnimationContext);
     // This returns the SceneItem that is currently animated if you pause the animation
     const renderCurrentItem = () => {
-        if (animationState.dialogue.length) {
+        if (animationState.sceneItems.length) {
             const currentCharacter = animationState.characters.find(
                 (character) =>
                     character.id ===
-                    animationState.dialogue[animationIndex].character
+                    animationState.sceneItems[animationIndex].character
             );
             return (
                 <AnimationPauseWrapper
@@ -29,7 +29,7 @@ function Animation() {
                     }
                 >
                     <SceneComponent
-                        sceneItem={animationState.dialogue[animationIndex]}
+                        sceneItem={animationState.sceneItems[animationIndex]}
                         character={currentCharacter}
                         animation
                     />

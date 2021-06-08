@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "./components/pagecomponents/Header/Header";
 import Main from "./components/pagecomponents/Main/Main";
 import Footer from "./components/pagecomponents/Footer/Footer";
+import AnimationPreview from "./components/editorcomponents/AnimationPreview";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { SceneContextProvider } from "./context/SceneContextProvider";
 import { AnimationContextProvider } from "./context/AnimationContext";
 import { SceneEditorContextProvider } from "./context/SceneEditorContext";
+import { PreviewContextProvider } from "./context/PreviewContext";
 
 const AppBody = styled.div`
     width: 100%;
@@ -17,6 +19,8 @@ const AppBody = styled.div`
 `;
 
 function App() {
+    const [preview, togglePreview] = useState(true);
+
     return (
         <Theme>
             <GlobalStyle />
@@ -25,7 +29,10 @@ function App() {
                 <SceneContextProvider>
                     <SceneEditorContextProvider>
                         <AnimationContextProvider>
-                            <Main />
+                            <PreviewContextProvider>
+                                <Main />
+                                {preview && <AnimationPreview />}
+                            </PreviewContextProvider>
                         </AnimationContextProvider>
                     </SceneEditorContextProvider>
                 </SceneContextProvider>

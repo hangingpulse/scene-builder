@@ -4,7 +4,7 @@ import {
     TextAreaContainer,
     NumberInputContainer,
     NumberInputLabel,
-    NumberInputField,
+    NumberInputValue,
 } from "./Input.style";
 
 function Input({ value, onChange }) {
@@ -32,12 +32,7 @@ function NumberInput({
             transition={transition}
         >
             <NumberInputLabel>{children}</NumberInputLabel>
-            <NumberInputField
-                type="number"
-                step="0.1"
-                value={value}
-                onChange={onChange}
-            />
+            <NumberInputValue>{value}</NumberInputValue>
             <NumberInputLabel>s</NumberInputLabel>
         </NumberInputContainer>
     );

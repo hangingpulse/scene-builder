@@ -1,9 +1,44 @@
 import { useReducer } from "react";
-import dummyScene from "../data/dummyScene";
 import { useEffect } from "react/cjs/react.development";
+import axios from "axios";
+import uuid from "react-uuid";
 
 function useSceneContext() {
-    const initialState = {};
+    const initialState = {
+        title: "Example Scene",
+        meta: {
+            creator: "Me",
+            public: true,
+            description: "",
+            tags: [],
+            rawtext: "",
+        },
+        //  names of itmes must be exactly the same as fields in MngoDB
+        general: {
+            header: "THIS IS A HEADER",
+            background: "",
+        },
+        characters: [
+            {
+                id: uuid(),
+                name: "JOHN DOE",
+                position: 0,
+                colorIndex: 0,
+                imageIndex: 0,
+            },
+        ],
+        sceneItems: [
+            {
+                id: uuid(),
+                type: "ACTIONTEXT",
+                text: "Example Text",
+                character: null,
+                position: 0,
+                length: 2,
+                delay: 0,
+            },
+        ],
+    };
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
@@ -17,7 +52,7 @@ function useSceneContext() {
                 const newState = {
                     ...sceneState,
                     characters: action.payload.characters,
-                    dialogue: action.payload.dialogue,
+                    sceneItems: action.payload.sceneItems,
                     header: action.payload.header,
                 };
 
@@ -25,40 +60,47 @@ function useSceneContext() {
 
                 return newState;
             case "DELETE SCENEITEM":
-                const dialogueWithoutDeletedItem = [...sceneState.dialogue];
-                dialogueWithoutDeletedItem.splice(action.payload, 1);
+                const sceneItemsWithoutDeletedItem = [...sceneState.sceneItems];
+                sceneItemsWithoutDeletedItem.splice(action.payload, 1);
                 return {
                     ...sceneState,
-                    dialogue: [...dialogueWithoutDeletedItem],
+                    sceneItems: [...sceneItemsWithoutDeletedItem],
                 };
             case "ADD SCENEITEM":
-                const dialogueWithNewItem = [...sceneState.dialogue];
-                dialogueWithNewItem.splice(
+                const sceneItemsWithNewItem = [...sceneState.sceneItems];
+                sceneItemsWithNewItem.splice(
                     action.payload.index,
                     0,
                     action.payload.sceneItem
                 );
-                return { ...sceneState, dialogue: [...dialogueWithNewItem] };
+                return {
+                    ...sceneState,
+                    sceneItems: [...sceneItemsWithNewItem],
+                };
 
             case "EDIT SCENEITEM":
-                const dialogueWithEditedItem = [...sceneState.dialogue];
+                const sceneItemsWithEditedItem = [...sceneState.sceneItems];
 
-                dialogueWithEditedItem[action.payload.index] =
+                sceneItemsWithEditedItem[action.payload.index] =
                     action.payload.sceneItem;
-                return { ...sceneState, dialogue: [...dialogueWithEditedItem] };
+                return {
+                    ...sceneState,
+                    sceneItems: [...sceneItemsWithEditedItem],
+                };
             case "UPDATE SCENEELEMENTS":
-                console.log(action.payload);
                 const characterIndexArray = action.payload.characters.map(
                     (character) => character.id
                 );
-                const newDialogueArray = sceneState.dialogue.filter(
-                    (item) => !characterIndexArray.includes(item.character)
+                const newSceneItemsArray = sceneState.sceneItems.filter(
+                    (item) =>
+                        characterIndexArray.includes(item.character) ||
+                        item.type === "ACTIONTEXT"
                 );
                 return {
                     ...sceneState,
                     header: action.payload.header,
                     characters: action.payload.characters,
-                    dialogue: newDialogueArray,
+                    sceneItems: newSceneItemsArray,
                 };
             default:
                 return sceneState;
@@ -68,7 +110,7 @@ function useSceneContext() {
     const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
         // get the initialState from the localStorage
         const localScene = localStorage.getItem("scene");
-        return localScene ? JSON.parse(localScene) : { ...dummyScene };
+        return localScene ? JSON.parse(localScene) : { ...initialState };
     });
 
     // save the sceneState to local storage whenever it changes

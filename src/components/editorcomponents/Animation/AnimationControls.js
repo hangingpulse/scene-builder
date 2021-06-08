@@ -45,23 +45,23 @@ function AnimationControls() {
             switch (direction) {
                 case "next":
                     const nextAnimationIndex =
-                        animationIndex >= animationState.dialogue.length - 1
+                        animationIndex >= animationState.sceneItems.length - 1
                             ? 0
                             : animationIndex + 1;
                     setAnimationIndex(nextAnimationIndex);
                     setCurrentAnimationList([
-                        ...sceneState.dialogue.slice(nextAnimationIndex),
+                        ...sceneState.sceneItems.slice(nextAnimationIndex),
                     ]);
                     break;
                 case "previous":
                     const previousAnimationIndex =
                         animationIndex === 0
-                            ? animationState.dialogue.length - 1
+                            ? animationState.sceneItems.length - 1
                             : animationIndex - 1;
 
                     setAnimationIndex(previousAnimationIndex);
                     setCurrentAnimationList([
-                        ...sceneState.dialogue.slice(previousAnimationIndex),
+                        ...sceneState.sceneItems.slice(previousAnimationIndex),
                     ]);
                     break;
                 default:

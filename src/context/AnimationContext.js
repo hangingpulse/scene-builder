@@ -14,7 +14,7 @@ function AnimationContextProvider({ children }) {
 
     // stores the list of items that will be animated (for example for pausing and playing)
     const [currentAnimationList, setCurrentAnimationList] = useState([
-        ...animationState.dialogue,
+        ...animationState.sceneItems,
     ]);
 
     // stores the index of the Item that is currently animated
@@ -27,7 +27,7 @@ function AnimationContextProvider({ children }) {
     }, [sceneState]);
 
     useEffect(() => {
-        setCurrentAnimationList(animationState.dialogue);
+        setCurrentAnimationList(animationState.sceneItems);
     }, [animationState]);
 
     // Animation for the speechbubbles, using the useAnimation hook
@@ -57,12 +57,12 @@ function AnimationContextProvider({ children }) {
     const pauseAnimation = () => {
         setAnimationPlaying(false);
         setCurrentAnimationList([
-            ...animationState.dialogue.slice(animationIndex),
+            ...animationState.sceneItems.slice(animationIndex),
         ]);
     };
 
     const animationItems = () => {
-        if (animationIndex > animationState.dialogue.length - 1) {
+        if (animationIndex > animationState.sceneItems.length - 1) {
             setAnimationPlaying(false);
             setAnimationIndex(0);
         }
@@ -70,35 +70,39 @@ function AnimationContextProvider({ children }) {
         if (animationPlaying) {
             let totalDelay = 0;
 
-            const dialogueList = currentAnimationList.map((dialogue, index) => {
-                const currentCharacter = sceneState.characters.find(
-                    (character) => character.id === dialogue.character
-                );
-                const duration = dialogue.length;
-                totalDelay += dialogue.delay + duration;
+            const sceneItemList = currentAnimationList.map(
+                (sceneItem, index) => {
+                    const currentCharacter = sceneState.characters.find(
+                        (character) => character.id === sceneItem.character
+                    );
+                    const duration = sceneItem.length;
+                    totalDelay += sceneItem.delay + duration;
 
-                return (
-                    <AnimationPlayingWrapper
-                        key={index}
-                        index={index}
-                        characterIndex={
-                            currentCharacter ? currentCharacter.position + 1 : 0
-                        }
-                        controls={controls}
-                        totalDelay={totalDelay - duration}
-                        duration={duration}
-                        setAnimationIndex={setAnimationIndex}
-                    >
-                        <SceneComponent
+                    return (
+                        <AnimationPlayingWrapper
                             key={index}
-                            sceneItem={dialogue}
-                            character={currentCharacter}
-                            animation
-                        />
-                    </AnimationPlayingWrapper>
-                );
-            });
-            return dialogueList;
+                            index={index}
+                            characterIndex={
+                                currentCharacter
+                                    ? currentCharacter.position + 1
+                                    : 0
+                            }
+                            controls={controls}
+                            totalDelay={totalDelay - duration}
+                            duration={duration}
+                            setAnimationIndex={setAnimationIndex}
+                        >
+                            <SceneComponent
+                                key={index}
+                                sceneItem={sceneItem}
+                                character={currentCharacter}
+                                animation
+                            />
+                        </AnimationPlayingWrapper>
+                    );
+                }
+            );
+            return sceneItemList;
         }
     };
     return (

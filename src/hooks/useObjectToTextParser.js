@@ -3,35 +3,39 @@ function changeObjectToTextParser(sceneState) {
     const characters = sceneState.characters;
     const textArray = [header];
     let currentCharacter = "";
-    let currentDialogue = [];
+    let currentSceneItem = [];
 
-    sceneState.dialogue.forEach((dialogue, index) => {
-        if (dialogue.type === "ACTIONTEXT") {
-            if (currentDialogue.length) {
-                textArray.push(currentDialogue.join("\n"));
-                currentDialogue = [];
+    console.log(sceneState);
+    sceneState.sceneItems.forEach((sceneItem, index) => {
+        if (sceneItem.type === "ACTIONTEXT") {
+            if (currentSceneItem.length) {
+                textArray.push(currentSceneItem.join("\n"));
+                currentSceneItem = [];
             }
-            textArray.push(dialogue.text);
+            textArray.push(sceneItem.text);
             currentCharacter = "";
         }
-        if (dialogue.type === "DIALOGUE" || dialogue.type === "PARENTHETICAL") {
-            const dialogueCharacter = characters.find(
-                (character) => character.id === dialogue.character
+        if (
+            sceneItem.type === "DIALOGUE" ||
+            sceneItem.type === "PARENTHETICAL"
+        ) {
+            const sceneItemCharacter = characters.find(
+                (character) => character.id === sceneItem.character
             );
-            if (currentCharacter === dialogueCharacter.name) {
-                currentDialogue.push(dialogue.text);
-            } else if (currentCharacter !== dialogueCharacter.name) {
-                if (currentDialogue.length) {
-                    textArray.push(currentDialogue.join("\n"));
-                    currentDialogue = [];
+            if (currentCharacter === sceneItemCharacter.name) {
+                currentSceneItem.push(sceneItem.text);
+            } else if (currentCharacter !== sceneItemCharacter.name) {
+                if (currentSceneItem.length) {
+                    textArray.push(currentSceneItem.join("\n"));
+                    currentSceneItem = [];
                 }
-                currentDialogue.push(dialogueCharacter.name.toUpperCase());
-                currentDialogue.push(dialogue.text);
-                currentCharacter = dialogueCharacter.name;
+                currentSceneItem.push(sceneItemCharacter.name.toUpperCase());
+                currentSceneItem.push(sceneItem.text);
+                currentCharacter = sceneItemCharacter.name;
             }
         }
     });
-    textArray.push(currentDialogue.join("\n"));
+    textArray.push(currentSceneItem.join("\n"));
     const sceneString = textArray.join("\n\n");
     return sceneString;
 }

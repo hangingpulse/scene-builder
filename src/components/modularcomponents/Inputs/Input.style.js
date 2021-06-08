@@ -50,9 +50,9 @@ const NumberInputLabel = styled.div`
     font-family: ${(props) => props.theme.fonts.serif};
 `;
 
-const NumberInputField = styled.input`
-    width: 4rem;
+const NumberInputValue = styled.span`
     padding: 0.2em;
+    color: white;
     font-size: ${({ theme }) => theme.fonts.fontSizes.blockSmall};
     font-family: ${(props) => props.theme.fonts.serif};
 `;
@@ -62,5 +62,5 @@ export {
     InputContainer,
     NumberInputContainer,
     NumberInputLabel,
-    NumberInputField,
+    NumberInputValue,
 };
