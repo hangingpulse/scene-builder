@@ -1,58 +1,54 @@
-import React, { useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
-import { AnimationContext } from "../../../context/AnimationContext";
+import React from "react";
+import useSceneAnimation from "../../../hooks/useSceneAnimation";
 import Character from "../../scenecomponents/Character";
 import {
     AnimationContainer,
     CharacterContainerAnimation,
     SceneContentAnimation,
     AnimationHeader,
+    AnimationAndControls,
 } from "./Animation.style";
-import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
-import AnimationPauseWrapper from "../../scenecomponents/SceneComponentWrapper/AnimationPauseWrapper";
+import AnimationControls from "./AnimationControls";
 
-function Animation() {
-    const { animationItems, animationPlaying, animationIndex, animationState } =
-        useContext(AnimationContext);
+function Animation({ sceneObject }) {
     // This returns the SceneItem that is currently animated if you pause the animation
-    const renderCurrentItem = () => {
-        if (animationState.sceneItems.length) {
-            const currentCharacter = animationState.characters.find(
-                (character) =>
-                    character.id ===
-                    animationState.sceneItems[animationIndex].character
-            );
-            return (
-                <AnimationPauseWrapper
-                    characterIndex={
-                        currentCharacter ? currentCharacter.position + 1 : 0
-                    }
-                >
-                    <SceneComponent
-                        sceneItem={animationState.sceneItems[animationIndex]}
-                        character={currentCharacter}
-                        animation
-                    />
-                </AnimationPauseWrapper>
-            );
-        }
-    };
+    const [
+        startAnimation,
+        pauseAnimation,
+        changeAnimationItem,
+        renderAnimationItems,
+        renderCurrentItem,
+        animationState,
+        animationObject,
+    ] = useSceneAnimation(sceneObject);
 
+    const { animationPlaying, animationIndex } = animationState;
+    console.log(animationPlaying);
     return (
-        <AnimationContainer className="AnimationContainer">
-            <AnimationHeader>{animationState.header}</AnimationHeader>
-            {animationState.characters.map((character, index) => (
-                <CharacterContainerAnimation
-                    key={index}
-                    position={`char${character.position}`}
-                >
-                    <Character character={character} />
-                </CharacterContainerAnimation>
-            ))}
-            <SceneContentAnimation>
-                {animationPlaying ? animationItems() : renderCurrentItem()}
-            </SceneContentAnimation>
-        </AnimationContainer>
+        <AnimationAndControls>
+            <AnimationContainer className="AnimationContainer">
+                <AnimationHeader>{animationObject.header}</AnimationHeader>
+                {animationObject.characters.map((character, index) => (
+                    <CharacterContainerAnimation
+                        key={index}
+                        position={`char${character.position}`}
+                    >
+                        <Character character={character} />
+                    </CharacterContainerAnimation>
+                ))}
+                <SceneContentAnimation>
+                    {animationPlaying
+                        ? renderAnimationItems()
+                        : renderCurrentItem()}
+                </SceneContentAnimation>
+            </AnimationContainer>
+            <AnimationControls
+                animationState={animationState}
+                startAnimation={startAnimation}
+                pauseAnimation={pauseAnimation}
+                changeAnimationItem={changeAnimationItem}
+            />
+        </AnimationAndControls>
     );
 }
 

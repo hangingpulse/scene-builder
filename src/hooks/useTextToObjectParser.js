@@ -130,6 +130,7 @@ function useTextParser() {
                 header: headerObject,
                 characters: characterObjects,
                 sceneItems: sceneObjects,
+                rawtext: text,
             },
         });
     };

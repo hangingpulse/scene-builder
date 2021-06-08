@@ -1,18 +1,25 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { SceneContext } from "./SceneContextProvider";
-import { useEffect } from "react/cjs/react.development";
+import useSaveScene from "../hooks/useSaveScene";
 
 const PreviewContext = createContext();
 
 function PreviewContextProvider({ children }) {
     const { sceneState, dispatch } = useContext(SceneContext);
 
+    // custom Hook that saves the scene to the backend, gets back the sceneid for the link
+    const [sceneId, sendScene, sceneShared] = useSaveScene();
     const [previewState, setPreviewState] = useState({ ...sceneState });
 
-    // useEffect(() => {
-    //     dispatch({ type: "EDIT METADATA", payload: previewState.meta });
-    // }, [previewState, dispatch]);
+    // opens and closes the preview modal
+    const [preview, togglePreview] = useState(true);
+
+    // gets the sceneId as a response from sending it to the backend
+
+    useEffect(() => {
+        dispatch({ type: "EDIT METADATA", payload: previewState.meta });
+    }, [previewState, dispatch]);
 
     const editMetaData = (type, value) => {
         switch (type) {
@@ -20,38 +27,40 @@ function PreviewContextProvider({ children }) {
                 setPreviewState({ ...previewState, title: value });
                 break;
             case "CREATOR":
-                setPreviewState({ ...previewState, creator: value });
+                console.log(value);
+                setPreviewState({
+                    ...previewState,
+                    meta: { ...previewState.meta, creator: value },
+                });
                 break;
             case "DESCRIPTION":
-                setPreviewState({ ...previewState, description: value });
+                setPreviewState({
+                    ...previewState,
+                    meta: { ...previewState.meta, description: value },
+                });
                 break;
             case "PUBLIC":
-                setPreviewState({ ...previewState, public: value });
+                setPreviewState({
+                    ...previewState,
+                    meta: { ...previewState.meta, public: value },
+                });
                 break;
             default:
                 return;
         }
     };
 
-    console.log(previewState);
-
-    const sendToBackend = () => {
-        axios
-            .post("http://localhost:5000/scenes", {
-                ...sceneState,
-                title: "Test Scene",
-                meta: {
-                    creator: "Me",
-                    public: true,
-                    rawtext: "",
-                },
-            })
-            .then((res) => console.log(res));
-    };
-
     return (
         <PreviewContext.Provider
-            value={{ editMetaData, sendToBackend, previewState }}
+            value={{
+                preview,
+                togglePreview,
+                editMetaData,
+                sendScene,
+                previewState,
+                sceneId,
+                sceneShared,
+            }}
         >
             {children}
         </PreviewContext.Provider>

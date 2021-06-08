@@ -27,7 +27,7 @@ function AnimationPlayingWrapper({
     controls,
     totalDelay,
     duration,
-    setAnimationIndex,
+    playAnimation,
     characterIndex,
 }) {
     return (
@@ -39,7 +39,7 @@ function AnimationPlayingWrapper({
                 duration: duration,
             }}
             onAnimationComplete={() => {
-                setAnimationIndex((prevState) => prevState + 1);
+                playAnimation();
             }}
             position={characterIndex}
         >

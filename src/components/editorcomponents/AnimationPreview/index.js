@@ -7,7 +7,6 @@ import SceneDescriptionInput from "./SceneDescriptionInput";
 
 function AnimationPreview() {
     const { previewState } = useContext(PreviewContext);
-    console.log(previewState);
     return (
         <AnimationPreviewContainer>
             <AnimationContent animation={previewState} />

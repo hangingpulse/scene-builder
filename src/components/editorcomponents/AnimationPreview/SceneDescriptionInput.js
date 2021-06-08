@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { PreviewContext } from "../../../context/PreviewContext";
 import Button from "../../modularcomponents/Buttons";
 import { TextArea } from "../../modularcomponents/Inputs";
@@ -11,7 +11,13 @@ import {
 } from "./AnimationPreview.style";
 
 function SceneDescriptionInput() {
-    const { previewState, editMetaData } = useContext(PreviewContext);
+    const { previewState, editMetaData, sendScene, sceneId, sceneShared } =
+        useContext(PreviewContext);
+
+    const handleShare = () => {
+        sendScene(previewState);
+    };
+
     return (
         <SceneDescriptionInputContainer>
             <TitleContainer>
@@ -35,9 +41,18 @@ function SceneDescriptionInput() {
                 />
             </DescriptionContainer>
             <ButtonContainer>
-                <Button>Share with everyone</Button>
-                <Button>Get a private Link</Button>
-                <Button>Return to Edit Mode</Button>
+                {sceneShared ? (
+                    <span>
+                        {sceneId
+                            ? `http://sceenies.herokuapp.com/${sceneId}`
+                            : "Share to get your Sceeny-Link"}
+                    </span>
+                ) : (
+                    <div>
+                        <Button onClick={handleShare}>Share</Button>
+                        <Button>Return to Edit Mode</Button>
+                    </div>
+                )}
             </ButtonContainer>
         </SceneDescriptionInputContainer>
     );

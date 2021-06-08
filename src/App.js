@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./components/pagecomponents/Header/Header";
 import Main from "./components/pagecomponents/Main/Main";
@@ -9,7 +10,11 @@ import GlobalStyle from "./styles/globalStyles";
 import { SceneContextProvider } from "./context/SceneContextProvider";
 import { AnimationContextProvider } from "./context/AnimationContext";
 import { SceneEditorContextProvider } from "./context/SceneEditorContext";
-import { PreviewContextProvider } from "./context/PreviewContext";
+import {
+    PreviewContextProvider,
+    PreviewContext,
+} from "./context/PreviewContext";
+import AnimationFinal from "./components/editorcomponents/AnimationFinal";
 
 const AppBody = styled.div`
     width: 100%;
@@ -19,23 +24,21 @@ const AppBody = styled.div`
 `;
 
 function App() {
-    const [preview, togglePreview] = useState(true);
-
+    const { preview } = useContext(PreviewContext);
     return (
         <Theme>
             <GlobalStyle />
             <AppBody>
                 <Header />
-                <SceneContextProvider>
-                    <SceneEditorContextProvider>
-                        <AnimationContextProvider>
-                            <PreviewContextProvider>
-                                <Main />
-                                {preview && <AnimationPreview />}
-                            </PreviewContextProvider>
-                        </AnimationContextProvider>
-                    </SceneEditorContextProvider>
-                </SceneContextProvider>
+                <Switch>
+                    <Route path="/:sceneid">
+                        <AnimationFinal />
+                    </Route>
+                    <Route path="/">
+                        <Main />
+                        {preview && <AnimationPreview />}
+                    </Route>
+                </Switch>
                 <Footer />
             </AppBody>
         </Theme>
