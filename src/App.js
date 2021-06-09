@@ -5,10 +5,12 @@ import Header from "./components/layoutcomponents/Header";
 import Main from "./components/layoutcomponents/Main";
 import Footer from "./components/layoutcomponents/Footer";
 import AnimationPreview from "./components/AnimationPreview";
+import SceneLibrary from "./components/LandingPage/SceneLibrary";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { PreviewContext } from "./context/PreviewContext";
 import AnimationFinal from "./components/AnimationFinal";
+import LandingPage from "./components/LandingPage";
 
 const AppBody = styled.div`
     width: 100%;
@@ -25,12 +27,14 @@ function App() {
             <AppBody>
                 <Header />
                 <Switch>
-                    <Route path="/:sceneid">
+                    <Route path="/scenes/:sceneid">
                         <AnimationFinal />
                     </Route>
+                    <Route path="/create">
+                        {preview ? <AnimationPreview /> : <Main />}
+                    </Route>
                     <Route path="/">
-                        <Main />
-                        {preview && <AnimationPreview />}
+                        <LandingPage />
                     </Route>
                 </Switch>
                 <Footer />

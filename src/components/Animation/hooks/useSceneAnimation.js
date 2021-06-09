@@ -6,6 +6,7 @@ import AnimationPlayingWrapper from "../AnimationPlayingWrapper";
 import AnimationPauseWrapper from "../AnimationPauseWrapper";
 
 function useSceneAnimation(sceneObject) {
+    console.log(sceneObject);
     // Stores our current animation state to keep it separated from the scene state
     const [animationObject, setAnimationObject] = useState(sceneObject);
     // stores the list of items that will be animated (for example for pausing and playing)

@@ -11,6 +11,7 @@ const MainContainer = styled.div`
 
     background-color: ${(props) => props.theme.colors.background};
     margin: 0.8em;
+    margin-top: 10rem;
 `;
 
 const EditorContentContainer = styled.div`

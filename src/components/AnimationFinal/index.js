@@ -8,11 +8,10 @@ function AnimationFinal() {
     const { sceneid } = useParams();
 
     const sceneData = useFetchScene(sceneid);
-
     console.log(sceneData);
     return (
         <AnimationFinalContainer>
-            <Animation sceneObject={sceneData} />
+            {sceneData && <Animation sceneObject={sceneData} />}
             {/* <SceneInfo>
                 <Title></Title>
                 <Creator></Creator>

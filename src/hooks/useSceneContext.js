@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
 import uuid from "react-uuid";
 
-function useSceneContext() {
+function useSceneContext(newScene) {
     const initialState = {
         title: "Example Scene",
         meta: {
@@ -105,16 +105,22 @@ function useSceneContext() {
         }
     };
 
-    const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
-        // get the initialState from the localStorage
-        const localScene = localStorage.getItem("scene");
-        return localScene ? JSON.parse(localScene) : { ...initialState };
-    });
+    const [sceneState, dispatch] = useReducer(
+        reducer,
+        initialState
+        //     () => {
+        //     // get the initialState from the localStorage
+        //     // const localScene = localStorage.getItem("scene");
+        //     // return localScene ? JSON.parse(localScene) : { ...initialState };
+        // }
+    );
 
     // save the sceneState to local storage whenever it changes
     useEffect(() => {
         localStorage.setItem("scene", JSON.stringify(sceneState));
     }, [sceneState]);
+
+    console.log(sceneState);
 
     return [sceneState, dispatch];
 }

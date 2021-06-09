@@ -11,6 +11,7 @@ import {
 } from "./Animation.style";
 
 function Animation({ sceneObject }) {
+    console.log(sceneObject);
     // This returns the SceneItem that is currently animated if you pause the animation
     const [
         startAnimation,

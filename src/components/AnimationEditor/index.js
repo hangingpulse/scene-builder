@@ -5,10 +5,10 @@ import { AnimationContentContainer } from "./AnimationEditor.style";
 
 function AnimationEditor() {
     const { sceneState } = useContext(SceneContext);
-
+    console.log(sceneState);
     return (
         <AnimationContentContainer>
-            <Animation sceneObject={sceneState} />
+            {sceneState && <Animation sceneObject={sceneState} />}
         </AnimationContentContainer>
     );
 }

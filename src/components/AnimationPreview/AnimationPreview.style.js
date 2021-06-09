@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 const AnimationPreviewContainer = styled.div`
-    position: absolute;
-    z-index: 100;
-
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     padding: 5rem;
 
     background-color: ${({ theme }) => theme.colors.background};
