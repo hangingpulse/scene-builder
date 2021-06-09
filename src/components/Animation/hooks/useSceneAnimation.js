@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAnimation } from "framer-motion";
 import useAnimationState from "./useAnimationState";
-import SceneComponent from "../components/scenecomponents/SceneComponentWrapper/SceneComponent";
-import AnimationPlayingWrapper from "../components/scenecomponents/SceneComponentWrapper/AnimationPlayingWrapper";
-import AnimationPauseWrapper from "../components/scenecomponents/SceneComponentWrapper/AnimationPauseWrapper";
+import SceneComponent from "../../scenecomponents/SceneComponentWrapper/SceneComponent";
+import AnimationPlayingWrapper from "../AnimationPlayingWrapper";
+import AnimationPauseWrapper from "../AnimationPauseWrapper";
 
 function useSceneAnimation(sceneObject) {
     // Stores our current animation state to keep it separated from the scene state
@@ -15,6 +15,7 @@ function useSceneAnimation(sceneObject) {
 
     const [animationState, changeAnimationState] = useAnimationState();
     const { animationIndex, animationPlaying } = animationState;
+
     useEffect(() => {
         setAnimationObject(sceneObject);
     }, [sceneObject]);
@@ -22,10 +23,6 @@ function useSceneAnimation(sceneObject) {
     useEffect(() => {
         setCurrentAnimationList(animationObject.sceneItems);
     }, [animationObject]);
-
-    useEffect(() => {
-        console.log(animationState);
-    }, [animationState]);
 
     // Animation for the speechbubbles, using the useAnimation hook
 
@@ -48,7 +45,6 @@ function useSceneAnimation(sceneObject) {
     }, [animationPlaying, controls]);
 
     const startAnimation = () => {
-        setCurrentAnimationList(animationObject.sceneItems);
         changeAnimationState({ type: "START ANIMATION" });
     };
 
@@ -64,6 +60,11 @@ function useSceneAnimation(sceneObject) {
             type: "PLAY ANIMATION",
             payload: animationIndex + 1,
         });
+    };
+
+    const endAnimation = () => {
+        changeAnimationState({ type: "END ANIMATION" });
+        setCurrentAnimationList(animationObject.sceneItems);
     };
 
     const changeAnimationItem = (direction) => {
@@ -102,7 +103,7 @@ function useSceneAnimation(sceneObject) {
 
     const renderAnimationItems = () => {
         if (animationIndex > animationObject.sceneItems.length - 1) {
-            changeAnimationState({ type: "END ANIMATION" });
+            endAnimation();
         }
 
         if (animationPlaying) {

@@ -1,6 +1,4 @@
-import { useReducer } from "react";
-import { useEffect } from "react/cjs/react.development";
-import axios from "axios";
+import { useReducer, useEffect } from "react";
 import uuid from "react-uuid";
 
 function useSceneContext() {

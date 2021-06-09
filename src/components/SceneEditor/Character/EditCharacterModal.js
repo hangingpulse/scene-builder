@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContext";
 import useEditCharacter from "../../../hooks/useEditCharacter";
 import EditCharacter from "../../scenecomponents/Character/EditCharacter";
 

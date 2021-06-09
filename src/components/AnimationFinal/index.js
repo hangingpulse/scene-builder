@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useFetchScene from "../../../hooks/useFetchScene";
-import AnimationContent from "../../pagecomponents/Main/AnimationContent";
+import useFetchScene from "./hooks/useFetchScene";
+import Animation from "../Animation";
 import { AnimationFinalContainer } from "./AnimationFinal.style";
 
 function AnimationFinal() {
@@ -12,7 +12,7 @@ function AnimationFinal() {
     console.log(sceneData);
     return (
         <AnimationFinalContainer>
-            <AnimationContent />
+            <Animation sceneObject={sceneData} />
             {/* <SceneInfo>
                 <Title></Title>
                 <Creator></Creator>

@@ -1,20 +1,14 @@
 import React, { useContext } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
-import Header from "./components/pagecomponents/Header/Header";
-import Main from "./components/pagecomponents/Main/Main";
-import Footer from "./components/pagecomponents/Footer/Footer";
-import AnimationPreview from "./components/editorcomponents/AnimationPreview";
+import Header from "./components/layoutcomponents/Header";
+import Main from "./components/layoutcomponents/Main";
+import Footer from "./components/layoutcomponents/Footer";
+import AnimationPreview from "./components/AnimationPreview";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
-import { SceneContextProvider } from "./context/SceneContextProvider";
-import { AnimationContextProvider } from "./context/AnimationContext";
-import { SceneEditorContextProvider } from "./context/SceneEditorContext";
-import {
-    PreviewContextProvider,
-    PreviewContext,
-} from "./context/PreviewContext";
-import AnimationFinal from "./components/editorcomponents/AnimationFinal";
+import { PreviewContext } from "./context/PreviewContext";
+import AnimationFinal from "./components/AnimationFinal";
 
 const AppBody = styled.div`
     width: 100%;

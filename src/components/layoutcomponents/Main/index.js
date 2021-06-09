@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MainContainer } from "./Main.style";
 import EditorContent from "./EditorContent";
-import AnimationContent from "./AnimationContent";
+import AnimationEditor from "../../AnimationEditor";
 
 function Main() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -14,7 +14,7 @@ function Main() {
     return (
         <MainContainer flex={windowWidth >= 1024 ? "row" : ""}>
             <EditorContent smallScreen={windowWidth >= 1024 ? false : true} />
-            {windowWidth >= 1024 ? <AnimationContent /> : ""}
+            {windowWidth >= 1024 ? <AnimationEditor /> : ""}
         </MainContainer>
     );
 }

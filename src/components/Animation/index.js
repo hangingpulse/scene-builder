@@ -1,6 +1,7 @@
 import React from "react";
-import useSceneAnimation from "../../../hooks/useSceneAnimation";
-import Character from "../../scenecomponents/Character";
+import useSceneAnimation from "./hooks/useSceneAnimation";
+import Character from "../scenecomponents/Character";
+import AnimationControls from "./AnimationControls";
 import {
     AnimationContainer,
     CharacterContainerAnimation,
@@ -8,7 +9,6 @@ import {
     AnimationHeader,
     AnimationAndControls,
 } from "./Animation.style";
-import AnimationControls from "./AnimationControls";
 
 function Animation({ sceneObject }) {
     // This returns the SceneItem that is currently animated if you pause the animation

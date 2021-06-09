@@ -14,6 +14,7 @@ const reducer = (animationState, action) => {
                 ...initialState,
             };
         case "START ANIMATION":
+            console.log(animationState);
             return {
                 animationStart: false,
                 animationPlaying: true,
@@ -23,7 +24,7 @@ const reducer = (animationState, action) => {
         case "PLAY ANIMATION":
             return {
                 ...animationState,
-                animationIndex: action.payload,
+                animationIndex: animationState.animationIndex + 1,
             };
         case "PAUSE ANIMATION":
             return {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import { SceneContext } from "../../context/SceneContext";
 import styled from "styled-components";
-import useTextToObjectParser from "../../../hooks/useTextToObjectParser";
-import changeObjectToTextParser from "../../../hooks/useObjectToTextParser";
-import useOpenAI from "../../../hooks/useOpenAI";
+import useTextToObjectParser from "./hooks/useTextToObjectParser";
+import changeObjectToTextParser from "./hooks/useObjectToTextParser";
+import useOpenAI from "./hooks/useOpenAI";
 
-import Button from "../../modularcomponents/Buttons";
+import Button from "../modularcomponents/Buttons";
 
 const StyledTextArea = styled.textarea`
     width: 100%;

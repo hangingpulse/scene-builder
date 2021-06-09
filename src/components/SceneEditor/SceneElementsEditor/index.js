@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { SceneEditorContext } from "../../../context/SceneEditorContext";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContext";
 import CharacterEdit from "./CharacterEdit";
 import CharacterSlot from "./CharacterSlot";
 import { TextArea } from "../../modularcomponents/Inputs";

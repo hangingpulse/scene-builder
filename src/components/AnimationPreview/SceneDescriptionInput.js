@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import { PreviewContext } from "../../../context/PreviewContext";
-import Button from "../../modularcomponents/Buttons";
-import { TextArea } from "../../modularcomponents/Inputs";
+import React, { useContext } from "react";
+import { PreviewContext } from "../../context/PreviewContext";
+import Button from "../modularcomponents/Buttons";
+import { TextArea } from "../modularcomponents/Inputs";
 import {
     CreatorContainer,
     SceneDescriptionInputContainer,

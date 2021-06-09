@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { SceneContext } from "../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContext";
 import uuid from "react-uuid";
 
 function useTextParser() {

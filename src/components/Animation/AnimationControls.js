@@ -1,6 +1,6 @@
 import React from "react";
 import { FaPlay, FaPause, FaStepForward, FaStepBackward } from "react-icons/fa";
-import Button from "../../modularcomponents/Buttons";
+import Button from "../modularcomponents/Buttons";
 import { AnimationControlsContainer } from "./Animation.style";
 
 function AnimationControls({

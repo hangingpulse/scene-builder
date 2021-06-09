@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { SceneContextProvider } from "./context/SceneContextProvider";
-import { AnimationContextProvider } from "./context/AnimationContext";
+import { SceneContextProvider } from "./context/SceneContext";
 import { SceneEditorContextProvider } from "./context/SceneEditorContext";
-import {
-    PreviewContextProvider,
-    PreviewContext,
-} from "./context/PreviewContext";
+import { PreviewContextProvider } from "./context/PreviewContext";
 
 import App from "./App";
 
@@ -16,11 +12,9 @@ ReactDOM.render(
         <BrowserRouter>
             <SceneContextProvider>
                 <SceneEditorContextProvider>
-                    <AnimationContextProvider>
-                        <PreviewContextProvider>
-                            <App />
-                        </PreviewContextProvider>
-                    </AnimationContextProvider>
+                    <PreviewContextProvider>
+                        <App />
+                    </PreviewContextProvider>
                 </SceneEditorContextProvider>
             </SceneContextProvider>
         </BrowserRouter>

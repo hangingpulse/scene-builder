@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import axios from "axios";
-import { SceneContext } from "./SceneContextProvider";
-import useSaveScene from "../hooks/useSaveScene";
+import { SceneContext } from "./SceneContext";
+import useSendScene from "../components/AnimationPreview/hooks/useSendScene";
 
 const PreviewContext = createContext();
 
@@ -9,7 +8,7 @@ function PreviewContextProvider({ children }) {
     const { sceneState, dispatch } = useContext(SceneContext);
 
     // custom Hook that saves the scene to the backend, gets back the sceneid for the link
-    const [sceneId, sendScene, sceneShared] = useSaveScene();
+    const [sceneId, sendScene, sceneShared] = useSendScene();
     const [previewState, setPreviewState] = useState({ ...sceneState });
 
     // opens and closes the preview modal
