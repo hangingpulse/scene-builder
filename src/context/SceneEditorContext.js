@@ -45,15 +45,6 @@ function SceneEditorContextProvider({ children }) {
         dispatch({ type: "EDIT SCENEITEM", payload: { index, sceneItem } });
     };
 
-    // Split an item into two items
-    const splitItem = () => {};
-
-    // Merge two items into one
-    const mergeItems = () => {};
-
-    // shift an item to a different place. This would be best with DragnDrop. But maybe do it with clicking first.
-    const shiftItem = () => {};
-
     return (
         <SceneEditorContext.Provider
             value={{

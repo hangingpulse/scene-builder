@@ -33,6 +33,9 @@ function SceneItemEdit({
             case "LENGTH":
                 setSceneItemState({ ...sceneItemState, length: value });
                 break;
+            case "DISPLAY":
+                setSceneItemState({ ...sceneItemState, display: value });
+                break;
             case "CHARACTER":
                 value
                     ? setSceneItemState({
@@ -49,6 +52,10 @@ function SceneItemEdit({
             default:
                 return;
         }
+    };
+
+    const setLength = (value) => {
+        changeSceneItem("LENGTH", value);
     };
 
     const closeEdit = () => {
@@ -80,11 +87,17 @@ function SceneItemEdit({
             <div className="EditButtons">
                 <NumberInput
                     value={sceneItemState.length}
-                    onChange={(e) => changeSceneItem("LENGTH", e.target.value)}
+                    setValue={setLength}
+                    range={{ top: 9.9, bottom: 0 }}
                 >
                     Length
                 </NumberInput>
-                <Toggle width="12rem" onClick={hideItem}>
+                <Toggle
+                    width="12rem"
+                    onClick={() =>
+                        changeSceneItem("DISPLAY", !sceneItem.display)
+                    }
+                >
                     Show Item
                 </Toggle>
                 <DeleteButton

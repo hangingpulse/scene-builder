@@ -8,11 +8,12 @@ function useFetchAllScenes() {
 
     useEffect(() => {
         axios.get(`${url}scenes`).then((res) => {
-            console.log(res.data);
             setAllScenes(res.data.data);
+            console.log(res.data.data);
         });
     }, [url]);
 
+    console.log(allScenes);
     return allScenes;
 }
 

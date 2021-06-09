@@ -20,7 +20,6 @@ const HeaderContainer = styled.div`
 `;
 
 const NavBar = styled.div`
-    width: 20%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,6 +30,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     font-family: ${({ theme }) => theme.fonts.serif};
     font-size: ${({ theme }) => theme.fonts.fontSizes.header2Small};
+    margin: 0 0.8rem;
 
     &:visited {
         color: ${({ theme }) => theme.colors.primaryLight};

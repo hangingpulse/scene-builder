@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaCaretUp, FaCaretDown } from "react-icons/fa";
 import {
     InputContainer,
     TextAreaContainer,
     NumberInputContainer,
     NumberInputLabel,
     NumberInputValue,
+    NumberInputButtons,
+    ButtonDown,
+    ButtonUp,
 } from "./Input.style";
 
 function Input({ value, onChange }) {
@@ -19,11 +23,12 @@ function TextArea({ value, onChange, height }) {
 
 function NumberInput({
     value,
-    onChange,
+    setValue,
     children,
     animate,
     initial,
     transition,
+    range,
 }) {
     return (
         <NumberInputContainer
@@ -32,8 +37,30 @@ function NumberInput({
             transition={transition}
         >
             <NumberInputLabel>{children}</NumberInputLabel>
-            <NumberInputValue>{value}</NumberInputValue>
+            <NumberInputValue>{Math.round(value * 10) / 10}</NumberInputValue>
             <NumberInputLabel>s</NumberInputLabel>
+            <NumberInputButtons>
+                <ButtonUp>
+                    <FaCaretUp
+                        className="Icon"
+                        onClick={() =>
+                            value < range.top
+                                ? setValue(value + 0.1)
+                                : range.top
+                        }
+                    />
+                </ButtonUp>
+                <ButtonDown>
+                    <FaCaretDown
+                        className="Icon"
+                        onClick={() =>
+                            value > range.bottom
+                                ? setValue(value - 0.1)
+                                : range.bottom
+                        }
+                    />
+                </ButtonDown>
+            </NumberInputButtons>
         </NumberInputContainer>
     );
 }

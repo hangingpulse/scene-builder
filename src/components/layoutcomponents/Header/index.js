@@ -4,7 +4,7 @@ import { Title, HeaderContainer, NavBar, StyledLink } from "./Header.style";
 function Header() {
     return (
         <HeaderContainer>
-            <Title>SCEENIES - Tiny Scenes</Title>
+            <Title>SCEENIES</Title>
             <NavBar>
                 <StyledLink to="/">EXPLORE</StyledLink>
                 <StyledLink to="/create">CREATE</StyledLink>

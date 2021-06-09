@@ -12,7 +12,7 @@ function PreviewContextProvider({ children }) {
     const [previewState, setPreviewState] = useState({ ...sceneState });
 
     // opens and closes the preview modal
-    const [preview, togglePreview] = useState(true);
+    const [preview, togglePreview] = useState(false);
 
     // gets the sceneId as a response from sending it to the backend
 
