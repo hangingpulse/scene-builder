@@ -1,15 +1,16 @@
 import { useContext } from "react";
-import { SceneContext } from "../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContext";
 import uuid from "react-uuid";
 
 function useTextParser() {
-    const { sceneState, dispatch } = useContext(SceneContext);
+    const { dispatch, sceneState } = useContext(SceneContext);
 
     const createActiontextObject = (actiontext) => {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
             id: uuid(),
             type: "ACTIONTEXT",
+            character: null,
             text: actiontextLine,
             length: 2 + actiontextLine.length * 0.05,
             delay: 0,
@@ -18,54 +19,54 @@ function useTextParser() {
         return actiontextObjects;
     };
 
-    const createCharacterObject = (charactername, characterId) => {
+    const createCharacterObject = (charactername, position) => {
         return {
             name: charactername,
-            id: characterId,
-            position: characterId - 1,
-            colorIndex: characterId,
-            imageIndex: characterId,
+            id: uuid(),
+            position,
+            colorIndex: 0,
+            imageIndex: 0,
         };
     };
 
-    const createDialogueObject = (dialogueLines, characterId) => {
+    const createSceneItemObject = (sceneItemLines, characterId) => {
         // get the current Character ID by checking the position in the currentCharacter Array
         // This should work because that's also how the character objects are created
 
-        const dialogueObjects = dialogueLines.map((dialogueLine, index) => {
-            // Check if Dialogue Line is a parenthetical
-            if (/\(.*\)/.test(dialogueLine)) {
+        const sceneItemObjects = sceneItemLines.map((sceneItemLine, index) => {
+            // Check if SceneItem Line is a parenthetical
+            if (/\(.*\)/.test(sceneItemLine)) {
                 return {
                     id: uuid(),
                     type: "PARENTHETICAL",
-                    text: dialogueLine,
+                    text: sceneItemLine,
                     character: characterId,
-                    length: 2 + dialogueLine.length * 0.05,
+                    length: 2 + sceneItemLine.length * 0.05,
                     delay: 0,
                     display: false,
                 };
             }
-            // Check if dialogue line is dialogue
-            if (/.*/.test(dialogueLine)) {
+            // Check if sceneItem line is sceneItem
+            if (/.*/.test(sceneItemLine)) {
                 return {
                     id: uuid(),
                     type: "DIALOGUE",
-                    text: dialogueLine,
+                    text: sceneItemLine,
                     character: characterId,
                     length:
-                        Math.round((2 + dialogueLine.length * 0.05) * 10) / 10,
+                        Math.round((2 + sceneItemLine.length * 0.05) * 10) / 10,
                     delay: 0,
                     display: true,
                 };
             }
             return "";
         });
-        return dialogueObjects;
+        return sceneItemObjects;
     };
 
     const findSceneObjects = (text) => {
         const sceneObjects = [];
-        const characterObjects = [];
+        const characterObjects = [...sceneState.characters];
         let headerObject = "";
         const sceneArray = text.split(/\n\n/);
 
@@ -76,22 +77,23 @@ function useTextParser() {
                 if (/^[^a-z]+$/.test(sceneObject) && headerObject === "") {
                     headerObject = sceneObject;
 
-                    // test if it is a dialogue object: starts with only capital letters, then a line break, than the dialogue.
+                    // test if it is a sceneItem object: starts with only capital letters, then a line break, than the sceneItem.
                 } else if (/^([^a-z\n]+)\n.*/.test(sceneObject)) {
-                    const dialogueObjectArray = sceneObject.split(/\n/);
+                    const sceneItemObjectArray = sceneObject.split(/\n/);
 
-                    // take the character name out of the dialogue array
-                    const characterName = dialogueObjectArray.shift();
-
+                    // take the character name out of the sceneItem array
+                    const characterName = sceneItemObjectArray.shift();
+                    console.log(characterObjects);
                     // check if there is already a character with this name. If no, create a new character object
                     if (
                         !characterObjects
                             .map((character) => character.name)
-                            .includes(characterName)
+                            .includes(characterName) &&
+                        characterObjects.length < 4
                     ) {
                         const newCharacterObject = createCharacterObject(
                             characterName,
-                            characterObjects.length + 1
+                            characterObjects.length
                         );
                         characterObjects.push(newCharacterObject);
                     }
@@ -99,11 +101,12 @@ function useTextParser() {
                     const { id } = characterObjects.find(
                         (character) => character.name === characterName
                     );
-                    const newDialogueObject = createDialogueObject(
-                        dialogueObjectArray,
+                    const newSceneItemObject = createSceneItemObject(
+                        sceneItemObjectArray,
                         id
                     );
-                    sceneObjects.push(...newDialogueObject);
+                    console.log(newSceneItemObject);
+                    sceneObjects.push(...newSceneItemObject);
                 } else if (/.*/.test(sceneObject)) {
                     const newActiontextObject =
                         createActiontextObject(sceneObject);
@@ -117,17 +120,17 @@ function useTextParser() {
         return [characterObjects, sceneObjects, headerObject];
     };
 
-    // This sends all the characters, the dialogue objects and the header info to the global scene object
+    // This sends all the characters, the sceneItem objects and the header info to the global scene object
     const saveScene = (text) => {
         const [characterObjects, sceneObjects, headerObject] =
             findSceneObjects(text);
-        console.log(characterObjects);
         dispatch({
             type: "EDIT SCENE",
             payload: {
                 header: headerObject,
                 characters: characterObjects,
-                dialogue: sceneObjects,
+                sceneItems: sceneObjects,
+                rawtext: text,
             },
         });
     };
@@ -141,13 +144,13 @@ export default useTextParser;
 PURPOSE: Parses the text string into a scene object (and vice versa?)
 
 Structure:
-1. Search for all dialogue objects with Regex.
+1. Search for all sceneItem objects with Regex.
 2. get all character names.
 3. if name doesn't exist, create character with random color and random image, save character in scene object
-4. Create Speechbubble Objects for every dialogue objects (one or more speechbubbles), linked to the characterid
-4a if new line between dialogue lines, add a new speechbubble for the same character.
+4. Create Speechbubble Objects for every sceneItem objects (one or more speechbubbles), linked to the characterid
+4a if new line between sceneItem lines, add a new speechbubble for the same character.
 4b. calculate length for every speechbubble object (3s base + length dependent)
-5.Add dialogue objects into the scene object.
+5.Add sceneItem objects into the scene object.
 
 
 

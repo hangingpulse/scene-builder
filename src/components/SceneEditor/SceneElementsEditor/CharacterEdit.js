@@ -12,7 +12,6 @@ import { characterColors, characterImages } from "../../../data/characterdata";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 function CharacterEdit({ currentCharacter, setCharacters, characters }) {
-    console.log(currentCharacter, characters);
     const characterIndex = characters.findIndex(
         (character) => character.id === currentCharacter.id
     );

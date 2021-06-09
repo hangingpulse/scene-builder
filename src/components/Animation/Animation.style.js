@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+const AnimationAndControls = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 const AnimationContainer = styled.div`
     width: 100%;
     display: grid;
@@ -38,9 +43,22 @@ const SceneContentAnimation = styled.div`
     grid-row: 1 / 5;
 `;
 
+const AnimationControlsContainer = styled.div`
+    width: 100%;
+    display: flex;
+    border: 1px black solid;
+    justify-content: center;
+
+    font-size: ${(props) => props.theme.fonts.fontSizes.base};
+
+    padding: 1.2em;
+`;
+
 export {
     AnimationContainer,
     CharacterContainerAnimation,
     SceneContentAnimation,
     AnimationHeader,
+    AnimationControlsContainer,
+    AnimationAndControls,
 };

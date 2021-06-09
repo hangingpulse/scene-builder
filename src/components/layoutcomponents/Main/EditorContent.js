@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import TextEditor from "../../editorcomponents/TextEditor";
+import TextEditor from "../../TextEditor";
 import SceneEditor from "../../SceneEditor";
-import AnimationContent from "./AnimationContent";
+import AnimationEditor from "../../AnimationEditor";
 import TabBar from "../../modularcomponents/TabBar";
 import { EditorContentContainer, EditorContainer } from "./Main.style";
 
@@ -15,7 +15,7 @@ function EditorContent({ smallScreen }) {
             case "Edit":
                 return <SceneEditor />;
             case "View":
-                return <AnimationContent />;
+                return <AnimationEditor />;
             default:
                 return;
         }

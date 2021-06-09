@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "../../components/modularcomponents/Modal";
+import Modal from "../modularcomponents/Modal";
 import SceneItemEditor from "./SceneItemEditor";
 import SceneElementsDisplay from "./SceneElementsDisplay";
 import SceneElementsEditor from "./SceneElementsEditor";

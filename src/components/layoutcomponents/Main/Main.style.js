@@ -28,16 +28,4 @@ const EditorContainer = styled.div`
     border-top: 3px solid ${({ theme }) => theme.colors.highlight};
 `;
 
-// only the editor content without the tabbar
-const AnimationContentContainer = styled.div`
-    width: 100%;
-    border: 1px solid black;
-`;
-
-export {
-    Container,
-    MainContainer,
-    EditorContentContainer,
-    EditorContainer,
-    AnimationContentContainer,
-};
+export { Container, MainContainer, EditorContentContainer, EditorContainer };

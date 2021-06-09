@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SceneContext } from "../../../context/SceneContextProvider";
+import { SceneContext } from "../../../context/SceneContext";
 import { EditButton } from "../../modularcomponents/Buttons";
 import { HeaderDisplayContainer } from "./SceneElementsDisplay.style";
 

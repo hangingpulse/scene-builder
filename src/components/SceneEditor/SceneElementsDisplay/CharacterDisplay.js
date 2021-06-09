@@ -11,11 +11,14 @@ function CharacterDisplay() {
 
     return (
         <CharacterDisplayContainer characters={editorState.characters.length}>
-            {editorState.characters.map((character, index) => (
-                <CharacterWrapperDisplay key={index}>
-                    <Character character={character} />
-                </CharacterWrapperDisplay>
-            ))}
+            {editorState.characters.map(
+                (character, index) =>
+                    index < 4 && (
+                        <CharacterWrapperDisplay key={index}>
+                            <Character character={character} />
+                        </CharacterWrapperDisplay>
+                    )
+            )}
         </CharacterDisplayContainer>
     );
 }

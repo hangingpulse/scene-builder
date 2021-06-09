@@ -28,54 +28,54 @@ function SceneItemEditor() {
     };
 
     // Renders the whole list of sceneitems and attaches a delay item to everyone of them
-    const renderDialogue = () => {
-        const sceneArray = editorState.dialogue.map((dialogue, index) => {
-            if (dialogue.type === "ACTIONTEXT") {
+    const renderSceneItem = () => {
+        const sceneArray = editorState.sceneItems.map((sceneItem, index) => {
+            if (sceneItem.type === "ACTIONTEXT") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
                             editorIndex={index}
-                            sceneItemAfter={dialogue}
+                            sceneItemAfter={sceneItem}
                         />
                         <SceneItem
                             key={index}
                             editorIndex={index}
-                            sceneItem={dialogue}
-                            character={findCharacter(dialogue.character)}
+                            sceneItem={sceneItem}
+                            character={findCharacter(sceneItem.character)}
                             characterCount={editorState.characters.length}
                         />
                     </SceneAndDelayItemWrapper>
                 );
             }
-            if (dialogue.type === "PARENTHETICAL") {
+            if (sceneItem.type === "PARENTHETICAL") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
                             editorIndex={index}
-                            sceneItemAfter={dialogue}
+                            sceneItemAfter={sceneItem}
                         />
                         <SceneItem
                             key={index}
                             editorIndex={index}
-                            sceneItem={dialogue}
-                            character={findCharacter(dialogue.character)}
+                            sceneItem={sceneItem}
+                            character={findCharacter(sceneItem.character)}
                             characterCount={editorState.characters.length}
                         />
                     </SceneAndDelayItemWrapper>
                 );
             }
-            if (dialogue.type === "DIALOGUE") {
+            if (sceneItem.type === "DIALOGUE") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
                             editorIndex={index}
-                            sceneItemAfter={dialogue}
+                            sceneItemAfter={sceneItem}
                         />
                         <SceneItem
                             key={index}
                             editorIndex={index}
-                            sceneItem={dialogue}
-                            character={findCharacter(dialogue.character)}
+                            sceneItem={sceneItem}
+                            character={findCharacter(sceneItem.character)}
                             characterCount={editorState.characters.length}
                         />
                     </SceneAndDelayItemWrapper>
@@ -92,7 +92,7 @@ function SceneItemEditor() {
         return sceneArray;
     };
     return (
-        <SceneItemEditorContainer>{renderDialogue()}</SceneItemEditorContainer>
+        <SceneItemEditorContainer>{renderSceneItem()}</SceneItemEditorContainer>
     );
 }
 

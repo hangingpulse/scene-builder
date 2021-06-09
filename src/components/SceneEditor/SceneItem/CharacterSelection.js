@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { SceneEditorContext } from "../../../context/SceneEditorContext";
-import { characterColors } from "../../../data/characterdata";
 import { CharacterSelectionContainer, CharacterItem } from "./SceneItem.style";
 
 function CharacterSelection({ selectedCharacter, changeSceneItem }) {

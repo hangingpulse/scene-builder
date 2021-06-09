@@ -17,7 +17,7 @@ const dummyScene = {
             imageIndex: 2,
         },
     ],
-    dialogue: [
+    sceneItems: [
         {
             character: 1,
             text: "Hey there, how's it going!",
