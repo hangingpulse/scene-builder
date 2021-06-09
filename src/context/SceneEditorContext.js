@@ -32,7 +32,7 @@ function SceneEditorContextProvider({ children }) {
                     character: null,
                     type: "ACTIONTEXT",
                     text: "New Text",
-                    duration: 2,
+                    length: 20,
                     delay: 0,
                     display: true,
                 },

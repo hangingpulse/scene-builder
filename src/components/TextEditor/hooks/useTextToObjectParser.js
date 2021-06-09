@@ -12,7 +12,7 @@ function useTextParser() {
             type: "ACTIONTEXT",
             character: null,
             text: actiontextLine,
-            length: Math.round((2 + actiontextLine.length * 0.05) * 10) / 10,
+            length: Math.round((2 + actiontextLine.length * 0.05) * 10),
             delay: 0,
             display: true,
         }));
@@ -41,8 +41,7 @@ function useTextParser() {
                     type: "PARENTHETICAL",
                     text: sceneItemLine,
                     character: characterId,
-                    length:
-                        Math.round((2 + sceneItemLine.length * 0.05) * 10) / 10,
+                    length: Math.round((2 + sceneItemLine.length * 0.05) * 10),
                     delay: 0,
                     display: false,
                 };
@@ -54,8 +53,7 @@ function useTextParser() {
                     type: "DIALOGUE",
                     text: sceneItemLine,
                     character: characterId,
-                    length:
-                        Math.round((2 + sceneItemLine.length * 0.05) * 10) / 10,
+                    length: Math.round((2 + sceneItemLine.length * 0.05) * 10),
                     delay: 0,
                     display: true,
                 };

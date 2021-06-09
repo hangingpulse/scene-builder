@@ -6,13 +6,16 @@ import AnimationPlayingWrapper from "../AnimationPlayingWrapper";
 import AnimationPauseWrapper from "../AnimationPauseWrapper";
 
 function useSceneAnimation(sceneObject) {
-    console.log(sceneObject);
     // Stores our current animation state to keep it separated from the scene state
     const [animationObject, setAnimationObject] = useState(sceneObject);
     // stores the list of items that will be animated (for example for pausing and playing)
     const [currentAnimationList, setCurrentAnimationList] = useState([
         ...animationObject.sceneItems,
     ]);
+    const filteredAnimationList = currentAnimationList.filter(
+        (animationItem) => animationItem.display
+    );
+    console.log(filteredAnimationList, currentAnimationList);
 
     const [animationState, changeAnimationState] = useAnimationState();
     const { animationIndex, animationPlaying } = animationState;
@@ -103,20 +106,21 @@ function useSceneAnimation(sceneObject) {
     };
 
     const renderAnimationItems = () => {
-        if (animationIndex > animationObject.sceneItems.length - 1) {
+        if (animationIndex > filteredAnimationList.length - 1) {
             endAnimation();
         }
 
         if (animationPlaying) {
             let totalDelay = 0;
 
-            const sceneItemList = currentAnimationList.map(
+            const sceneItemList = filteredAnimationList.map(
                 (sceneItem, index) => {
                     const currentCharacter = sceneObject.characters.find(
                         (character) => character.id === sceneItem.character
                     );
-                    const duration = sceneItem.length;
-                    totalDelay += sceneItem.delay + duration;
+                    const duration = sceneItem.length / 10;
+                    //  dividing the delay and length by ten to not get rounding errors
+                    totalDelay += sceneItem.delay / 10 + duration;
 
                     return (
                         <AnimationPlayingWrapper
@@ -147,11 +151,11 @@ function useSceneAnimation(sceneObject) {
     };
 
     const renderCurrentItem = () => {
-        if (animationObject.sceneItems.length) {
+        if (filteredAnimationList.length) {
             const currentCharacter = animationObject.characters.find(
                 (character) =>
                     character.id ===
-                    animationObject.sceneItems[animationIndex].character
+                    filteredAnimationList[animationIndex].character
             );
             return (
                 <AnimationPauseWrapper
@@ -160,7 +164,7 @@ function useSceneAnimation(sceneObject) {
                     }
                 >
                     <SceneComponent
-                        sceneItem={animationObject.sceneItems[animationIndex]}
+                        sceneItem={filteredAnimationList[animationIndex]}
                         character={currentCharacter}
                         animation
                     />
@@ -177,6 +181,7 @@ function useSceneAnimation(sceneObject) {
         renderCurrentItem,
         animationState,
         animationObject,
+        filteredAnimationList,
     ];
 }
 

@@ -65,6 +65,7 @@ function useSceneContext(newScene) {
                     sceneItems: [...sceneItemsWithoutDeletedItem],
                 };
             case "ADD SCENEITEM":
+                console.log(action.payload.sceneItem);
                 const sceneItemsWithNewItem = [...sceneState.sceneItems];
                 sceneItemsWithNewItem.splice(
                     action.payload.index,

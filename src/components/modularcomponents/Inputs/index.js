@@ -37,16 +37,16 @@ function NumberInput({
             transition={transition}
         >
             <NumberInputLabel>{children}</NumberInputLabel>
-            <NumberInputValue>{Math.round(value * 10) / 10}</NumberInputValue>
+            <NumberInputValue>{value / 10}</NumberInputValue>
             <NumberInputLabel>s</NumberInputLabel>
             <NumberInputButtons>
                 <ButtonUp>
                     <FaCaretUp
                         className="Icon"
                         onClick={() =>
-                            value < range.top
-                                ? setValue(value + 0.1)
-                                : range.top
+                            value < range.top * 10
+                                ? setValue(value + 1)
+                                : range.top * 10
                         }
                     />
                 </ButtonUp>
@@ -54,9 +54,9 @@ function NumberInput({
                     <FaCaretDown
                         className="Icon"
                         onClick={() =>
-                            value > range.bottom
-                                ? setValue(value - 0.1)
-                                : range.bottom
+                            value > range.bottom * 10
+                                ? setValue(value - 1)
+                                : range.bottom * 10
                         }
                     />
                 </ButtonDown>

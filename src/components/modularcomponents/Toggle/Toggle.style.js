@@ -15,8 +15,7 @@ const ToggleContainer = styled(motion.div)`
 
 const ToggleSwitchContainer = styled(motion.div)`
     display: flex;
-    justify-content: ${({ toggleOn }) =>
-        toggleOn ? "flex-end" : "flex-start"};
+    justify-content: ${({ value }) => (value ? "flex-end" : "flex-start")};
     align-items: center;
 
     width: 4rem;
@@ -25,8 +24,8 @@ const ToggleSwitchContainer = styled(motion.div)`
     border: 0.2rem solid black;
     border-radius: 0.7rem;
     box-shadow: inset 0 0 0.2rem black;
-    background-color: ${({ toggleOn, theme }) =>
-        toggleOn ? theme.colors.secondary : theme.colors.highlight};
+    background-color: ${({ value, theme }) =>
+        value ? theme.colors.secondary : theme.colors.highlight};
 `;
 
 const ToggleSwitch = styled(motion.div)`

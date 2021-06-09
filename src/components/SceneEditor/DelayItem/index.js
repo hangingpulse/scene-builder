@@ -11,7 +11,6 @@ function DelayItem({ editorIndex, sceneItemAfter, sceneItemBefore }) {
         sceneItemAfter ? Math.round(sceneItemAfter.delay * 10) / 10 : 0
     );
 
-    console.log(sceneItemAfter);
     useEffect(() => {
         if (sceneItemAfter) {
             editSceneItem({ ...sceneItemAfter, delay: delay }, editorIndex);
@@ -54,7 +53,8 @@ function DelayItem({ editorIndex, sceneItemAfter, sceneItemBefore }) {
                         </NumberInput>
                     ) : (
                         <div className="PauseInfo">
-                            {sceneItemAfter ? sceneItemAfter.delay : 0}s Pause
+                            {sceneItemAfter ? sceneItemAfter.delay / 10 : 0}s
+                            Pause
                         </div>
                     )}
                 </EditPause>

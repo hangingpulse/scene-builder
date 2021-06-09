@@ -24,6 +24,7 @@ function SceneItemEdit({
     const currentCharacter = editorState.characters.find(
         (character) => character.id === sceneItemState.character
     );
+    console.log(sceneItemState);
 
     const changeSceneItem = (type, value) => {
         switch (type) {
@@ -95,8 +96,9 @@ function SceneItemEdit({
                 <Toggle
                     width="12rem"
                     onClick={() =>
-                        changeSceneItem("DISPLAY", !sceneItem.display)
+                        changeSceneItem("DISPLAY", !sceneItemState.display)
                     }
+                    value={sceneItemState.display}
                 >
                     Show Item
                 </Toggle>
