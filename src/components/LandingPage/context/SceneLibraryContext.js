@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 import useFetchAllScenes from "../hooks/useFetchAllScenes";
-import useFetchScene from "../../AnimationFinal/hooks/useFetchScene";
 import { useEffect } from "react/cjs/react.development";
 
 const SceneLibraryContext = createContext();

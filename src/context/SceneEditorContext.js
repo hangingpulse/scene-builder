@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { SceneContext } from "./SceneContext";
 import uuid from "react-uuid";
-import { characterImages, characterColors } from "../data/characterdata";
 
 const SceneEditorContext = createContext();
 

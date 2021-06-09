@@ -6,7 +6,6 @@ import SceneListItem from "./SceneListItem";
 
 function SceneList() {
     const { allScenes } = useContext(SceneLibraryContext);
-    console.log(allScenes);
     const reversedAllScenes = allScenes && allScenes.reverse();
     return (
         <SceneListContainer>

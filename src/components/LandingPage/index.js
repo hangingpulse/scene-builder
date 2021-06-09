@@ -1,5 +1,4 @@
 import React from "react";
-import useFetchAllScenes from "./hooks/useFetchAllScenes";
 import { SceneLibraryContextProvider } from "./context/SceneLibraryContext";
 import SceneLibrary from "./SceneLibrary";
 import SceneList from "./SceneList";

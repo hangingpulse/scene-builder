@@ -64,10 +64,6 @@ function SceneItemEdit({
         editSceneItem(sceneItemState, editorIndex);
     };
 
-    const hideItem = () => {
-        setSceneItemState({ ...sceneItemState, display: false });
-    };
-
     return (
         <SceneItemEditContainer
             sceneItem={sceneItemState}

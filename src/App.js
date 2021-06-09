@@ -5,7 +5,6 @@ import Header from "./components/layoutcomponents/Header";
 import Main from "./components/layoutcomponents/Main";
 import Footer from "./components/layoutcomponents/Footer";
 import AnimationPreview from "./components/AnimationPreview";
-import SceneLibrary from "./components/LandingPage/SceneLibrary";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { PreviewContext } from "./context/PreviewContext";

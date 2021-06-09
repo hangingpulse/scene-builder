@@ -15,7 +15,6 @@ function useSceneAnimation(sceneObject) {
     const filteredAnimationList = currentAnimationList.filter(
         (animationItem) => animationItem.display
     );
-    console.log(filteredAnimationList, currentAnimationList);
 
     const [animationState, changeAnimationState] = useAnimationState();
     const { animationIndex, animationPlaying } = animationState;

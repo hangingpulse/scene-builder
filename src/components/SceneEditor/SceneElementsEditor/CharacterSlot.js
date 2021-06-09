@@ -1,12 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import uuid from "react-uuid";
 import { characterColors, characterImages } from "../../../data/characterdata";
 import { AddButton } from "../../modularcomponents/Buttons";
-import {
-    SceneEditorContext,
-    SceneEditorContextProvider,
-} from "../../../context/SceneEditorContext";
 
 const CharacterSlotContainer = styled.div`
     width: 100%;
