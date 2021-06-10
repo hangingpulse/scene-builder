@@ -8,6 +8,7 @@ import {
     SceneContentAnimation,
     AnimationHeader,
     AnimationAndControls,
+    AnimationContentContainer,
 } from "./Animation.style";
 
 function Animation({ sceneObject, animationstate }) {
@@ -21,33 +22,34 @@ function Animation({ sceneObject, animationstate }) {
         animationState,
         animationObject,
     ] = useSceneAnimation(sceneObject, animationstate);
-    console.log(sceneObject);
 
     const { animationPlaying } = animationState;
     return (
         <AnimationAndControls>
             <AnimationContainer className="AnimationContainer">
                 <AnimationHeader>{animationObject.header}</AnimationHeader>
-                {animationObject.characters.map((character, index) => (
-                    <CharacterContainerAnimation
-                        key={index}
-                        position={`char${character.position}`}
-                    >
-                        <Character character={character} />
-                    </CharacterContainerAnimation>
-                ))}
-                <SceneContentAnimation>
-                    {animationPlaying
-                        ? renderAnimationItems()
-                        : renderCurrentItem()}
-                </SceneContentAnimation>
+                <AnimationContentContainer>
+                    {animationObject.characters.map((character, index) => (
+                        <CharacterContainerAnimation
+                            key={index}
+                            position={`char${character.position}`}
+                        >
+                            <Character character={character} />
+                        </CharacterContainerAnimation>
+                    ))}
+                    <SceneContentAnimation>
+                        {animationPlaying
+                            ? renderAnimationItems()
+                            : renderCurrentItem()}
+                    </SceneContentAnimation>
+                </AnimationContentContainer>
+                <AnimationControls
+                    animationState={animationState}
+                    startAnimation={startAnimation}
+                    pauseAnimation={pauseAnimation}
+                    changeAnimationItem={changeAnimationItem}
+                />
             </AnimationContainer>
-            <AnimationControls
-                animationState={animationState}
-                startAnimation={startAnimation}
-                pauseAnimation={pauseAnimation}
-                changeAnimationItem={changeAnimationItem}
-            />
         </AnimationAndControls>
     );
 }

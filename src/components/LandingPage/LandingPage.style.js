@@ -54,6 +54,9 @@ const SceneInformationContainer = styled.div`
 
 const AboutContainer = styled.div`
     border: 1px black solid;
+    border-radius: 1.2em;
+    background-color: ${({ theme }) => theme.colors.primaryLight};
+
     ${({ theme }) => theme.desktopSmall`
             flex-direction: column;
             width: 20%;

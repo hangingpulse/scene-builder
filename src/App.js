@@ -13,9 +13,11 @@ import LandingPage from "./components/LandingPage";
 
 const AppBody = styled.div`
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    background: ${({ theme }) => theme.gradients.background[0]};
+    background: ${({ theme }) => theme.gradients.background[1]};
 `;
 
 function App() {

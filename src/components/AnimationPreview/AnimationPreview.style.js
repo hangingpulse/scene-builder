@@ -15,8 +15,7 @@ const SceneDescriptionInputContainer = styled.div`
     display: grid;
     grid-template-areas:
         "title title creator"
-        "desc desc desc"
-        "button button button";
+        "desc desc desc";
 `;
 
 const TitleContainer = styled.div`
@@ -31,6 +30,7 @@ const CreatorContainer = styled.div`
 const DescriptionContainer = styled.div`
     width: 100%;
     grid-area: desc;
+    display: flex;
 `;
 
 const ButtonContainer = styled.div`

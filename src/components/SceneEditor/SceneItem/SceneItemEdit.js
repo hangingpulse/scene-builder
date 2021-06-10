@@ -24,7 +24,6 @@ function SceneItemEdit({
     const currentCharacter = editorState.characters.find(
         (character) => character.id === sceneItemState.character
     );
-    console.log(sceneItemState);
 
     const changeSceneItem = (type, value) => {
         switch (type) {

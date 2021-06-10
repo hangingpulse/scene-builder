@@ -154,7 +154,6 @@ function useSceneAnimation(sceneObject) {
 
     const renderCurrentItem = () => {
         if (currentAnimationList.length) {
-            console.log(filteredList);
             const currentCharacter = animationObject.characters.find(
                 (character) =>
                     character.id === filteredList[animationIndex].character

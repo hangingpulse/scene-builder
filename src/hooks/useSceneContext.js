@@ -1,51 +1,20 @@
-import { useReducer, useEffect } from "react";
-import uuid from "react-uuid";
+import { useReducer, useEffect, useState } from "react";
+import useLocalStorage from "./useLocalStorage";
+import templateScene from "../data/templateScene";
 
-function useSceneContext(newScene) {
-    const initialState = {
-        title: "Example Scene",
-        meta: {
-            creator: "Me",
-            public: true,
-            description: "",
-            tags: [],
-            rawtext: "",
-        },
-        //  names of itmes must be exactly the same as fields in MngoDB
-        general: {
-            header: "THIS IS A HEADER",
-            background: "",
-        },
-        characters: [
-            {
-                id: uuid(),
-                name: "JOHN DOE",
-                position: 0,
-                colorIndex: 0,
-                imageIndex: 0,
-            },
-        ],
-        sceneItems: [
-            {
-                id: uuid(),
-                itemType: "ACTIONTEXT",
-                text: "Example Text",
-                character: null,
-                position: 0,
-                length: 2,
-                delay: 0,
-                display: true,
-            },
-        ],
-    };
+function useSceneContext() {
+    const [newScene, setNewScene] = useState(true);
+    const { storeScene, getStoredScene, clearLocalStorage } = useLocalStorage();
+
+    const initialState = { ...templateScene };
 
     const reducer = (sceneState, action) => {
         switch (action.type) {
-            case "LOAD SCENE":
+            case "LOAD NEW SCENE":
                 console.log(action.payload);
-                action.payload.characters.filter((character) => character);
+                clearLocalStorage();
                 return {
-                    ...action.payload,
+                    ...templateScene,
                 };
             case "EDIT SCENE":
                 const newState = {
@@ -109,18 +78,16 @@ function useSceneContext(newScene) {
 
     const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
         // get the initialState from the localStorage
-        const localScene = localStorage.getItem("scene");
-        return localScene ? JSON.parse(localScene) : { ...initialState };
+
+        return getStoredScene();
     });
 
     // save the sceneState to local storage whenever it changes
     useEffect(() => {
-        localStorage.setItem("scene", JSON.stringify(sceneState));
-    }, [sceneState]);
+        storeScene(sceneState);
+    }, [sceneState, storeScene]);
 
-    console.log(sceneState);
-
-    return [sceneState, dispatch];
+    return [sceneState, dispatch, newScene, setNewScene];
 }
 
 export default useSceneContext;

@@ -17,7 +17,7 @@ function useSendScene() {
         }
     };
 
-    return [sceneId, sendScene, sceneShared];
+    return [sceneId, sendScene, sceneShared, setSceneShared];
 }
 
 export default useSendScene;

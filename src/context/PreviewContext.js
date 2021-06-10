@@ -1,14 +1,17 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { SceneContext } from "./SceneContext";
 import useSendScene from "../components/AnimationPreview/hooks/useSendScene";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const PreviewContext = createContext();
 
 function PreviewContextProvider({ children }) {
     const { sceneState, dispatch } = useContext(SceneContext);
+    const { clearLocalStorage } = useLocalStorage();
 
+    console.log(sceneState);
     // custom Hook that saves the scene to the backend, gets back the sceneid for the link
-    const [sceneId, sendScene, sceneShared] = useSendScene();
+    const [sceneId, sendScene, sceneShared, setSceneShared] = useSendScene();
     const [previewState, setPreviewState] = useState({ ...sceneState });
 
     // opens and closes the preview modal
@@ -17,8 +20,18 @@ function PreviewContextProvider({ children }) {
     // gets the sceneId as a response from sending it to the backend
 
     useEffect(() => {
+        setPreviewState({ ...sceneState });
+    }, [sceneState]);
+
+    useEffect(() => {
         dispatch({ itemType: "EDIT METADATA", payload: previewState.meta });
     }, [previewState, dispatch]);
+
+    const handleShare = () => {
+        sendScene(previewState);
+        clearLocalStorage();
+        dispatch({ type: "LOAD NEW SCENE" });
+    };
 
     const editMetaData = (type, value) => {
         switch (type) {
@@ -59,6 +72,8 @@ function PreviewContextProvider({ children }) {
                 previewState,
                 sceneId,
                 sceneShared,
+                setSceneShared,
+                handleShare,
             }}
         >
             {children}

@@ -1,22 +1,20 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+const HeaderContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 3rem;
+    background-color: ${({ theme }) => theme.colors.primary};
+    color: white;
+`;
+
 const Title = styled.h1`
     text-align: center;
     font-size: 20px;
     color: ${(props) => props.theme.colors.primaryLight};
     font-family: ${(props) => props.theme.fonts.sansSerif};
-`;
-
-const HeaderContainer = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0.4rem 3rem;
-    background-color: ${({ theme }) => theme.colors.primary};
-    color: white;
-
-    position: fixed;
 `;
 
 const NavBar = styled.div`

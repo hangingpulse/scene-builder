@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { PreviewContext } from "../../context/PreviewContext";
-import Button from "../modularcomponents/Buttons";
+import Toggle from "../modularcomponents/Toggle";
 import { TextArea } from "../modularcomponents/Inputs";
 import {
     CreatorContainer,
@@ -39,21 +39,8 @@ function SceneDescriptionInput() {
                         editMetaData("DESCRIPTION", e.target.value)
                     }
                 />
+                <Toggle>Public</Toggle>
             </DescriptionContainer>
-            <ButtonContainer>
-                {sceneShared ? (
-                    <span>
-                        {sceneId
-                            ? `http://sceenies.herokuapp.com/${sceneId}`
-                            : "Share to get your Sceeny-Link"}
-                    </span>
-                ) : (
-                    <div>
-                        <Button onClick={handleShare}>Share</Button>
-                        <Button>Return to Edit Mode</Button>
-                    </div>
-                )}
-            </ButtonContainer>
         </SceneDescriptionInputContainer>
     );
 }

@@ -4,10 +4,12 @@ import useSceneContext from "../hooks/useSceneContext";
 const SceneContext = createContext();
 
 function SceneContextProvider({ children }) {
-    const [sceneState, dispatch] = useSceneContext();
+    const [sceneState, dispatch, newScene, setNewScene] = useSceneContext();
 
     return (
-        <SceneContext.Provider value={{ sceneState, dispatch }}>
+        <SceneContext.Provider
+            value={{ sceneState, dispatch, newScene, setNewScene }}
+        >
             {children}
         </SceneContext.Provider>
     );

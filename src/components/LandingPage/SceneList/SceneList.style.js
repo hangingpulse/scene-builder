@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 const SceneListContainer = styled.div`
     border: 1px black solid;
+    border-radius: 1.2em;
     display: flex;
     align-items: center;
 
     padding: 0.8em;
 
     overflow-y: scroll;
+
+    background-color: ${({ theme }) => theme.colors.primaryLight};
 
     ${({ theme }) => theme.desktopSmall`
             flex-direction: column;
