@@ -13,7 +13,7 @@ const SceneComponentContainer = styled.div``;
 function SceneComponent({ sceneItem, character, animation, onClick }) {
     // fills the wrapper with the needed scene item
     const getSceneItemComponent = () => {
-        switch (sceneItem.type) {
+        switch (sceneItem.itemType) {
             case "ACTIONTEXT":
                 return (
                     <Actiontext actiontext={sceneItem} animation={animation} />

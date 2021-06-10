@@ -2,7 +2,9 @@ import styled from "styled-components";
 
 const AnimationContentContainer = styled.div`
     width: 100%;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 export { AnimationContentContainer };

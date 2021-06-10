@@ -1,21 +1,13 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetchScene(sceneid) {
-    const [sceneData, setSceneData] = useState({});
-
+function useFetchScene() {
     const url = process.env.REACT_APP_BACKEND_URL;
 
-    useEffect(() => {
-        if (sceneid) {
-            axios.get(`${url}scenes/${sceneid}`).then((res) => {
-                console.log(res.data);
-                setSceneData(res.data.data);
-            });
-        }
-    }, [sceneid, url]);
+    const getSceneData = async (sceneid) => {
+        axios.get(`${url}scenes/${sceneid}`).then((res) => res.data.data);
+    };
 
-    return sceneData;
+    return getSceneData;
 }
 
 export default useFetchScene;

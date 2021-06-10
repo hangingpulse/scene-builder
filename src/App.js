@@ -9,12 +9,15 @@ import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/globalStyles";
 import { PreviewContext } from "./context/PreviewContext";
 import AnimationFinal from "./components/AnimationFinal";
+import LandingPage from "./components/LandingPage";
 
 const AppBody = styled.div`
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    background: ${({ theme }) => theme.gradients.background[0]};
+    background: ${({ theme }) => theme.gradients.background[1]};
 `;
 
 function App() {
@@ -25,12 +28,14 @@ function App() {
             <AppBody>
                 <Header />
                 <Switch>
-                    <Route path="/:sceneid">
+                    <Route path="/scenes/:sceneid">
                         <AnimationFinal />
                     </Route>
+                    <Route path="/create">
+                        {preview ? <AnimationPreview /> : <Main />}
+                    </Route>
                     <Route path="/">
-                        <Main />
-                        {preview && <AnimationPreview />}
+                        <LandingPage />
                     </Route>
                 </Switch>
                 <Footer />

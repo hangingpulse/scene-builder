@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     ToggleContainer,
     ToggleSwitch,
@@ -6,16 +6,12 @@ import {
     ToggleSwitchContainer,
 } from "./Toggle.style";
 
-function Toggle({ children, onClick, width }) {
-    const [toggleOn, setToggleOn] = useState(true);
-
+function Toggle({ children, onClick, width, value }) {
     return (
         <ToggleContainer width={width}>
             {children ? <ToggleLabel>{children}</ToggleLabel> : null}
-            <ToggleSwitchContainer onClick={onClick} toggleOn={toggleOn}>
-                <ToggleSwitch
-                    onClick={() => setToggleOn((prevState) => !prevState)}
-                />
+            <ToggleSwitchContainer onClick={onClick} value={value}>
+                <ToggleSwitch />
             </ToggleSwitchContainer>
         </ToggleContainer>
     );

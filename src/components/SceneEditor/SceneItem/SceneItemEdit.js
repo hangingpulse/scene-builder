@@ -33,17 +33,20 @@ function SceneItemEdit({
             case "LENGTH":
                 setSceneItemState({ ...sceneItemState, length: value });
                 break;
+            case "DISPLAY":
+                setSceneItemState({ ...sceneItemState, display: value });
+                break;
             case "CHARACTER":
                 value
                     ? setSceneItemState({
                           ...sceneItemState,
                           character: value,
-                          type: "DIALOGUE",
+                          itemType: "DIALOGUE",
                       })
                     : setSceneItemState({
                           ...sceneItemState,
                           character: value,
-                          type: "ACTIONTEXT",
+                          itemType: "ACTIONTEXT",
                       });
                 break;
             default:
@@ -51,13 +54,13 @@ function SceneItemEdit({
         }
     };
 
+    const setLength = (value) => {
+        changeSceneItem("LENGTH", value);
+    };
+
     const closeEdit = () => {
         toggleEditSceneItem(false);
         editSceneItem(sceneItemState, editorIndex);
-    };
-
-    const hideItem = () => {
-        setSceneItemState({ ...sceneItemState, display: false });
     };
 
     return (
@@ -80,11 +83,18 @@ function SceneItemEdit({
             <div className="EditButtons">
                 <NumberInput
                     value={sceneItemState.length}
-                    onChange={(e) => changeSceneItem("LENGTH", e.target.value)}
+                    setValue={setLength}
+                    range={{ top: 9.9, bottom: 0 }}
                 >
                     Length
                 </NumberInput>
-                <Toggle width="12rem" onClick={hideItem}>
+                <Toggle
+                    width="12rem"
+                    onClick={() =>
+                        changeSceneItem("DISPLAY", !sceneItemState.display)
+                    }
+                    value={sceneItemState.display}
+                >
                     Show Item
                 </Toggle>
                 <DeleteButton

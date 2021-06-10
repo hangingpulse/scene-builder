@@ -7,7 +7,8 @@ const SceneItemBase = styled(motion.div)`
     border: 4px solid
         ${({ character }) =>
             character ? characterColors[character.colorIndex] : "black"};
-    background-color: ${(props) => props.theme.colors.primaryLight};
+    background-color: ${({ character }) =>
+        character ? characterColors[character.colorIndex] : "black"};
     font-size: ${(props) => props.theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
     border-radius: ${({ character }) => (character ? "0.5em" : "0rem")};

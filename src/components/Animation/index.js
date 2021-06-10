@@ -8,9 +8,10 @@ import {
     SceneContentAnimation,
     AnimationHeader,
     AnimationAndControls,
+    AnimationContentContainer,
 } from "./Animation.style";
 
-function Animation({ sceneObject }) {
+function Animation({ sceneObject, animationstate }) {
     // This returns the SceneItem that is currently animated if you pause the animation
     const [
         startAnimation,
@@ -20,34 +21,35 @@ function Animation({ sceneObject }) {
         renderCurrentItem,
         animationState,
         animationObject,
-    ] = useSceneAnimation(sceneObject);
+    ] = useSceneAnimation(sceneObject, animationstate);
 
-    const { animationPlaying, animationIndex } = animationState;
-    console.log(animationPlaying);
+    const { animationPlaying } = animationState;
     return (
         <AnimationAndControls>
             <AnimationContainer className="AnimationContainer">
                 <AnimationHeader>{animationObject.header}</AnimationHeader>
-                {animationObject.characters.map((character, index) => (
-                    <CharacterContainerAnimation
-                        key={index}
-                        position={`char${character.position}`}
-                    >
-                        <Character character={character} />
-                    </CharacterContainerAnimation>
-                ))}
-                <SceneContentAnimation>
-                    {animationPlaying
-                        ? renderAnimationItems()
-                        : renderCurrentItem()}
-                </SceneContentAnimation>
+                <AnimationContentContainer>
+                    {animationObject.characters.map((character, index) => (
+                        <CharacterContainerAnimation
+                            key={index}
+                            position={`char${character.position}`}
+                        >
+                            <Character character={character} />
+                        </CharacterContainerAnimation>
+                    ))}
+                    <SceneContentAnimation>
+                        {animationPlaying
+                            ? renderAnimationItems()
+                            : renderCurrentItem()}
+                    </SceneContentAnimation>
+                </AnimationContentContainer>
+                <AnimationControls
+                    animationState={animationState}
+                    startAnimation={startAnimation}
+                    pauseAnimation={pauseAnimation}
+                    changeAnimationItem={changeAnimationItem}
+                />
             </AnimationContainer>
-            <AnimationControls
-                animationState={animationState}
-                startAnimation={startAnimation}
-                pauseAnimation={pauseAnimation}
-                changeAnimationItem={changeAnimationItem}
-            />
         </AnimationAndControls>
     );
 }

@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 const AnimationPreviewContainer = styled.div`
-    position: absolute;
-    z-index: 100;
-
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
     padding: 5rem;
 
     background-color: ${({ theme }) => theme.colors.background};
@@ -19,8 +15,7 @@ const SceneDescriptionInputContainer = styled.div`
     display: grid;
     grid-template-areas:
         "title title creator"
-        "desc desc desc"
-        "button button button";
+        "desc desc desc";
 `;
 
 const TitleContainer = styled.div`
@@ -35,6 +30,7 @@ const CreatorContainer = styled.div`
 const DescriptionContainer = styled.div`
     width: 100%;
     grid-area: desc;
+    display: flex;
 `;
 
 const ButtonContainer = styled.div`

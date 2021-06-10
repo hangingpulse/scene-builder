@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { SceneContext } from "./SceneContext";
 import uuid from "react-uuid";
-import { characterImages, characterColors } from "../data/characterdata";
 
 const SceneEditorContext = createContext();
 
@@ -30,9 +29,9 @@ function SceneEditorContextProvider({ children }) {
                 sceneItem: {
                     id: uuid(),
                     character: null,
-                    type: "ACTIONTEXT",
+                    itemType: "ACTIONTEXT",
                     text: "New Text",
-                    duration: 2,
+                    length: 20,
                     delay: 0,
                     display: true,
                 },
@@ -44,15 +43,6 @@ function SceneEditorContextProvider({ children }) {
     const editSceneItem = (sceneItem, index) => {
         dispatch({ type: "EDIT SCENEITEM", payload: { index, sceneItem } });
     };
-
-    // Split an item into two items
-    const splitItem = () => {};
-
-    // Merge two items into one
-    const mergeItems = () => {};
-
-    // shift an item to a different place. This would be best with DragnDrop. But maybe do it with clicking first.
-    const shiftItem = () => {};
 
     return (
         <SceneEditorContext.Provider

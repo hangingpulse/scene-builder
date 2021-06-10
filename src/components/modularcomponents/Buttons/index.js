@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
 import { TiPlusOutline } from "react-icons/ti";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";

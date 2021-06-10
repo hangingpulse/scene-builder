@@ -14,7 +14,6 @@ const reducer = (animationState, action) => {
                 ...initialState,
             };
         case "START ANIMATION":
-            console.log(animationState);
             return {
                 animationStart: false,
                 animationPlaying: true,

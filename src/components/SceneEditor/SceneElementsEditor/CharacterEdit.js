@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { SceneEditorContext } from "../../../context/SceneEditorContext";
+import React from "react";
 import {
     CharacterEditContainer,
     StyledCharacterEdit,

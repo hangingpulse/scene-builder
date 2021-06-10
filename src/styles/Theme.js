@@ -25,6 +25,12 @@ const mainTheme = {
         backgroundDark: "#121212",
         highlight: "#f38181",
     },
+    gradients: {
+        background: [
+            "rgb(177,241,242)",
+            "linear-gradient(333deg, rgba(177,241,242,1) 0%, rgba(185,225,220,1) 100%)",
+        ],
+    },
     fonts: {
         serif: "Lexend",
         sansSerif: "Cormorand",

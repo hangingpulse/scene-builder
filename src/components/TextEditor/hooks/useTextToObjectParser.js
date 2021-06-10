@@ -9,10 +9,10 @@ function useTextParser() {
         const actiontextLines = actiontext.split(/\n/);
         const actiontextObjects = actiontextLines.map((actiontextLine) => ({
             id: uuid(),
-            type: "ACTIONTEXT",
+            itemType: "ACTIONTEXT",
             character: null,
             text: actiontextLine,
-            length: 2 + actiontextLine.length * 0.05,
+            length: Math.round((2 + actiontextLine.length * 0.05) * 10),
             delay: 0,
             display: true,
         }));
@@ -38,10 +38,10 @@ function useTextParser() {
             if (/\(.*\)/.test(sceneItemLine)) {
                 return {
                     id: uuid(),
-                    type: "PARENTHETICAL",
+                    itemType: "PARENTHETICAL",
                     text: sceneItemLine,
                     character: characterId,
-                    length: 2 + sceneItemLine.length * 0.05,
+                    length: Math.round((2 + sceneItemLine.length * 0.05) * 10),
                     delay: 0,
                     display: false,
                 };
@@ -50,11 +50,10 @@ function useTextParser() {
             if (/.*/.test(sceneItemLine)) {
                 return {
                     id: uuid(),
-                    type: "DIALOGUE",
+                    itemType: "DIALOGUE",
                     text: sceneItemLine,
                     character: characterId,
-                    length:
-                        Math.round((2 + sceneItemLine.length * 0.05) * 10) / 10,
+                    length: Math.round((2 + sceneItemLine.length * 0.05) * 10),
                     delay: 0,
                     display: true,
                 };

@@ -13,7 +13,7 @@ const SceneItemEditorContainer = styled.div`
     padding: 0 0.8rem;
     padding-top: 0.8em;
     padding-bottom: 10rem;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: ${({ theme }) => theme.colors.primaryLight};
     overflow: scroll;
 `;
 
@@ -30,7 +30,7 @@ function SceneItemEditor() {
     // Renders the whole list of sceneitems and attaches a delay item to everyone of them
     const renderSceneItem = () => {
         const sceneArray = editorState.sceneItems.map((sceneItem, index) => {
-            if (sceneItem.type === "ACTIONTEXT") {
+            if (sceneItem.itemType === "ACTIONTEXT") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
@@ -47,7 +47,7 @@ function SceneItemEditor() {
                     </SceneAndDelayItemWrapper>
                 );
             }
-            if (sceneItem.type === "PARENTHETICAL") {
+            if (sceneItem.itemType === "PARENTHETICAL") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
@@ -64,7 +64,7 @@ function SceneItemEditor() {
                     </SceneAndDelayItemWrapper>
                 );
             }
-            if (sceneItem.type === "DIALOGUE") {
+            if (sceneItem.itemType === "DIALOGUE") {
                 return (
                     <SceneAndDelayItemWrapper key={index}>
                         <DelayItem
