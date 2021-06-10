@@ -9,7 +9,7 @@ function SceneList() {
     const reversedAllScenes = allScenes && allScenes.reverse();
     return (
         <SceneListContainer>
-            <SmallHeading>Browse Scenes</SmallHeading>
+            <SmallHeading highlight>Browse Scenes</SmallHeading>
             {reversedAllScenes &&
                 reversedAllScenes.map((scene, index) => (
                     <SceneListItem key={index} scene={scene} />

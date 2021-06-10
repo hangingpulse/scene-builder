@@ -13,7 +13,7 @@ import LandingPage from "./components/LandingPage";
 
 const AppBody = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background: ${({ theme }) => theme.gradients.background[0]};

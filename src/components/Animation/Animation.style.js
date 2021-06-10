@@ -20,10 +20,12 @@ const AnimationContainer = styled.div`
     align-items: center;
     justify-items: center;
 
+    overflow: hidden;
+
     background-color: ${({ theme }) => theme.colors.primaryLight};
     border: 3px solid black;
     border-radius: 1.6em;
-
+    box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
     @media (orientation: landscape) {
         @media (max-width: 800px) {
             grid-template-areas:

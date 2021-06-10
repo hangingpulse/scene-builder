@@ -15,7 +15,6 @@ const LandingPageContainer = styled.div`
 `;
 
 const GalleryContainer = styled.div`
-    border: 1px black solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +27,11 @@ const SceneInformationContainer = styled.div`
     width: 100%;
     font-size: ${({ theme }) => theme.fonts.fontSizes.blockLarge};
     font-family: ${({ theme }) => theme.fonts.serif};
-    background-color: ${({ theme }) => theme.colors.secondary};
+    background-color: ${({ theme }) => theme.colors.primaryLight};
+    margin: 0.4em;
     padding: 0.4em;
+    border-radius: 0.8em;
+
     display: grid;
     grid-template-areas:
         "title title creator"
