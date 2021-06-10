@@ -7,10 +7,13 @@ const SceneElementsDisplayContainer = styled.div`
 `;
 
 const HeaderDisplayContainer = styled.div`
-    width: 100%;
     font-size: ${(props) => props.theme.fonts.fontSizes.header2Small};
     text-align: center;
-    padding: 0.4em;
+    padding: 0.2em;
+    margin: 0.4em 0.4em;
+    background-color: ${({ theme }) => theme.colors.primaryLight};
+    border-radius: 0.8em;
+    box-shadow: ${({ theme }) => theme.boxShadows.lowLevelTop};
 `;
 
 const CharacterDisplayContainer = styled.div`
@@ -21,8 +24,6 @@ const CharacterDisplayContainer = styled.div`
     gap: 0.4em;
 
     padding: 0.8em 0;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.highlight};
-    border-top: 2px dotted ${({ theme }) => theme.colors.highlight};
 `;
 
 const CharacterWrapperDisplay = styled.div`

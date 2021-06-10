@@ -39,6 +39,7 @@ const EditorContainer = styled.div`
     border: 2px solid black;
     border-radius: 0 0 0.8em 0.8em;
     border-top: 3px solid ${({ theme }) => theme.colors.highlight};
+    box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
     overflow: hidden;
 `;
 

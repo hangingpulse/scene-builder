@@ -25,6 +25,14 @@ const mainTheme = {
         backgroundDark: "#121212",
         highlight: "#f38181",
     },
+    boxShadows: {
+        animationText: "2px 3px 3px 0px black",
+        animationCharacter: "",
+        lowLevelTop: "2px 2px 4px 2px black",
+        highLevelTop: "0px 0px 4px 4px black",
+        mainContainer: "2px 3px 3px 0px black",
+        editorInset: "inset 0px 0px 5px 4px black",
+    },
     gradients: {
         background: [
             "rgb(177,241,242)",

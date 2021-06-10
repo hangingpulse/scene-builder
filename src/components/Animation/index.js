@@ -27,7 +27,9 @@ function Animation({ sceneObject, animationstate }) {
     return (
         <AnimationAndControls>
             <AnimationContainer className="AnimationContainer">
-                <AnimationHeader>{animationObject.header}</AnimationHeader>
+                <AnimationHeader>
+                    {animationObject.general.header}
+                </AnimationHeader>
                 <AnimationContentContainer>
                     {animationObject.characters.map((character, index) => (
                         <CharacterContainerAnimation

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const SceneListContainer = styled.div`
+    height: 100vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;

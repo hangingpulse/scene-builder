@@ -21,7 +21,10 @@ function useSceneContext() {
                     ...sceneState,
                     characters: action.payload.characters,
                     sceneItems: action.payload.sceneItems,
-                    header: action.payload.header,
+                    general: {
+                        ...sceneState.general,
+                        header: action.payload.header,
+                    },
                 };
 
                 console.log(newState);
@@ -29,6 +32,7 @@ function useSceneContext() {
                 return newState;
             case "DELETE SCENEITEM":
                 const sceneItemsWithoutDeletedItem = [...sceneState.sceneItems];
+                console.log(sceneItemsWithoutDeletedItem, action.payload);
                 sceneItemsWithoutDeletedItem.splice(action.payload, 1);
                 return {
                     ...sceneState,
@@ -36,6 +40,7 @@ function useSceneContext() {
                 };
             case "ADD SCENEITEM":
                 console.log(action.payload.sceneItem);
+                console.log(sceneState);
                 const sceneItemsWithNewItem = [...sceneState.sceneItems];
                 sceneItemsWithNewItem.splice(
                     action.payload.index,
@@ -65,9 +70,13 @@ function useSceneContext() {
                         characterIndexArray.includes(item.character) ||
                         item.itemType === "ACTIONTEXT"
                 );
+                console.log(action.payload.header);
                 return {
                     ...sceneState,
-                    header: action.payload.header,
+                    general: {
+                        ...sceneState.general,
+                        header: action.payload.header,
+                    },
                     characters: action.payload.characters,
                     sceneItems: newSceneItemsArray,
                 };

@@ -10,9 +10,10 @@ import Button from "../modularcomponents/Buttons";
 const StyledTextArea = styled.textarea`
     width: 100%;
     height: 75vh;
-    padding: 0.5rem;
+    padding: 1rem;
     font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
+    box-shadow: ${({ theme }) => theme.boxShadows.editorInset};
 `;
 
 function TextEditor() {

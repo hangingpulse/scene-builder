@@ -9,7 +9,6 @@ function PreviewContextProvider({ children }) {
     const { sceneState, dispatch } = useContext(SceneContext);
     const { clearLocalStorage } = useLocalStorage();
 
-    console.log(sceneState);
     // custom Hook that saves the scene to the backend, gets back the sceneid for the link
     const [sceneId, sendScene, sceneShared, setSceneShared] = useSendScene();
     const [previewState, setPreviewState] = useState({ ...sceneState });
