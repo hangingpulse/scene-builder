@@ -6,25 +6,29 @@ import AnimationPlayingWrapper from "../AnimationPlayingWrapper";
 import AnimationPauseWrapper from "../AnimationPauseWrapper";
 
 function useSceneAnimation(sceneObject) {
+    console.log(sceneObject);
     // Stores our current animation state to keep it separated from the scene state
     const [animationObject, setAnimationObject] = useState(sceneObject);
-    // stores the list of items that will be animated (for example for pausing and playing)
-    const [currentAnimationList, setCurrentAnimationList] = useState([
-        ...animationObject.sceneItems,
-    ]);
-    const filteredAnimationList = currentAnimationList.filter(
+
+    const filteredList = animationObject.sceneItems.filter(
         (animationItem) => animationItem.display
     );
+
+    // stores the list of items that will be animated (for example for pausing and playing)
+    const [currentAnimationList, setCurrentAnimationList] = useState([
+        ...filteredList,
+    ]);
 
     const [animationState, changeAnimationState] = useAnimationState();
     const { animationIndex, animationPlaying } = animationState;
 
     useEffect(() => {
         setAnimationObject(sceneObject);
+        changeAnimationState({ type: "LOAD ANIMATION" });
     }, [sceneObject]);
 
     useEffect(() => {
-        setCurrentAnimationList(animationObject.sceneItems);
+        setCurrentAnimationList(filteredList);
     }, [animationObject]);
 
     // Animation for the speechbubbles, using the useAnimation hook
@@ -53,9 +57,7 @@ function useSceneAnimation(sceneObject) {
 
     const pauseAnimation = () => {
         changeAnimationState({ type: "PAUSE ANIMATION" });
-        setCurrentAnimationList([
-            ...animationObject.sceneItems.slice(animationIndex),
-        ]);
+        setCurrentAnimationList([...filteredList.slice(animationIndex)]);
     };
 
     const playAnimation = () => {
@@ -67,14 +69,14 @@ function useSceneAnimation(sceneObject) {
 
     const endAnimation = () => {
         changeAnimationState({ type: "END ANIMATION" });
-        setCurrentAnimationList(animationObject.sceneItems);
+        setCurrentAnimationList(filteredList);
     };
 
     const changeAnimationItem = (direction) => {
         switch (direction) {
             case "NEXT":
                 const nextAnimationIndex =
-                    animationIndex >= animationObject.sceneItems.length - 1
+                    animationIndex >= filteredList.length - 1
                         ? 0
                         : animationIndex + 1;
                 changeAnimationState({
@@ -82,13 +84,14 @@ function useSceneAnimation(sceneObject) {
                     payload: nextAnimationIndex,
                 });
                 setCurrentAnimationList([
-                    ...animationObject.sceneItems.slice(nextAnimationIndex),
+                    ...filteredList.slice(nextAnimationIndex),
                 ]);
                 break;
             case "PREVIOUS":
+                console.log(animationIndex);
                 const previousAnimationIndex =
                     animationIndex === 0
-                        ? animationObject.sceneItems.length - 1
+                        ? filteredList.length - 1
                         : animationIndex - 1;
 
                 changeAnimationState({
@@ -96,7 +99,7 @@ function useSceneAnimation(sceneObject) {
                     payload: previousAnimationIndex,
                 });
                 setCurrentAnimationList([
-                    ...animationObject.sceneItems.slice(previousAnimationIndex),
+                    ...filteredList.slice(previousAnimationIndex),
                 ]);
                 break;
             default:
@@ -105,16 +108,16 @@ function useSceneAnimation(sceneObject) {
     };
 
     const renderAnimationItems = () => {
-        if (animationIndex > filteredAnimationList.length - 1) {
+        if (animationIndex > filteredList.length - 1) {
             endAnimation();
         }
 
         if (animationPlaying) {
             let totalDelay = 0;
 
-            const sceneItemList = filteredAnimationList.map(
+            const sceneItemList = currentAnimationList.map(
                 (sceneItem, index) => {
-                    const currentCharacter = sceneObject.characters.find(
+                    const currentCharacter = animationObject.characters.find(
                         (character) => character.id === sceneItem.character
                     );
                     const duration = sceneItem.length / 10;
@@ -150,11 +153,11 @@ function useSceneAnimation(sceneObject) {
     };
 
     const renderCurrentItem = () => {
-        if (filteredAnimationList.length) {
+        if (currentAnimationList.length) {
+            console.log(filteredList);
             const currentCharacter = animationObject.characters.find(
                 (character) =>
-                    character.id ===
-                    filteredAnimationList[animationIndex].character
+                    character.id === filteredList[animationIndex].character
             );
             return (
                 <AnimationPauseWrapper
@@ -163,7 +166,7 @@ function useSceneAnimation(sceneObject) {
                     }
                 >
                     <SceneComponent
-                        sceneItem={filteredAnimationList[animationIndex]}
+                        sceneItem={filteredList[animationIndex]}
                         character={currentCharacter}
                         animation
                     />
@@ -180,7 +183,7 @@ function useSceneAnimation(sceneObject) {
         renderCurrentItem,
         animationState,
         animationObject,
-        filteredAnimationList,
+        filteredList,
     ];
 }
 

@@ -10,7 +10,7 @@ import {
     AnimationAndControls,
 } from "./Animation.style";
 
-function Animation({ sceneObject }) {
+function Animation({ sceneObject, animationstate }) {
     // This returns the SceneItem that is currently animated if you pause the animation
     const [
         startAnimation,
@@ -20,7 +20,8 @@ function Animation({ sceneObject }) {
         renderCurrentItem,
         animationState,
         animationObject,
-    ] = useSceneAnimation(sceneObject);
+    ] = useSceneAnimation(sceneObject, animationstate);
+    console.log(sceneObject);
 
     const { animationPlaying } = animationState;
     return (

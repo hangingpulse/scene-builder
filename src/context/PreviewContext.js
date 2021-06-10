@@ -17,7 +17,7 @@ function PreviewContextProvider({ children }) {
     // gets the sceneId as a response from sending it to the backend
 
     useEffect(() => {
-        dispatch({ type: "EDIT METADATA", payload: previewState.meta });
+        dispatch({ itemType: "EDIT METADATA", payload: previewState.meta });
     }, [previewState, dispatch]);
 
     const editMetaData = (type, value) => {

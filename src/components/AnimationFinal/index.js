@@ -11,7 +11,9 @@ function AnimationFinal() {
     console.log(sceneData);
     return (
         <AnimationFinalContainer>
-            {sceneData && <Animation sceneObject={sceneData} />}
+            {sceneData && (
+                <Animation sceneObject={sceneData} animationstate={2} />
+            )}
             {/* <SceneInfo>
                 <Title></Title>
                 <Creator></Creator>

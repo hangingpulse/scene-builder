@@ -42,12 +42,12 @@ function SceneItemEdit({
                     ? setSceneItemState({
                           ...sceneItemState,
                           character: value,
-                          type: "DIALOGUE",
+                          itemType: "DIALOGUE",
                       })
                     : setSceneItemState({
                           ...sceneItemState,
                           character: value,
-                          type: "ACTIONTEXT",
+                          itemType: "ACTIONTEXT",
                       });
                 break;
             default:

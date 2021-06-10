@@ -29,7 +29,7 @@ function SceneEditorContextProvider({ children }) {
                 sceneItem: {
                     id: uuid(),
                     character: null,
-                    type: "ACTIONTEXT",
+                    itemType: "ACTIONTEXT",
                     text: "New Text",
                     length: 20,
                     delay: 0,

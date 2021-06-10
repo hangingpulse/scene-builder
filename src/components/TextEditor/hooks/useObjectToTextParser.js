@@ -7,7 +7,7 @@ function changeObjectToTextParser(sceneState) {
 
     console.log(sceneState);
     sceneState.sceneItems.forEach((sceneItem, index) => {
-        if (sceneItem.type === "ACTIONTEXT") {
+        if (sceneItem.itemType === "ACTIONTEXT") {
             if (currentSceneItem.length) {
                 textArray.push(currentSceneItem.join("\n"));
                 currentSceneItem = [];
@@ -16,8 +16,8 @@ function changeObjectToTextParser(sceneState) {
             currentCharacter = "";
         }
         if (
-            sceneItem.type === "DIALOGUE" ||
-            sceneItem.type === "PARENTHETICAL"
+            sceneItem.itemType === "DIALOGUE" ||
+            sceneItem.itemType === "PARENTHETICAL"
         ) {
             const sceneItemCharacter = characters.find(
                 (character) => character.id === sceneItem.character

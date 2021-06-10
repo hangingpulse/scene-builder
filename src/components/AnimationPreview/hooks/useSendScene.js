@@ -8,6 +8,7 @@ function useSendScene() {
     const url = process.env.REACT_APP_BACKEND_URL;
 
     const sendScene = (sceneData) => {
+        console.log(sceneData);
         if (!sceneShared) {
             axios.post(`${url}scenes`, sceneData).then((res) => {
                 setSceneId(res.data.data._id);

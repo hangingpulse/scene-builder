@@ -28,12 +28,13 @@ function useSceneContext(newScene) {
         sceneItems: [
             {
                 id: uuid(),
-                type: "ACTIONTEXT",
+                itemType: "ACTIONTEXT",
                 text: "Example Text",
                 character: null,
                 position: 0,
                 length: 2,
                 delay: 0,
+                display: true,
             },
         ],
     };
@@ -93,7 +94,7 @@ function useSceneContext(newScene) {
                 const newSceneItemsArray = sceneState.sceneItems.filter(
                     (item) =>
                         characterIndexArray.includes(item.character) ||
-                        item.type === "ACTIONTEXT"
+                        item.itemType === "ACTIONTEXT"
                 );
                 return {
                     ...sceneState,
@@ -106,15 +107,11 @@ function useSceneContext(newScene) {
         }
     };
 
-    const [sceneState, dispatch] = useReducer(
-        reducer,
-        initialState
-        //     () => {
-        //     // get the initialState from the localStorage
-        //     // const localScene = localStorage.getItem("scene");
-        //     // return localScene ? JSON.parse(localScene) : { ...initialState };
-        // }
-    );
+    const [sceneState, dispatch] = useReducer(reducer, initialState, () => {
+        // get the initialState from the localStorage
+        const localScene = localStorage.getItem("scene");
+        return localScene ? JSON.parse(localScene) : { ...initialState };
+    });
 
     // save the sceneState to local storage whenever it changes
     useEffect(() => {
