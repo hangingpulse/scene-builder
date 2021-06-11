@@ -26,9 +26,6 @@ function SceneEditor() {
 
     return (
         <SceneEditorContainer>
-            <div className="EditButton">
-                <EditButton onClick={() => toggleEditModal(true)} />
-            </div>
             {editModal && (
                 <Modal
                     onClick={(e) =>
@@ -38,7 +35,7 @@ function SceneEditor() {
                     <SceneElementsEditor />
                 </Modal>
             )}
-            <SceneElementsDisplay />
+            <SceneElementsDisplay toggleEditModal={toggleEditModal} />
             <SceneItemEditor />
         </SceneEditorContainer>
     );

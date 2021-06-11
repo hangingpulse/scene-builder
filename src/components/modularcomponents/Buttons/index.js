@@ -28,7 +28,7 @@ function DeleteButton({ onClick, background }) {
 function EditButton({ onClick, size }) {
     return (
         <IconButtonContainer onClick={onClick}>
-            <FaEdit className="Icon" />
+            <FaEdit className="Icon" size="4rem" />
         </IconButtonContainer>
     );
 }

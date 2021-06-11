@@ -5,7 +5,9 @@ import { AboutContainer } from "./LandingPage.style";
 function AboutSection() {
     return (
         <AboutContainer>
-            <SmallHeading>About Sceenies</SmallHeading>
+            <SmallHeading highlight position="fixed">
+                About Sceenies
+            </SmallHeading>
         </AboutContainer>
     );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import useSceneAnimation from "./hooks/useSceneAnimation";
 import Character from "../scenecomponents/Character";
 import AnimationControls from "./AnimationControls";
+import Button from "../modularcomponents/Buttons";
+import AnimationPauseWrapper from "./AnimationPauseWrapper";
 import {
     AnimationContainer,
     CharacterContainerAnimation,
@@ -10,6 +12,7 @@ import {
     AnimationAndControls,
     AnimationContentContainer,
 } from "./Animation.style";
+import { AnimatePresence } from "framer-motion";
 
 function Animation({ sceneObject, animationstate }) {
     // This returns the SceneItem that is currently animated if you pause the animation
@@ -23,7 +26,35 @@ function Animation({ sceneObject, animationstate }) {
         animationObject,
     ] = useSceneAnimation(sceneObject, animationstate);
 
-    const { animationPlaying } = animationState;
+    const { animationPlaying, animationStart, animationEnd } = animationState;
+
+    const getSceneContent = () => {
+        if (animationPlaying) {
+            return renderAnimationItems();
+        }
+        if (animationStart) {
+            return (
+                <AnimationPauseWrapper characterIndex={0}>
+                    <Button onClick={startAnimation} highlighted>
+                        Start the Animation
+                    </Button>
+                </AnimationPauseWrapper>
+            );
+        }
+        if (animationEnd) {
+            return (
+                <AnimationPauseWrapper characterIndex={0}>
+                    <Button onClick={startAnimation} highlighted>
+                        Play Again
+                    </Button>
+                </AnimationPauseWrapper>
+            );
+        }
+        if (!animationPlaying) {
+            return renderCurrentItem();
+        }
+    };
+
     return (
         <AnimationAndControls>
             <AnimationContainer className="AnimationContainer">
@@ -40,17 +71,25 @@ function Animation({ sceneObject, animationstate }) {
                         </CharacterContainerAnimation>
                     ))}
                     <SceneContentAnimation>
-                        {animationPlaying
-                            ? renderAnimationItems()
-                            : renderCurrentItem()}
+                        {getSceneContent()}
                     </SceneContentAnimation>
                 </AnimationContentContainer>
-                <AnimationControls
-                    animationState={animationState}
-                    startAnimation={startAnimation}
-                    pauseAnimation={pauseAnimation}
-                    changeAnimationItem={changeAnimationItem}
-                />
+                <AnimatePresence>
+                    {!(animationStart || animationEnd) ? (
+                        <AnimationControls
+                            intital={false}
+                            animate={animationPlaying && { opacity: 1 }}
+                            transition={{ duration: 0.2 }}
+                            exit={{ opacity: 0 }}
+                            animationState={animationState}
+                            startAnimation={startAnimation}
+                            pauseAnimation={pauseAnimation}
+                            changeAnimationItem={changeAnimationItem}
+                        />
+                    ) : (
+                        ""
+                    )}
+                </AnimatePresence>
             </AnimationContainer>
         </AnimationAndControls>
     );

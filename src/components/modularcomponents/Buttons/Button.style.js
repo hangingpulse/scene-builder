@@ -11,7 +11,7 @@ const ButtonContainer = styled.div`
     font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     padding: 0.2em;
     margin: 0.4em;
-    border: 2px solid ${({ theme }) => theme.colors.primary};
+    border: 2px solid black;
     border-radius: 0.5em;
     box-shadow: 0.1em 0.1em 0.4em black;
     width: ${({ square }) => (square ? square : "")};

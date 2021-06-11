@@ -6,7 +6,7 @@ import TabBar from "../../modularcomponents/TabBar";
 import { EditorContentContainer, EditorContainer } from "./Main.style";
 
 function EditorContent({ smallScreen }) {
-    const [selectedTab, setSelectedTab] = useState("Edit");
+    const [selectedTab, setSelectedTab] = useState("Write");
 
     const showTab = () => {
         switch (selectedTab) {
@@ -15,7 +15,7 @@ function EditorContent({ smallScreen }) {
             case "Edit":
                 return <SceneEditor />;
             case "View":
-                return <AnimationEditor />;
+                return smallScreen ? <SceneEditor /> : <AnimationEditor />;
             default:
                 return;
         }

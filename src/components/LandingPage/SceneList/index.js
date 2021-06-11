@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { SmallHeading } from "../../modularcomponents/Headings";
 import { SceneLibraryContext } from "../context/SceneLibraryContext";
-import { SceneListContainer } from "./SceneList.style";
+import { SceneListContainer, SceneListItemsContainer } from "./SceneList.style";
 import SceneListItem from "./SceneListItem";
 
 function SceneList() {
@@ -9,11 +9,16 @@ function SceneList() {
     const reversedAllScenes = allScenes && allScenes.reverse();
     return (
         <SceneListContainer>
-            <SmallHeading highlight>Browse Scenes</SmallHeading>
-            {reversedAllScenes &&
-                reversedAllScenes.map((scene, index) => (
-                    <SceneListItem key={index} scene={scene} />
-                ))}
+            <SmallHeading highlight position="fixed">
+                Browse Scenes
+            </SmallHeading>
+
+            <SceneListItemsContainer>
+                {reversedAllScenes &&
+                    reversedAllScenes.map((scene, index) => (
+                        <SceneListItem key={index} scene={scene} />
+                    ))}
+            </SceneListItemsContainer>
         </SceneListContainer>
     );
 }

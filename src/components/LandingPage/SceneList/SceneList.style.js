@@ -1,21 +1,30 @@
 import styled from "styled-components";
 
 const SceneListContainer = styled.div`
-    height: 100vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    overflow: hidden;
 
+    background-color: ${({ theme }) => theme.colors.primaryLight};
+    box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
+
+    ${({ theme }) => theme.desktopSmall`
+            width: 20%;
+        `}
+`;
+
+const SceneListItemsContainer = styled.div`
+    width: 100%;
     padding: 0.8em;
+    display: flex;
 
     overflow-y: scroll;
 
-    background-color: ${({ theme }) => theme.colors.primaryLight};
-
     ${({ theme }) => theme.desktopSmall`
             flex-direction: column;
-            width: 20%;
         `}
 `;
 
@@ -66,6 +75,7 @@ const SceneListItemDescription = styled.p`
 
 export {
     SceneListContainer,
+    SceneListItemsContainer,
     SceneListItemContainer,
     SceneListItemCreator,
     SceneListItemDescription,
