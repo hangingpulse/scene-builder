@@ -75,20 +75,16 @@ function Animation({ sceneObject, animationstate }) {
                     </SceneContentAnimation>
                 </AnimationContentContainer>
                 <AnimatePresence>
-                    {!(animationStart || animationEnd) ? (
-                        <AnimationControls
-                            intital={false}
-                            animate={animationPlaying && { opacity: 1 }}
-                            transition={{ duration: 0.2 }}
-                            exit={{ opacity: 0 }}
-                            animationState={animationState}
-                            startAnimation={startAnimation}
-                            pauseAnimation={pauseAnimation}
-                            changeAnimationItem={changeAnimationItem}
-                        />
-                    ) : (
-                        ""
-                    )}
+                    <AnimationControls
+                        intital={false}
+                        animate={animationPlaying && { opacity: 1 }}
+                        transition={{ duration: 0.2 }}
+                        exit={{ opacity: 0 }}
+                        animationState={animationState}
+                        startAnimation={startAnimation}
+                        pauseAnimation={pauseAnimation}
+                        changeAnimationItem={changeAnimationItem}
+                    />
                 </AnimatePresence>
             </AnimationContainer>
         </AnimationAndControls>

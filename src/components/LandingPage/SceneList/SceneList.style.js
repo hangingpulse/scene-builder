@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const SceneListContainer = styled.div`
+    height: 90vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;
@@ -36,7 +37,8 @@ const SceneListItemContainer = styled.div`
     padding: 0.4em;
     margin: 0.4em;
 
-    background-color: ${({ theme }) => theme.colors.secondary};
+    background-color: ${({ theme, selected }) =>
+        selected ? theme.colors.highlight : theme.colors.secondary};
     border: 2px solid black;
     border-radius: 0.4rem;
 

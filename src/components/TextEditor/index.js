@@ -17,7 +17,7 @@ const StyledTextArea = styled.textarea`
 `;
 
 function TextEditor() {
-    const { sceneState } = useContext(SceneContext);
+    const { dispatch, sceneState } = useContext(SceneContext);
     const [text, setText] = useState();
     const saveScene = useTextToObjectParser();
     const [getPrompt, openAIText] = useOpenAI();
@@ -38,8 +38,11 @@ function TextEditor() {
     };
 
     const getTextFromOpenAI = () => {
-        console.log(text);
-        getPrompt(text);
+        console.log(sceneState.openAIused);
+        if (sceneState.openAIused < 3) {
+            dispatch({ type: "USE OPENAI" });
+            getPrompt(text);
+        }
     };
 
     return (

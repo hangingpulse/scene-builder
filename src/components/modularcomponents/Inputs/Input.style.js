@@ -12,7 +12,7 @@ const InputContainer = styled.input`
 const TextAreaContainer = styled.textarea`
     margin: 0.2em;
     padding: 0.2em;
-    width: 90%;
+    width: 100%;
     height: calc(${({ theme }) => theme.fonts.fontSizes.base} + 0.7em);
     resize: none;
 

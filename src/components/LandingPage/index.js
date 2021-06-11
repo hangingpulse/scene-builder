@@ -17,7 +17,7 @@ function LandingPage() {
                 <GalleryContainer>
                     <SceneLibrary />
                     <CallToActionButton highlighted>
-                        CREATE YOUR OWN SCEENIE
+                        CREATE YOUR OWN SCEENY
                     </CallToActionButton>
                 </GalleryContainer>
                 <AboutSection />

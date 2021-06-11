@@ -51,9 +51,13 @@ function PreviewContextProvider({ children }) {
                 });
                 break;
             case "PUBLIC":
+                console.log(previewState.meta.public);
                 setPreviewState({
                     ...previewState,
-                    meta: { ...previewState.meta, public: value },
+                    meta: {
+                        ...previewState.meta,
+                        public: previewState.meta.public ? false : true,
+                    },
                 });
                 break;
             default:
