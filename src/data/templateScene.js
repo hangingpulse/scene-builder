@@ -6,7 +6,7 @@ const templateScene = {
         description: "A late night discussion about this app.",
         rawtext: "",
     },
-    openAIUsed: 0,
+    openAIused: 0,
     general: {
         background: "",
         header: "INT. SCEENY BAR - NIGHT",
