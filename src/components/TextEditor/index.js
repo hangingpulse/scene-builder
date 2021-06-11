@@ -50,7 +50,9 @@ function TextEditor() {
             <Button highlighted onClick={handleClick}>
                 Save
             </Button>
-            <Button onClick={getTextFromOpenAI}>Generate new lines</Button>
+            <Button onClick={getTextFromOpenAI}>
+                Ask the AI {`(${3 - sceneState.openAIused} times)`}
+            </Button>
             <StyledTextArea
                 value={text}
                 onChange={(e) => setText(e.target.value)}

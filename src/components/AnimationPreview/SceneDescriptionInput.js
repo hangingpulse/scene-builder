@@ -17,6 +17,7 @@ function SceneDescriptionInput() {
         <SceneDescriptionInputContainer>
             <TitleContainer>
                 <TextArea
+                    maxChar={50}
                     value={previewState.title}
                     onChange={(e) => editMetaData("TITLE", e.target.value)}
                 />
@@ -24,12 +25,14 @@ function SceneDescriptionInput() {
             <CreatorContainer>
                 <p className="Creator">by</p>
                 <TextArea
+                    maxChar={20}
                     value={previewState.meta.creator}
                     onChange={(e) => editMetaData("CREATOR", e.target.value)}
                 />
             </CreatorContainer>
             <DescriptionContainer>
                 <TextArea
+                    maxChar={200}
                     value={previewState.meta.description}
                     onChange={(e) =>
                         editMetaData("DESCRIPTION", e.target.value)

@@ -6,16 +6,15 @@ import SceneListItem from "./SceneListItem";
 
 function SceneList() {
     const { allScenes } = useContext(SceneLibraryContext);
-    const reversedAllScenes = allScenes && allScenes.reverse();
     return (
         <SceneListContainer>
             <SmallHeading highlight position="fixed">
-                Browse Scenes
+                Browse Sceenies
             </SmallHeading>
 
             <SceneListItemsContainer>
-                {reversedAllScenes &&
-                    reversedAllScenes.map((scene, index) => (
+                {allScenes &&
+                    allScenes.map((scene, index) => (
                         <SceneListItem key={index} scene={scene} />
                     ))}
             </SceneListItemsContainer>

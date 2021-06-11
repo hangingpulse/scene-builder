@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const SceneListContainer = styled.div`
-    height: 90vh;
+    height: 92vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;
@@ -21,11 +21,12 @@ const SceneListItemsContainer = styled.div`
     width: 100%;
     padding: 0.8em;
     display: flex;
+    flex-direction: row-reverse;
 
     overflow-y: scroll;
 
     ${({ theme }) => theme.desktopSmall`
-            flex-direction: column;
+            flex-direction: column-reverse;
         `}
 `;
 
@@ -41,6 +42,7 @@ const SceneListItemContainer = styled.div`
         selected ? theme.colors.highlight : theme.colors.secondary};
     border: 2px solid black;
     border-radius: 0.4rem;
+    box-shadow: ${({ theme }) => theme.boxShadows.animationText};
 
     display: flex;
     flex-direction: column;
@@ -52,6 +54,7 @@ const SceneListItemContainer = styled.div`
 
     &:hover {
         cursor: pointer;
+        transform: scale(1.05);
     }
 
     ${({ theme }) => theme.desktopSmall`

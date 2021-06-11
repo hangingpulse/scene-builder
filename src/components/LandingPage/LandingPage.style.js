@@ -64,7 +64,7 @@ const SceneInformationContainer = styled.div`
 `;
 
 const AboutContainer = styled.div`
-    height: 100vh;
+    height: 92vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;

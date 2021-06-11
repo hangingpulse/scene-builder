@@ -29,6 +29,7 @@ function useSceneContext() {
                     general: {
                         ...sceneState.general,
                         header: action.payload.header,
+                        rawtext: action.payload.rawtext,
                     },
                 };
 
