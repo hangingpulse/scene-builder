@@ -49,12 +49,10 @@ function TextEditor() {
     };
 
     const getTextFromOpenAI = () => {
-        console.log(sceneState.openAIused);
         if (sceneState.openAIused < 3) {
             saveScene(text);
             dispatch({ type: "USE OPENAI" });
             getPrompt(text);
-            console.log(text);
         }
     };
 
