@@ -35,8 +35,9 @@ function AboutSection() {
                 screenplay.
             </InfoBoxText>
             <InfoBoxText small>
-                Also, there is a connection to the OpenAI AI that can continue
-                scenes for you.
+                Also, you can ask the{" "}
+                <InlineLink href="https://openai.com/">OpenAI</InlineLink> AI to
+                continue scenes for you.
             </InfoBoxText>
             <InfoBoxText small>
                 And also, the character art comes from{" "}
@@ -47,7 +48,7 @@ function AboutSection() {
                 <InlineLink href="https://www.openpeeps.com/">
                     Open Peeps
                 </InlineLink>
-                . It's awesome. Check him out and send him a tip.
+                . It's awesome. Check it out.
             </InfoBoxText>
         </AboutContainer>
     );

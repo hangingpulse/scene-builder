@@ -40,6 +40,7 @@ const InfoboxTextContainer = styled.p`
         large
             ? theme.fonts.fontSizes.blockLarge
             : theme.fonts.fontSizes.baseSmall};
+    font-family: ${({ theme }) => theme.fonts.serif};
 `;
 
 const InfoBoxImageContainer = styled.img`
