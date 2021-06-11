@@ -68,9 +68,10 @@ function SceneElementsEditor() {
         <SceneElementsEditorContainer>
             <HeaderInputContainer>
                 <TextArea
-                    value={header}
+                    maxChar={50}
+                    value={header || ""}
                     onChange={(e) => setHeader(e.target.value.toUpperCase())}
-                    height="2.4rem"
+                    height="3.6rem"
                 />
                 <Button highlighted onClick={resetSceneElements}>
                     Reset

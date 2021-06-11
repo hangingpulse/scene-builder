@@ -32,7 +32,7 @@ const CharacterImage = styled.img`
 
 const CharacterName = styled.p`
     width: 100%;
-    padding: 0.4em 0;
+    padding: 0.4em 0.4em;
     text-align: center;
     font-size: ${({ theme }) => theme.fonts.fontSizes.blockLarge};
     background-color: rgba(0, 0, 0, 0.5);

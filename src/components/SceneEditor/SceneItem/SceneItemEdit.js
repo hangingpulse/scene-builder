@@ -76,6 +76,7 @@ function SceneItemEdit({
                 <CloseButton onClick={closeEdit} />
             </div>
             <TextArea
+                maxChar={200}
                 value={sceneItemState.text}
                 onChange={(e) => changeSceneItem("TEXT", e.target.value)}
             />

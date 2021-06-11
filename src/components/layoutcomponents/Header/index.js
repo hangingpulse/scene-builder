@@ -1,10 +1,16 @@
 import React from "react";
-import { Title, HeaderContainer, NavBar, StyledLink } from "./Header.style";
+import {
+    Title,
+    HeaderContainer,
+    NavBar,
+    StyledLink,
+    Logo,
+} from "./Header.style";
 
 function Header() {
     return (
         <HeaderContainer>
-            <Title>SCEENIES - Tiny Scenes</Title>
+            <Logo>SCEENIES</Logo>
             <NavBar>
                 <StyledLink to="/">EXPLORE</StyledLink>
                 <StyledLink to="/create">CREATE</StyledLink>

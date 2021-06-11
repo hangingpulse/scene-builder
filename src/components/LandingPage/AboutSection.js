@@ -1,8 +1,9 @@
 import React from "react";
 import { SmallHeading } from "../modularcomponents/Headings";
 import { AboutContainer } from "./LandingPage.style";
-import { InfoBoxText } from "../modularcomponents/InfoBox";
+import { InfoBoxText, InfoBoxImage } from "../modularcomponents/InfoBox";
 import { characterImages } from "../../data/characterdata";
+import { InlineLink } from "../modularcomponents/Link";
 
 function AboutSection() {
     return (
@@ -10,12 +11,43 @@ function AboutSection() {
             <SmallHeading highlight position="fixed">
                 About Sceenies
             </SmallHeading>
-            <img src={characterImages[3]} alt="" />
-            <InfoBoxText>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aspernatur cum eveniet esse laudantium magnam sed delectus
-                dolores voluptate quis, voluptatem obcaecati sunt accusantium
-                beatae illo, at dolorum voluptas doloribus soluta.
+            <InfoBoxImage
+                src={characterImages[3]}
+                alt="Character Drawing"
+                width="90%"
+            />
+            <InfoBoxText small>
+                Hi, I'm Henning and I'm a web developer and a screenwriter.
+                Connect to me on Github{" "}
+                <InlineLink href="https://github.com/hangingpulse">
+                    here
+                </InlineLink>
+                .
+            </InfoBoxText>
+            <InfoBoxText small>
+                As a screenwriter you are sometimes only working for the trash
+                bin and it feels like you never really have a finished work of
+                art.
+            </InfoBoxText>
+            <InfoBoxText small>
+                That's why I build this App. To let you create something
+                finished that you can share and that doesn't look like a
+                screenplay.
+            </InfoBoxText>
+            <InfoBoxText small>
+                Also, there is a connection to the OpenAI AI that can continue
+                scenes for you.
+            </InfoBoxText>
+            <InfoBoxText small>
+                And also, the character art comes from{" "}
+                <InlineLink href="https://www.instagram.com/pablostanley/">
+                    Pablo Stanley
+                </InlineLink>
+                . It's an open library called{" "}
+                <InlineLink href="https://www.openpeeps.com/">
+                    Open Peeps
+                </InlineLink>
+                . It's awesome. Check him out and send him a tip.
             </InfoBoxText>
         </AboutContainer>
     );

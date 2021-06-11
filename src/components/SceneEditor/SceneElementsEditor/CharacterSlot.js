@@ -15,7 +15,7 @@ const CharacterSlotContainer = styled.div`
 
 const EmptySlot = styled.div`
     width: 100%;
-    height: 21rem;
+    height: 26rem;
     display: flex;
     flex-direction: column;
     align-items: center;

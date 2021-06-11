@@ -20,7 +20,8 @@ const TextAreaContainer = styled.textarea`
     border: 1px solid black;
     border-radius: 0.3em;
 
-    font-size: ${({ theme }) => theme.fonts.fontSizes.base};
+    font-size: ${({ theme, small }) =>
+        small ? theme.fonts.fontSizes.baseSmall : theme.fonts.fontSizes.base};
     font-family: ${(props) => props.theme.fonts.sansSerif};
 
     &:focus {

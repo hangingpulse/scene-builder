@@ -3,7 +3,6 @@ import { StyledCharacter } from "../../scenecomponents/Character/Character.style
 
 const SceneElementsEditorContainer = styled.div`
     width: 100%;
-    height: 100%;
     display: grid;
     grid-template-areas:
         "head head head"
@@ -47,7 +46,6 @@ const CharacterEditContainer = styled.div`
 
 const StyledCharacterEdit = styled(StyledCharacter)`
     width: 100%;
-    height: 100%;
 
     display: flex;
     flex-direction: column;

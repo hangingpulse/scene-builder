@@ -8,6 +8,7 @@ const AnimationAndControls = styled.div`
 
 const AnimationContainer = styled.div`
     width: 100%;
+    max-width: 100rem;
     display: grid;
     grid-template-areas:
         "head head head"

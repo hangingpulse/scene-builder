@@ -35,4 +35,15 @@ const StyledLink = styled(Link)`
     }
 `;
 
-export { Title, HeaderContainer, NavBar, StyledLink };
+const Logo = styled.div`
+    padding: 0.4em;
+
+    background-color: ${({ theme }) => theme.colors.highlight};
+    border: 3px solid black;
+    border-radius: 0.8em;
+    box-shadow: ${({ theme }) => theme.boxShadows.highLevelTop};
+
+    font-size: ${({ theme }) => theme.fonts.fontSizes.header2Small};
+`;
+
+export { Title, HeaderContainer, NavBar, StyledLink, Logo };
