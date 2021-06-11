@@ -1,5 +1,5 @@
 function changeObjectToTextParser(sceneState) {
-    const header = sceneState.header;
+    const header = sceneState.general.header;
     const characters = sceneState.characters;
     const textArray = [header];
     let currentCharacter = "";

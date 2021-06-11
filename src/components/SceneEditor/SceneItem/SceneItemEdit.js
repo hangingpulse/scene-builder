@@ -90,16 +90,16 @@ function SceneItemEdit({
                     Length
                 </NumberInput>
                 <Toggle
+                    labelOn="Show"
+                    labelOff="Hide"
                     width="12rem"
                     onClick={() =>
                         changeSceneItem("DISPLAY", !sceneItemState.display)
                     }
                     value={sceneItemState.display}
-                >
-                    Show Item
-                </Toggle>
+                />
                 <DeleteButton
-                    size="2em"
+                    size="1em"
                     onClick={() => deleteSceneItem(editorIndex)}
                 />
             </div>
