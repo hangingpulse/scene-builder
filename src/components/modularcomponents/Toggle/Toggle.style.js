@@ -8,7 +8,6 @@ const ToggleContainer = styled(motion.div)`
     justify-content: space-between;
     gap: 0.4rem;
     padding: 0.4rem;
-
     border-radius: 0.4rem;
     background-color: ${({ theme }) => theme.colors.primary};
 `;
@@ -40,7 +39,7 @@ const ToggleSwitch = styled(motion.div)`
 
 const ToggleLabel = styled(motion.div)`
     color: ${({ theme }) => theme.colors.primaryLight};
-    font-size: ${({ theme }) => theme.fonts.fontSizes.blockSmall};
+    font-size: ${({ theme }) => theme.fonts.fontSizes.base};
     font-family: ${({ theme }) => theme.fonts.serif};
 `;
 

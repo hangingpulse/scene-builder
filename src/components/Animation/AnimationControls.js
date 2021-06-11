@@ -8,19 +8,39 @@ function AnimationControls({
     startAnimation,
     pauseAnimation,
     changeAnimationItem,
+    animate,
+    initial,
+    transition,
+    exit,
 }) {
+    const { animationPlaying } = animationState;
+    console.log(animate);
+
     return (
-        <AnimationControlsContainer>
+        <AnimationControlsContainer
+            animate={animate}
+            initial={initial}
+            transition={transition}
+            exit={exit}
+        >
             <Button
                 square="3em"
                 onClick={() => changeAnimationItem("PREVIOUS")}
             >
                 <FaStepBackward size={20} />
             </Button>
-            <Button square="3em" highlighted onClick={startAnimation}>
+            <Button
+                square="3em"
+                highlighted={!animationPlaying}
+                onClick={startAnimation}
+            >
                 <FaPlay size={20} />
             </Button>
-            <Button square="3em" onClick={pauseAnimation}>
+            <Button
+                square="3em"
+                highlighted={animationPlaying}
+                onClick={pauseAnimation}
+            >
                 <FaPause size={20} />
             </Button>
             <Button square="3em" onClick={() => changeAnimationItem("NEXT")}>

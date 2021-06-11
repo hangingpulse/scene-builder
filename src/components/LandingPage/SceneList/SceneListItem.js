@@ -8,10 +8,14 @@ import {
 } from "./SceneList.style";
 
 function SceneListItem({ scene }) {
-    const { changeSelectedScene } = useContext(SceneLibraryContext);
+    const { changeSelectedScene, selectedScene } =
+        useContext(SceneLibraryContext);
 
     return (
-        <SceneListItemContainer onClick={() => changeSelectedScene(scene._id)}>
+        <SceneListItemContainer
+            onClick={() => changeSelectedScene(scene._id)}
+            selected={selectedScene._id === scene._id}
+        >
             <SceneListItemTitle>{scene.title}</SceneListItemTitle>
             <SceneListItemCreator>
                 {` by ${scene.meta.creator}`}

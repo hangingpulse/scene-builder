@@ -16,6 +16,11 @@ function useSceneContext() {
                 return {
                     ...templateScene,
                 };
+            case "USE OPENAI":
+                return {
+                    ...sceneState,
+                    openAIused: sceneState.openAIused + 1,
+                };
             case "EDIT SCENE":
                 const newState = {
                     ...sceneState,
@@ -24,6 +29,7 @@ function useSceneContext() {
                     general: {
                         ...sceneState.general,
                         header: action.payload.header,
+                        rawtext: action.payload.rawtext,
                     },
                 };
 

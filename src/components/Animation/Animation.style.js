@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const AnimationAndControls = styled.div`
     display: flex;
@@ -44,6 +45,7 @@ const AnimationContainer = styled.div`
 
 const AnimationContentContainer = styled.div`
     width: 100%;
+    min-height: 20rem;
     display: grid;
     grid-area: ani;
     grid-template-areas:
@@ -82,9 +84,10 @@ const SceneContentAnimation = styled.div`
     width: 100%;
     grid-column: 2 / 3;
     grid-row: 1 / 5;
+    align-self: center;
 `;
 
-const AnimationControlsContainer = styled.div`
+const AnimationControlsContainer = styled(motion.div)`
     grid-area: ctrl;
     width: 100%;
     height: 100%;

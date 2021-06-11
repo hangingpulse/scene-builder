@@ -3,11 +3,13 @@ import { ButtonContainer } from "../modularcomponents/Buttons/Button.style";
 
 const LandingPageContainer = styled.div`
     width: 100%;
-    padding: 1.2rem 0;
+    height: 100%;
+    padding: 1.2rem;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.2rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
 
     ${({ theme }) => theme.desktopSmall`
             flex-direction: row;
@@ -15,9 +17,13 @@ const LandingPageContainer = styled.div`
 `;
 
 const GalleryContainer = styled.div`
+    max-width: 100rem;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1.2em;
+
     ${({ theme }) => theme.desktopSmall`
             width: 60%;
         `}
@@ -28,9 +34,11 @@ const SceneInformationContainer = styled.div`
     font-size: ${({ theme }) => theme.fonts.fontSizes.blockLarge};
     font-family: ${({ theme }) => theme.fonts.serif};
     background-color: ${({ theme }) => theme.colors.primaryLight};
-    margin: 0.4em;
-    padding: 0.4em;
+    padding: 0.8em;
     border-radius: 0.8em;
+    border: 2px solid black;
+    box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
+    margin-top: 0.8rem;
 
     display: grid;
     grid-template-areas:
@@ -47,6 +55,7 @@ const SceneInformationContainer = styled.div`
         grid-area: creator;
         display: inline-block;
         font-style: italic;
+        justify-self: flex-end;
     }
     & .Description {
         grid-area: desc;
@@ -55,8 +64,14 @@ const SceneInformationContainer = styled.div`
 `;
 
 const AboutContainer = styled.div`
+    height: 92vh;
     border: 1px black solid;
     border-radius: 1.2em;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
+
     background-color: ${({ theme }) => theme.colors.primaryLight};
 
     ${({ theme }) => theme.desktopSmall`
@@ -69,9 +84,10 @@ const CallToActionButton = styled(ButtonContainer)`
     width: 25rem;
     height: 12rem;
     font-size: ${({ theme }) => theme.fonts.fontSizes.header2};
-    color: white;
-    border-color: ${({ theme }) => theme.colors.primary};
-    border-width: 1rem;
+    font-weight: 600;
+    color: black;
+    border: 3px black solid;
+
     box-shadow: 10px 10px 5px black;
     text-align: center;
 `;

@@ -6,13 +6,14 @@ import {
     ToggleSwitchContainer,
 } from "./Toggle.style";
 
-function Toggle({ children, onClick, width, value }) {
+function Toggle({ labelOn, labelOff, onClick, width, value }) {
     return (
         <ToggleContainer width={width}>
-            {children ? <ToggleLabel>{children}</ToggleLabel> : null}
+            {labelOff ? <ToggleLabel>{labelOff}</ToggleLabel> : null}
             <ToggleSwitchContainer onClick={onClick} value={value}>
                 <ToggleSwitch />
             </ToggleSwitchContainer>
+            {labelOn ? <ToggleLabel>{labelOn}</ToggleLabel> : null}
         </ToggleContainer>
     );
 }

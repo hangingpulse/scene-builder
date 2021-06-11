@@ -5,7 +5,7 @@ function SceneInformation({ sceneObject }) {
     return (
         <SceneInformationContainer>
             <p className="Title">{sceneObject.title}</p>
-            <p className="Creator">{sceneObject.meta.creator}</p>
+            <p className="Creator">by {sceneObject.meta.creator}</p>
             <p className="Description">{sceneObject.meta.description}</p>
         </SceneInformationContainer>
     );

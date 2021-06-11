@@ -8,6 +8,7 @@ const SceneItemBase = styled(motion.div)`
     border-radius: ${({ character }) => (character ? "0.5em" : "0rem")};
     box-shadow: ${({ theme }) => theme.boxShadows.animationText};
 
+    max-width: 30ch;
     background-color: ${({ character }) =>
         character ? characterColors[character.colorIndex] : "black"};
     font-size: ${(props) => props.theme.fonts.fontSizes.base};

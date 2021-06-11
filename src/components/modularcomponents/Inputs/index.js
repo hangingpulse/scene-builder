@@ -15,9 +15,17 @@ function Input({ value, onChange }) {
     return <InputContainer value={value} onChange={onChange} />;
 }
 
-function TextArea({ value, onChange, height }) {
+function TextArea({ value, onChange, height, maxChar }) {
     return (
-        <TextAreaContainer value={value} onChange={onChange} height={height} />
+        <TextAreaContainer
+            value={
+                value.length <= maxChar - 1
+                    ? value
+                    : value.substring(0, maxChar - 1)
+            }
+            onChange={onChange}
+            height={height}
+        />
     );
 }
 

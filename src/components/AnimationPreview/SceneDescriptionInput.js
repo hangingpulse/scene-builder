@@ -6,41 +6,49 @@ import {
     CreatorContainer,
     SceneDescriptionInputContainer,
     TitleContainer,
-    ButtonContainer,
     DescriptionContainer,
+    PublicContainer,
 } from "./AnimationPreview.style";
 
 function SceneDescriptionInput() {
-    const { previewState, editMetaData, sendScene, sceneId, sceneShared } =
-        useContext(PreviewContext);
-
-    const handleShare = () => {
-        sendScene(previewState);
-    };
+    const { previewState, editMetaData } = useContext(PreviewContext);
 
     return (
         <SceneDescriptionInputContainer>
             <TitleContainer>
                 <TextArea
+                    maxChar={50}
                     value={previewState.title}
                     onChange={(e) => editMetaData("TITLE", e.target.value)}
                 />
             </TitleContainer>
             <CreatorContainer>
+                <p className="Creator">by</p>
                 <TextArea
+                    maxChar={20}
                     value={previewState.meta.creator}
                     onChange={(e) => editMetaData("CREATOR", e.target.value)}
                 />
             </CreatorContainer>
             <DescriptionContainer>
                 <TextArea
+                    maxChar={200}
                     value={previewState.meta.description}
                     onChange={(e) =>
                         editMetaData("DESCRIPTION", e.target.value)
                     }
                 />
-                <Toggle>Public</Toggle>
             </DescriptionContainer>
+            <PublicContainer>
+                <Toggle
+                    labelOff="Only Link"
+                    labelOn="Post publicly"
+                    value={previewState.meta.public}
+                    onClick={() => editMetaData("PUBLIC")}
+                >
+                    Public
+                </Toggle>
+            </PublicContainer>
         </SceneDescriptionInputContainer>
     );
 }

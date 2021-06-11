@@ -4,9 +4,14 @@ const SceneElementsDisplayContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    & .HeaderAndButton {
+        display: flex;
+    }
 `;
 
 const HeaderDisplayContainer = styled.div`
+    width: 100%;
     font-size: ${(props) => props.theme.fonts.fontSizes.header2Small};
     text-align: center;
     padding: 0.2em;

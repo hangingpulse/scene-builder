@@ -8,17 +8,24 @@ const AnimationPlayingContainer = styled(motion.div)`
     position: absolute;
     top: ${(props) => props.theme.animationPositions[props.position].top};
     bottom: ${(props) => props.theme.animationPositions[props.position].bottom};
-    right: ${(props) => props.theme.animationPositions[props.position].right};
-    left: ${(props) => props.theme.animationPositions[props.position].left};
-    transform: translateY(
+    transform: translate(
+        ${({ theme, position }) =>
+            theme.animationPositions[position].translateX},
         ${(props) => props.theme.animationPositions[props.position].translateY}
     );
     transform-origin: center;
     display: flex;
-    justify-content: center;
+    justify-content: ${({ position }) => {
+        if (position === 1 || position === 3) {
+            return "flex-start";
+        }
+        if (position === 2 || position === 4) {
+            return "flex-end";
+        }
+        return "center";
+    }};
     align-items: center;
     width: 100%;
-    max-width: 25rem;
     max-height: 50%;
 `;
 

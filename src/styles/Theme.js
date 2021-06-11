@@ -19,6 +19,7 @@ const mainTheme = {
     ...media,
     colors: {
         primary: "#756c83",
+        primaryMedium: "#ACA8B3",
         primaryLight: "#EBE9ED",
         secondary: "#b9e1dc",
         background: "#fbfbfb",
@@ -32,6 +33,7 @@ const mainTheme = {
         highLevelTop: "0px 0px 4px 4px black",
         mainContainer: "2px 3px 3px 0px black",
         editorInset: "inset 0px 0px 5px 4px black",
+        onlyBottomInset: "inset 0px -3px 4px 0px black",
     },
     gradients: {
         background: [
@@ -55,37 +57,22 @@ const mainTheme = {
         {
             top: "50%",
             bottom: "",
-            right: "",
-            left: "",
-            translateY: "-50%",
         },
         {
-            top: "0",
+            top: "",
             bottom: "",
-            right: "",
-            left: "0",
-            translateY: "0",
         },
         {
             top: "",
             bottom: "50%",
-            right: "0%",
-            left: "",
-            translateY: "",
         },
         {
             top: "50%",
             bottom: "",
-            right: "",
-            left: "0",
-            translateY: "0",
         },
         {
             top: "",
             bottom: "0",
-            right: "0",
-            left: "",
-            translateY: "-100%",
         },
     ],
 };
