@@ -3,6 +3,7 @@ import {
     InfoBoxContainer,
     InfoBoxHeaderContainer,
     InfoboxTextContainer,
+    InfoBoxImageContainer,
 } from "./InfoBox.style";
 
 function InfoBox({ children }) {
@@ -20,5 +21,9 @@ function InfoBoxText({ children, highlighted, large }) {
     );
 }
 
+function InfoBoxImage({ src, width }) {
+    return <InfoBoxImageContainer src={src} width={width} />;
+}
+
 export default InfoBox;
-export { InfoBoxHeader, InfoBoxText };
+export { InfoBoxHeader, InfoBoxText, InfoBoxImage };

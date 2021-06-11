@@ -16,6 +16,16 @@ const StyledTextArea = styled.textarea`
     box-shadow: ${({ theme }) => theme.boxShadows.editorInset};
 `;
 
+const TextEditorContainer = styled.div`
+    width: 100%;
+    padding: 0.4em;
+
+    & .ButtonContainer {
+        display: flex;
+        justify-content: flex-end;
+    }
+`;
+
 function TextEditor() {
     const { dispatch, sceneState } = useContext(SceneContext);
     const [text, setText] = useState();
@@ -31,6 +41,7 @@ function TextEditor() {
         if (openAIText.length) {
             setText((text) => text + openAIText);
         }
+        console.log(text);
     }, [openAIText]);
 
     const handleClick = () => {
@@ -40,24 +51,28 @@ function TextEditor() {
     const getTextFromOpenAI = () => {
         console.log(sceneState.openAIused);
         if (sceneState.openAIused < 3) {
+            saveScene(text);
             dispatch({ type: "USE OPENAI" });
             getPrompt(text);
+            console.log(text);
         }
     };
 
     return (
-        <div>
-            <Button highlighted onClick={handleClick}>
-                Save
-            </Button>
-            <Button onClick={getTextFromOpenAI}>
-                Ask the AI {`(${3 - sceneState.openAIused} times)`}
-            </Button>
+        <TextEditorContainer>
+            <div className="ButtonContainer">
+                <Button onClick={getTextFromOpenAI}>
+                    Ask the AI {`(${3 - sceneState.openAIused} times)`}
+                </Button>
+                <Button highlighted onClick={handleClick}>
+                    Save
+                </Button>
+            </div>
             <StyledTextArea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             ></StyledTextArea>
-        </div>
+        </TextEditorContainer>
     );
 }
 

@@ -11,7 +11,7 @@ const SceneItemBase = styled(motion.div)`
     max-width: 30ch;
     background-color: ${({ character }) =>
         character ? characterColors[character.colorIndex] : "black"};
-    font-size: ${(props) => props.theme.fonts.fontSizes.base};
+    font-size: ${(props) => props.theme.fonts.fontSizes.blockLarge};
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 

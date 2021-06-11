@@ -6,7 +6,7 @@ const StyledActiontext = styled(SceneItemBase)`
     padding: 0.3em;
     border: 2px solid black;
     background-color: ${(props) => props.theme.colors.primaryMedium};
-    font-size: ${(props) => props.theme.fonts.fontSizes.base};
+    font-size: ${(props) => props.theme.fonts.fontSizes.blockLarge};
     font-family: ${(props) => props.theme.fonts.sansSerif};
 `;
 

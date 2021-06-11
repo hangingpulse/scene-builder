@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const SceneListContainer = styled.div`
-    height: 92vh;
     border: 1px black solid;
     border-radius: 1.2em;
     display: flex;
@@ -13,7 +12,8 @@ const SceneListContainer = styled.div`
     box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
 
     ${({ theme }) => theme.desktopSmall`
-            width: 20%;
+            height: 92vh;
+            width: 20%
         `}
 `;
 

@@ -37,7 +37,19 @@ const InfoboxTextContainer = styled.p`
     background-color: ${({ theme, highlighted }) =>
         highlighted ? theme.colors.primary : theme.colors.primaryLight};
     font-size: ${({ theme, large }) =>
-        large ? theme.fonts.fontSizes.blockLarge : theme.fonts.fontSizes.base};
+        large
+            ? theme.fonts.fontSizes.blockLarge
+            : theme.fonts.fontSizes.baseSmall};
 `;
 
-export { InfoBoxContainer, InfoBoxHeaderContainer, InfoboxTextContainer };
+const InfoBoxImageContainer = styled.img`
+    width: ${({ width }) => width};
+    margin: 0.4em;
+`;
+
+export {
+    InfoBoxContainer,
+    InfoBoxHeaderContainer,
+    InfoboxTextContainer,
+    InfoBoxImageContainer,
+};

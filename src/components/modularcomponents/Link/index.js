@@ -13,8 +13,21 @@ const StyledLinkContainer = styled(Link)`
     }
 `;
 
+const InlineLinkContainer = styled.a`
+    color: ${({ theme }) => theme.colors.highlight};
+
+    &:visited {
+        color: ${({ theme }) => theme.colors.highlight};
+    }
+`;
+
+function InlineLink({ href, children }) {
+    return <InlineLinkContainer href={href}>{children}</InlineLinkContainer>;
+}
+
 function StyledLink({ children, to }) {
     return <StyledLinkContainer to={to}>{children}</StyledLinkContainer>;
 }
 
 export default StyledLink;
+export { InlineLink };

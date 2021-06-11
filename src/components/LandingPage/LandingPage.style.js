@@ -17,7 +17,7 @@ const LandingPageContainer = styled.div`
 `;
 
 const GalleryContainer = styled.div`
-    max-width: 100rem;
+    max-width: 80rem;
 
     display: flex;
     flex-direction: column;
