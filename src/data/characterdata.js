@@ -2,6 +2,7 @@ export const characterImages = [
     "../pics/characters/peep-13.png",
     "../pics/characters/peep-51.png",
     "../pics/characters/peep-31.png",
+    "../pics/characters/peep-46.png",
     "../pics/characters/peep-5.png",
     "../pics/characters/peep-7.png",
     "../pics/characters/peep-30.png",
@@ -14,15 +15,17 @@ export const characterImages = [
     "../pics/characters/peep-80.png",
     "../pics/characters/peep-101.png",
     "../pics/characters/peep-104.png",
-    "../pics/characters/peep-46.png",
 ];
 
 export const characterColors = [
-    "#83BBC9",
-    "#9A657C",
+    "#90D6E0",
+    "#F0A373",
     "#B49FCC",
     "#FFEED6",
     "#BFAE48",
+    "#CEE397",
+    "#E6B567",
+    "#F28080",
 ];
 
 // [

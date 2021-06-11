@@ -24,7 +24,14 @@ const AnimationContainer = styled.div`
 
     overflow: hidden;
 
-    background-color: ${({ theme }) => theme.colors.primaryLight};
+    /* background-color: ${({ theme }) => theme.colors.primaryLight}; */
+    background: rgb(194, 240, 241);
+    background: linear-gradient(
+        333deg,
+        rgba(194, 240, 241, 1) 0%,
+        rgba(235, 233, 237, 1) 67%
+    );
+
     border: 3px solid black;
     border-radius: 1.6em;
     box-shadow: ${({ theme }) => theme.boxShadows.mainContainer};
@@ -45,6 +52,10 @@ const AnimationContainer = styled.div`
 `;
 
 const AnimationContentContainer = styled.div`
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url(https://source.unsplash.com/aKbNRT-PKqQ);
+    background: cover; */
+
     width: 100%;
     min-height: 20rem;
     display: grid;
