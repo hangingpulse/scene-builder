@@ -91,6 +91,8 @@ function CharacterEdit({ currentCharacter, setCharacters, characters }) {
                 </div>
                 <div className="NameAndDelete">
                     <TextArea
+                        small
+                        maxChar={15}
                         value={currentCharacter.name}
                         height="2.5rem"
                         onChange={(e) =>

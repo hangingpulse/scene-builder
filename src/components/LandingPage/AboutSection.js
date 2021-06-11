@@ -17,7 +17,7 @@ function AboutSection() {
                 width="90%"
             />
             <InfoBoxText small>
-                Hi, I'm Henning and I am a Web Developer and a Screenwriter.
+                Hi, I'm Henning and I'm a web developer and a screenwriter.
                 Connect to me on Github{" "}
                 <InlineLink href="https://github.com/hangingpulse">
                     here

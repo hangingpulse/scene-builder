@@ -30,7 +30,7 @@ const mainTheme = {
         animationText: "2px 3px 3px 0px black",
         animationCharacter: "",
         lowLevelTop: "2px 2px 4px 2px black",
-        highLevelTop: "0px 0px 4px 4px black",
+        highLevelTop: "0px 0px 4px 4px #b9e1dc",
         mainContainer: "2px 3px 3px 0px black",
         editorInset: "inset 0px 0px 5px 4px black",
         onlyBottomInset: "inset 0px -3px 4px 0px black",
