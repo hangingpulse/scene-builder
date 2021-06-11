@@ -15,7 +15,7 @@ function EditorContent({ smallScreen }) {
             case "Edit":
                 return <SceneEditor />;
             case "View":
-                return smallScreen ? <SceneEditor /> : <AnimationEditor />;
+                return !smallScreen ? <SceneEditor /> : <AnimationEditor />;
             default:
                 return;
         }
