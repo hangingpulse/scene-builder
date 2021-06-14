@@ -8,6 +8,7 @@ import {
     GalleryContainer,
     CallToActionButton,
 } from "./LandingPage.style";
+import StyledLink from "../modularcomponents/Link";
 
 function LandingPage() {
     return (
@@ -17,7 +18,9 @@ function LandingPage() {
                 <GalleryContainer>
                     <SceneLibrary />
                     <CallToActionButton highlighted>
-                        CREATE YOUR OWN SCEENY
+                        <StyledLink to="/create">
+                            CREATE YOUR OWN SCEENY
+                        </StyledLink>
                     </CallToActionButton>
                 </GalleryContainer>
                 <AboutSection />

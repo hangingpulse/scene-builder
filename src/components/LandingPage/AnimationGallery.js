@@ -10,7 +10,6 @@ function AnimationGallery() {
     const [selectedSceneObject, setSelectedSceneObject] =
         useState(selectedScene);
 
-    console.log(selectedSceneObject);
     useEffect(() => {
         if (selectedScene) {
             setSelectedSceneObject(selectedScene);
