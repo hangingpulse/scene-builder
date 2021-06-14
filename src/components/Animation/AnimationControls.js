@@ -14,7 +14,6 @@ function AnimationControls({
     exit,
 }) {
     const { animationPlaying } = animationState;
-    console.log(animate);
 
     return (
         <AnimationControlsContainer

@@ -13,7 +13,7 @@ const SceneItemContainer = styled.div`
 /*************** SCENE ITEM EDIT MODE*************** */
 
 const SceneItemEditContainer = styled(SceneItemBase)`
-    width: 100%;
+    width: 10%;
     grid-column: 2 / -2;
     padding: 0.2em;
 
