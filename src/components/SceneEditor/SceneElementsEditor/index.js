@@ -15,7 +15,7 @@ import {
 function SceneElementsEditor() {
     const { editorState } = useContext(SceneEditorContext);
     const { dispatch, sceneState } = useContext(SceneContext);
-    const [header, setHeader] = useState(editorState.header);
+    const [header, setHeader] = useState(editorState.general.header);
     const [characters, setCharacters] = useState(editorState.characters);
 
     console.log(sceneState.characters, characters);

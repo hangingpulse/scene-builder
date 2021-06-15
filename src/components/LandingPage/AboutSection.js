@@ -31,7 +31,7 @@ function AboutSection() {
             </InfoBoxText>
             <InfoBoxText small>
                 That's why I build this App. To let you create something
-                finished that you can share and that doesn't look like a
+                finished that you can share and that doesn't look as boring a
                 screenplay.
             </InfoBoxText>
             <InfoBoxText small>

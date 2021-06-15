@@ -8,8 +8,7 @@ const LandingPageContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1.2rem;
-    margin-top: 1rem;
+    gap: 2rem;
 
     ${({ theme }) => theme.desktopSmall`
             flex-direction: row;
@@ -81,14 +80,14 @@ const AboutContainer = styled.div`
 `;
 
 const CallToActionButton = styled(ButtonContainer)`
-    width: 25rem;
+    width: 20rem;
     height: 12rem;
     font-size: ${({ theme }) => theme.fonts.fontSizes.header2};
     font-weight: 600;
     color: black;
     border: 3px black solid;
 
-    box-shadow: 10px 10px 5px black;
+    box-shadow: 5px 5px 5px black;
     text-align: center;
 `;
 

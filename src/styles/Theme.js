@@ -51,6 +51,8 @@ const mainTheme = {
             blockLarge: "1.92rem",
             header2: "2.77rem",
             header2Small: "2.02rem",
+            title: "3.3rem",
+            sectionHeading: "2.77rem",
         },
     },
     animationPositions: [
