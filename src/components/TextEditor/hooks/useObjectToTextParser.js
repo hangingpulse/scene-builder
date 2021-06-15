@@ -5,7 +5,6 @@ function changeObjectToTextParser(sceneState) {
     let currentCharacter = "";
     let currentSceneItem = [];
 
-    console.log(sceneState);
     sceneState.sceneItems.forEach((sceneItem, index) => {
         if (sceneItem.itemType === "ACTIONTEXT") {
             if (currentSceneItem.length) {

@@ -41,6 +41,14 @@ function AddButton({ onClick, size }) {
     );
 }
 
+function HelpButton({ onClick }) {
+    return (
+        <ButtonContainer topLayer highlighted onClick={onClick}>
+            Help
+        </ButtonContainer>
+    );
+}
+
 function Button({ children, onClick, highlighted, square }) {
     return (
         <ButtonContainer
@@ -54,4 +62,4 @@ function Button({ children, onClick, highlighted, square }) {
 }
 
 export default Button;
-export { CloseButton, DeleteButton, EditButton, AddButton };
+export { CloseButton, DeleteButton, EditButton, AddButton, HelpButton };

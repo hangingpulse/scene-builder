@@ -4,8 +4,12 @@ import styled from "styled-components";
 import useTextToObjectParser from "./hooks/useTextToObjectParser";
 import changeObjectToTextParser from "./hooks/useObjectToTextParser";
 import useOpenAI from "./hooks/useOpenAI";
-
-import Button from "../modularcomponents/Buttons";
+import Modal from "../modularcomponents/Modal";
+import InfoBox, {
+    InfoBoxHeader,
+    InfoBoxText,
+} from "../modularcomponents/InfoBox";
+import Button, { HelpButton } from "../modularcomponents/Buttons";
 
 const StyledTextArea = styled.textarea`
     width: 100%;
@@ -19,18 +23,26 @@ const StyledTextArea = styled.textarea`
 const TextEditorContainer = styled.div`
     width: 100%;
     padding: 0.4em;
+    position: relative;
 
     & .ButtonContainer {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+
+        & .ButtonsRight {
+            display: flex;
+            justify-content: flex-end;
+        }
     }
 `;
 
 function TextEditor() {
     const { dispatch, sceneState } = useContext(SceneContext);
-    const [text, setText] = useState();
     const saveScene = useTextToObjectParser();
     const [getPrompt, openAIText] = useOpenAI();
+    const [text, setText] = useState();
+
+    const [textEditorHelp, toggleTextEditorHelp] = useState(false);
 
     useEffect(() => {
         const sceneText = changeObjectToTextParser(sceneState);
@@ -41,7 +53,6 @@ function TextEditor() {
         if (openAIText.length) {
             setText((text) => text + openAIText);
         }
-        console.log(text);
     }, [openAIText]);
 
     const handleClick = () => {
@@ -58,13 +69,53 @@ function TextEditor() {
 
     return (
         <TextEditorContainer>
+            {textEditorHelp && (
+                <Modal toggleModal={toggleTextEditorHelp}>
+                    <InfoBox>
+                        <InfoBoxHeader>Write Your Sceeny</InfoBoxHeader>
+                        <InfoBoxText>
+                            The formatting rules for a Sceeny are the same as
+                            for a screenplay.
+                        </InfoBoxText>
+                        <InfoBoxText highlighted>
+                            Scene Headers are one line and all UPPERCASE.
+                        </InfoBoxText>
+                        <InfoBoxText highlighted>
+                            Dialogue is the name in UPPERCASE, followed by a new
+                            line and the dialogue. A new line in dialogue
+                            creates a new speechbubble. A new paragraph ends the
+                            dialogue.
+                        </InfoBoxText>
+                        <InfoBoxText highlighted>
+                            Scene Descriptions (Action Text) is everything else.
+                        </InfoBoxText>
+
+                        <InfoBoxText>
+                            What else... A Sceeny can also only consist of max.
+                            four characters.
+                        </InfoBoxText>
+                        <InfoBoxText>
+                            Oh, and I almost forgot. You have also three wishes
+                            free to let OpenAI's AI continue the scene for you.
+                            Have fun with it!
+                        </InfoBoxText>
+                    </InfoBox>
+                </Modal>
+            )}
             <div className="ButtonContainer">
-                <Button onClick={getTextFromOpenAI}>
-                    Ask the AI {`(${3 - sceneState.openAIused} times)`}
-                </Button>
-                <Button highlighted onClick={handleClick}>
-                    Save
-                </Button>
+                <HelpButton
+                    onClick={() =>
+                        toggleTextEditorHelp((prevState) => !prevState)
+                    }
+                />
+                <div className="ButtonsRight">
+                    <Button onClick={getTextFromOpenAI}>
+                        Ask the AI {`(${3 - sceneState.openAIused} times)`}
+                    </Button>
+                    <Button highlighted onClick={handleClick}>
+                        Save
+                    </Button>
+                </div>
             </div>
             <StyledTextArea
                 value={text}

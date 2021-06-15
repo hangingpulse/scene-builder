@@ -14,11 +14,10 @@ import {
 
 function SceneElementsEditor() {
     const { editorState } = useContext(SceneEditorContext);
-    const { dispatch, sceneState } = useContext(SceneContext);
+    const { dispatch } = useContext(SceneContext);
     const [header, setHeader] = useState(editorState.general.header);
     const [characters, setCharacters] = useState(editorState.characters);
 
-    console.log(sceneState.characters, characters);
     const slotPositions = [0, 1, 2, 3];
 
     // Updates all the new Scene Element changes at once

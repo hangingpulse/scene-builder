@@ -4,7 +4,10 @@ import Modal from "../modularcomponents/Modal";
 import SceneItemEditor from "./SceneItemEditor";
 import SceneElementsDisplay from "./SceneElementsDisplay";
 import SceneElementsEditor from "./SceneElementsEditor";
-import { EditButton } from "../modularcomponents/Buttons";
+import InfoBox, {
+    InfoBoxHeader,
+    InfoBoxText,
+} from "../modularcomponents/InfoBox";
 
 const SceneEditorContainer = styled.div`
     position: relative;
@@ -23,19 +26,45 @@ const SceneEditorContainer = styled.div`
 
 function SceneEditor() {
     const [editModal, toggleEditModal] = useState(false);
+    const [helpModal, toggleHelpModal] = useState(false);
 
     return (
         <SceneEditorContainer>
+            {helpModal && (
+                <Modal toggleModal={toggleHelpModal}>
+                    <InfoBox>
+                        <InfoBoxHeader>Edit your Sceeny</InfoBoxHeader>
+                        <InfoBoxText>
+                            You can tweak your written Sceeny here or even build
+                            it from scratch
+                        </InfoBoxText>
+                        <InfoBoxText>
+                            You can add new characters and change their color or
+                            appearance.
+                        </InfoBoxText>
+                        <InfoBoxText>
+                            You can add new scene items, change if it's dialogue
+                            or action text. You can also edit the length or even
+                            add a pause inbetween items. Because sometimes
+                            people just don't know what to say.
+                        </InfoBoxText>
+                        <InfoBoxText>
+                            Now, go ahead, and finish your Sceeny. Below the
+                            Animation Preview you find the Share Button.
+                        </InfoBoxText>
+                    </InfoBox>
+                </Modal>
+            )}
+
             {editModal && (
-                <Modal
-                    onClick={(e) =>
-                        e.target === e.currentTarget && toggleEditModal(false)
-                    }
-                >
+                <Modal toggleModal={toggleEditModal}>
                     <SceneElementsEditor />
                 </Modal>
             )}
-            <SceneElementsDisplay toggleEditModal={toggleEditModal} />
+            <SceneElementsDisplay
+                toggleEditModal={toggleEditModal}
+                toggleHelpModal={toggleHelpModal}
+            />
             <SceneItemEditor />
         </SceneEditorContainer>
     );

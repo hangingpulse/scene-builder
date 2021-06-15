@@ -82,7 +82,6 @@ function useTextParser() {
 
                     // take the character name out of the sceneItem array
                     const characterName = sceneItemObjectArray.shift();
-                    console.log(characterObjects);
                     // check if there is already a character with this name. If no, create a new character object
                     if (
                         !characterObjects
@@ -104,7 +103,6 @@ function useTextParser() {
                         sceneItemObjectArray,
                         id
                     );
-                    console.log(newSceneItemObject);
                     sceneObjects.push(...newSceneItemObject);
                 } else if (/.*/.test(sceneObject)) {
                     const newActiontextObject =

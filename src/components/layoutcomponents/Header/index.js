@@ -1,11 +1,5 @@
 import React from "react";
-import {
-    Title,
-    HeaderContainer,
-    NavBar,
-    StyledLink,
-    Logo,
-} from "./Header.style";
+import { HeaderContainer, NavBar, StyledLink, Logo } from "./Header.style";
 
 function Header() {
     return (

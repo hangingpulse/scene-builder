@@ -11,7 +11,6 @@ function useSceneContext() {
     const reducer = (sceneState, action) => {
         switch (action.type) {
             case "LOAD NEW SCENE":
-                console.log(action.payload);
                 clearLocalStorage();
                 return {
                     ...templateScene,
@@ -29,11 +28,12 @@ function useSceneContext() {
                     general: {
                         ...sceneState.general,
                         header: action.payload.header,
+                    },
+                    meta: {
+                        ...sceneState.meta,
                         rawtext: action.payload.rawtext,
                     },
                 };
-
-                console.log(newState);
 
                 return newState;
             case "DELETE SCENEITEM":
@@ -45,8 +45,6 @@ function useSceneContext() {
                     sceneItems: [...sceneItemsWithoutDeletedItem],
                 };
             case "ADD SCENEITEM":
-                console.log(action.payload.sceneItem);
-                console.log(sceneState);
                 const sceneItemsWithNewItem = [...sceneState.sceneItems];
                 sceneItemsWithNewItem.splice(
                     action.payload.index,

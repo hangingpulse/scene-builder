@@ -8,7 +8,6 @@ import Button from "../modularcomponents/Buttons";
 function AnimationEditor() {
     const { sceneState } = useContext(SceneContext);
     const { togglePreview } = useContext(PreviewContext);
-    console.log(sceneState);
     return (
         <AnimationContentContainer>
             {sceneState && <Animation sceneObject={sceneState} />}

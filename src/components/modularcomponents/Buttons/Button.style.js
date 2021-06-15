@@ -17,6 +17,8 @@ const ButtonContainer = styled.div`
     width: ${({ square }) => (square ? square : "")};
     height: ${({ square }) => (square ? square : "")};
 
+    z-index: ${({ topLayer }) => (topLayer ? 9999 : "")};
+
     &:hover {
         cursor: pointer;
         transform: scale(1.03);
