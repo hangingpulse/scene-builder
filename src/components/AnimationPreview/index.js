@@ -36,7 +36,7 @@ function AnimationPreview() {
                             the world.
                         </InfoBoxText>
                         <InfoBoxText highlighted>
-                            {`http://sceenies.herokuapp.com/${sceneId}`}
+                            {`http://www.sceenies.io/${sceneId}`}
                         </InfoBoxText>
                         <div>
                             <Button
